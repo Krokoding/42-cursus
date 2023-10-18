@@ -5,6 +5,7 @@
         "functional": "c",
         "tuple": "c",
         "utility": "c",
-        "stddef.h": "c"
+        "stddef.h": "c",
+        "stdio.h": "c"
     }
 }
