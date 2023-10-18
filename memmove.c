@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memmove.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:27:37 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 13:46:53 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:18:19 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	*ft_memcpy(void *destination, const void *source, size_t size)
 		src++;
 		size--;
 	}
+	return (destination);
 }
 
 int	ft_strlen(const char *str)
@@ -41,11 +42,9 @@ int	ft_strlen(const char *str)
 
 void	*ft_memmove(void *dest, const void *src, size_t count)
 {
-	char		temp;
 	const char	*s;
 	char		*dst;
 	size_t		i;
-	int			j;
 
 	i = 0;
 	dst = dest;
@@ -66,6 +65,7 @@ void	*ft_memmove(void *dest, const void *src, size_t count)
 			i++;
 		}
 	}
+	return (dest);
 }
 /*
 #include <string.h>

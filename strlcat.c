@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strlcat.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 13:50:55 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/18 13:51:28 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:19:54 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ size_t	ft_strlen(const char *str)
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int	i;
-	int	dest_size;
-	int	j;
+	size_t	i;
+	size_t	dest_size;
+	size_t	j;
 
 	j = 0;
 	dest_size = ft_strlen(dst);

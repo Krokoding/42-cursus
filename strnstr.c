@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strnstr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:07:26 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 13:54:00 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:28:45 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 
 char	*strnstr(const char *big, const char *little, size_t len)
 {
-	int	i;
-	int	j;
-	int	found;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	if (!(little[i]))

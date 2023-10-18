@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strncmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 10:35:43 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 13:52:17 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:25:03 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	strncmp(const char *first, const char *second, size_t length )
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (first[i] && second[i] && i < length)

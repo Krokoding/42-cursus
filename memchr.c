@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memchr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 10:48:10 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 13:43:24 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:27:52 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	*memchr(const void *memoryBlock, int searchedChar, size_t size)
 	mblock = memoryBlock;
 	while (size)
 	{
-		if (mblock == searchedChar)
-			return (mblock);
+		if (*mblock == searchedChar)
+			return ((void *)mblock);
 		size--;
 		mblock++;
 	}

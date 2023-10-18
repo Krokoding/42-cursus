@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memcpy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:38:54 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 13:45:39 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:17:53 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	*ft_memcpy(void *destination, const void *source, size_t size)
 		src++;
 		size--;
 	}
+	return (destination);	
 }
 /*
 int main() {

@@ -1,22 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strchr.c                                           :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 08:50:25 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 16:21:26 by loris            ###   ########.fr       */
+/*   Created: 2023/10/18 16:32:58 by loris             #+#    #+#             */
+/*   Updated: 2023/10/18 16:34:09 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*strchr(const char *string, int searchedChar)
-{
-	while (*string)
-	{
-		if (*string == searchedChar)
-			return ((char *)string);
-		string++;
-	}
-	return (0);
-}
+#ifndef LIBFT_H
+# define LIBFT_H
+
