@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toupper.c                                          :+:      :+:    :+:   */
+/*   memchr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 16:22:12 by loris             #+#    #+#             */
+/*   Created: 2023/10/18 10:48:10 by loris             #+#    #+#             */
 /*   Updated: 2023/10/18 12:08:18 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int toupper(int c)
+#include <stddef.h>
+
+void * memchr( const void * memoryBlock, int searchedChar, size_t size )
 {
-    if (c < 'z' && c > 'a')
-        c += 32;
-    return (c);
+    const char  *mblock;
+
+    mblock = memoryBlock;
+    while (size)
+    {
+        if (mblock == searchedChar)
+            return (mblock);
+        size--;
+        mblock++;
+    }
+    return (0);
 }

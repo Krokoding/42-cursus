@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   strlcpy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:57:09 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/16 15:14:46 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:08:18 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdio.h>
+#include <stddef.h>
 
 size_t	strlcpy(char *destination, const	char *source, size_t size)
 {

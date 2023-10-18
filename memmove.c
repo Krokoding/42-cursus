@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:27:37 by loris             #+#    #+#             */
-/*   Updated: 2023/10/17 16:20:46 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/18 10:19:18 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,20 @@ void *ft_memmove(void *dest, const void *src, size_t count)
 	const char	*s;
 	char		*dst;
 	size_t		i;
+	int			j;
 
-	i = count;
+	i = 0;
 	dst = dest;
 	s = src;
-	if (ft_strlen(dst) < ft_strlen(s))
+	if (dst < s)
 	{	
-		while (i)
+		while (count)
 		{
-			dst[i] = s[i];
-			i--;
+			dst[count] = s[count];
+			count--;
 		}
 	}
-	if (ft_strlen(dst) > ft_strlen(s))
+	if (dst > s)
 	{
 		while (i < count)
 		{

@@ -1,18 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toupper.c                                          :+:      :+:    :+:   */
+/*   strdup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 16:22:12 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 12:08:18 by loris            ###   ########.fr       */
+/*   Created: 2023/10/18 12:31:52 by loris             #+#    #+#             */
+/*   Updated: 2023/10/18 12:47:33 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int toupper(int c)
+int ft_strlen(char *str)
 {
-    if (c < 'z' && c > 'a')
-        c += 32;
-    return (c);
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char * strdup( const char * source )
+{
+    int len;
+    char *t;
+    int i;
+    
+    i = 0;
+    len = ft_strlen(source);
+    t = malloc(sizeof(char) * len);
+    while (i < len)
+    {
+        t[i] = source[i];
+        i++;
+    }
+    return (t);
 }
