@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   strlen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:55:10 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/16 14:56:09 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:51:43 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	int	i;
 

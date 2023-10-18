@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   strrchr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 10:25:58 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 12:08:18 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/18 13:53:10 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- 
-
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	int	i;
 
@@ -22,16 +20,16 @@ int ft_strlen(char *str)
 	return (i);
 }
 
-char * strrchr( const char * string, int searchedChar )
+char	*strrchr(const char *string, int searchedChar)
 {
-    int len;
+	int	len;
 
-    len = ft_strlen(string);
-    while (len)
-    {
-        if (string[len] == searchedChar)
-            return (string + len);
-        len--;
-    }
-    return (0);
+	len = ft_strlen(string);
+	while (len)
+	{
+		if (string[len] == searchedChar)
+			return (string + len);
+		len--;
+	}
+	return (0);
 }

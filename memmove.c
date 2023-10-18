@@ -3,34 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   memmove.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:27:37 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 10:19:18 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/18 13:46:53 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stddef.h>
 
-
-void *ft_memcpy(void *destination, const void *source, size_t size)
+void	*ft_memcpy(void *destination, const void *source, size_t size)
 {
-    unsigned char		*dest;
-    const unsigned char	*src;
+	unsigned char		*dest;
+	const unsigned char	*src;
 
-    src = source;
-    dest = destination;
-    while (size)
-    {
-        *dest = *src;
-        dest++;
-        src++;
-        size--;
-    }
+	src = source;
+	dest = destination;
+	while (size)
+	{
+		*dest = *src;
+		dest++;
+		src++;
+		size--;
+	}
 }
 
-int ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -40,7 +39,7 @@ int ft_strlen(const char *str)
 	return (i);
 }
 
-void *ft_memmove(void *dest, const void *src, size_t count)
+void	*ft_memmove(void *dest, const void *src, size_t count)
 {
 	char		temp;
 	const char	*s;
@@ -68,7 +67,7 @@ void *ft_memmove(void *dest, const void *src, size_t count)
 		}
 	}
 }
-
+/*
 #include <string.h>
 
 int main ()
@@ -78,3 +77,4 @@ int main ()
   puts (str);
   return 0;
 }
+*/

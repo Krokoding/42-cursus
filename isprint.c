@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   isprint.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:51:19 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/16 14:54:52 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:37:09 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isprint(int c)
+int	ft_isprint(int c)
 {
 	if (c < 33 || c == 127)
 		return (0);

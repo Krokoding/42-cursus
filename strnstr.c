@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strnstr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:07:26 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 11:50:29 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/18 13:54:00 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,44 @@
 #include <stddef.h>
 #include <stdio.h>
 
-char *strnstr(const char *big, const char *little, size_t len)
+char	*strnstr(const char *big, const char *little, size_t len)
 {
-    int i;
-    int j;
-    int found;
+	int	i;
+	int	j;
+	int	found;
 
-    i = 0;
-    if (!(little[i]))
-        return ((char *)big);
-    while (i < len && big[i])
-    {
-        j = 0;
-        if (big[i] == little[j])
-        {
-            while (((j + i) < len) && (big[i + j] == little[j]) && (big[i + j]))
-            {
-                if (!(little[j + 1]))
-                {
-                    return ((char *)(big + i));
-                    printf("yo\n");
-                }
-                j++;
-            }
-        }
-        i++;
-    }
-    return (0);
+	i = 0;
+	if (!(little[i]))
+		return ((char *)big);
+	while (i < len && big[i])
+	{
+		j = 0;
+		if (big[i] == little[j])
+		{
+			while (((j + i) < len) && (big[i + j] == little[j]) && (big[i + j]))
+			{
+				if (!(little[j + 1]))
+				{
+					return ((char *)(big + i));
+					printf("yo\n");
+				}
+				j++;
+			}
+		}
+		i++;
+	}
+	return (0);
 }
 
-
+/*
 int main()
 {
-    const char big[] = "bonjour";
-    const char little[] = "";
-    char *result;
+	const char big[] = "bonjour";
+	const char little[] = "";
+	char *result;
 
-    result = strnstr(big, little, 4);
-    printf("%s", result);
+	result = strnstr(big, little, 4);
+	printf("%s", result);
 
 }
+*/

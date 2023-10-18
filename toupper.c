@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   toupper.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 16:22:12 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 12:08:18 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/18 13:53:33 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int toupper(int c)
+int	toupper(int c)
 {
-    if (c < 'z' && c > 'a')
-        c += 32;
-    return (c);
+	if (c < 'z' && c > 'a')
+		c += 32;
+	return (c);
 }

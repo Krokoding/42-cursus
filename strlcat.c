@@ -1,22 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   strlcat.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 13:50:55 by lkary-po          #+#    #+#             */
+/*   Updated: 2023/10/18 13:51:28 by lkary-po         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <string.h>
 #include <stddef.h>
 #include <stdio.h>
 
-size_t ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (str[i])
 		i++;
 	return (i);
 }
 
-size_t  ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int i;
+	int	i;
 	int	dest_size;
-	int j;
+	int	j;
 
 	j = 0;
 	dest_size = ft_strlen(dst);
@@ -33,10 +45,11 @@ size_t  ft_strlcat(char *dst, const char *src, size_t size)
 	}
 	return (dest_size + j);
 }
-
+/*
 int main()
 {
 	char	dst[] = "bon";
 	char	src[] = "jour";
 	
 }
+*/
