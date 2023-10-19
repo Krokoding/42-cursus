@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 10:35:43 by loris             #+#    #+#             */
-/*   Updated: 2023/10/19 11:50:59 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/19 12:30:12 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 int	ft_strncmp(const char *first, const char *second, size_t length )
 {
-	size_t	i;
+	size_t				i;
+	unsigned const char	*uc1;
+	unsigned const char	*uc2;
 
 	i = 0;
+	uc1 = (unsigned const char *)first;
+	uc2 = (unsigned const char *)second;
 	if (length == 0)
 		return (0);
-	while (first[i] && second[i] && i < length)
+	while (uc1[i] && uc2[i] && i < length)
 	{
-		if (first[i] != second[i])
-			return (first[i] - second[i]);
+		if (uc1[i] != uc2[i])
+			return (uc1[i] - uc2[i]);
 		i++;
 	}
 	if (i == length)
 		return (0);
-	return (first[i] - second[i]);
+	return (uc1[i] - uc2[i]);
 }

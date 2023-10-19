@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 08:50:25 by loris             #+#    #+#             */
-/*   Updated: 2023/10/19 10:41:17 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/19 13:08:54 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strchr(const char *string, int searchedChar)
 			return ((char *)str);
 		str++;
 	}
-	if (searchedChar == '\0')
+	if ((unsigned char)searchedChar == '\0')
 		return ((char *)str);
 	return (0);
 }

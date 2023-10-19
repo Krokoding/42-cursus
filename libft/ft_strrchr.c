@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 10:25:58 by loris             #+#    #+#             */
-/*   Updated: 2023/10/19 10:52:21 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/19 13:05:43 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,16 @@ char	*ft_strrchr(const char *string, int searchedChar)
 	len = ft_strlen(string);
 	while (len >= 0)
 	{
-		if (string[len] == searchedChar)
-			return ((char *)string + len);
+		if (string[len] == (char)searchedChar)
+			return ((char *)(string + len));
 		len--;
 	}
-	if (searchedChar == '\0')
-		return ((char *)string + len);
-	return (0);
+	return (NULL);
 }
+// #include <stdio.h>
+
+// int main()
+// {
+// 	const char s[] = "teste";
+// 	printf("%s", ft_strrchr(s, 'x'));
+// }
