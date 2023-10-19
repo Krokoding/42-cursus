@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 12:38:54 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 17:33:50 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/19 11:15:28 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	*ft_memcpy(void *destination, const void *source, size_t size)
 
 	src = source;
 	dest = destination;
+	if (!dest && !src)
+		return (0);
 	while (size)
 	{
 		*dest = *src;

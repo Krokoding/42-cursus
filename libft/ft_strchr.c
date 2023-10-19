@@ -3,21 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 08:50:25 by loris             #+#    #+#             */
-/*   Updated: 2023/10/18 17:30:41 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/19 10:41:17 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strchr(const char *string, int searchedChar)
 {
-	while (*string)
+	unsigned char	*str;
+
+	str = (unsigned char *)string;
+	while (*str)
 	{
-		if (*string == searchedChar)
-			return ((char *)string);
-		string++;
+		if (*str == (unsigned char)searchedChar)
+			return ((char *)str);
+		str++;
 	}
+	if (searchedChar == '\0')
+		return ((char *)str);
 	return (0);
 }
 /*
