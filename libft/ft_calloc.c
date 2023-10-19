@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 12:48:55 by loris             #+#    #+#             */
-/*   Updated: 2023/10/19 11:24:13 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/19 13:23:55 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,14 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static void	fti_bzero(void *str, size_t n)
-{
-	unsigned char	*c;
-
-	c = str;
-	while (n)
-	{
-		*c = 0;
-		n--;
-		c++;
-	}
-}
-
 void	*ft_calloc(size_t elementCount, size_t elementSize)
 {
 	char	*t;
 
-	t = malloc(sizeof(char) * (elementSize * elementCount));
-	if (t == NULL)
+	t = (void *)malloc(elementSize * elementCount);
+	if (!t)
 		return (0);
-	fti_bzero(t, elementCount * elementSize);
+	ft_bzero(t, elementCount * elementSize);
 	return (t);
 }
 /*
