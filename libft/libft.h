@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:32:58 by loris             #+#    #+#             */
-/*   Updated: 2023/10/19 11:21:34 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/19 14:01:14 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <stddef.h>
 # include <stdio.h>
+# include <stdint.h>
 
 int		ft_tolower(int c);
 int		ft_toupper(int c);
