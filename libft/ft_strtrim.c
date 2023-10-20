@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 12:31:52 by loris             #+#    #+#             */
-/*   Updated: 2023/10/19 14:31:59 by loris            ###   ########.fr       */
+/*   Created: 2023/10/19 17:33:34 by loris             #+#    #+#             */
+/*   Updated: 2023/10/19 18:45:05 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
 #include "libft.h"
+#include <stdlib.h>
 
-char	*ft_strdup(const char *source)
+char *ft_strtrim(char const *s1, char const *set)
 {
-	int		len;
-	char	*t;
-	int		i;
+    int         start;
+    int         end;
 
-	i = 0;
-	len = ft_strlen(source);
-	t = malloc(sizeof(const char) * len + 1);
-	if (t == NULL)
-		return (0);
-	while (i < len)
-	{
-		t[i] = source[i];
-		i++;
-	}
-	t[i] = '\0';
-	return (t);
+    end = ft_strlen(s1);
+    start = 0;
+    while (ft_strchr(set, s1[start]) != 0 && s1[start])
+        start++;
+    while (ft_strrchr(set, s1[end]) != 0)
+        end--;
+    return(ft_substr(s1, start, (end - start + 1)));
 }

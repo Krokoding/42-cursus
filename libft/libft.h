@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:32:58 by loris             #+#    #+#             */
-/*   Updated: 2023/10/19 14:01:14 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/19 19:43:07 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,24 @@ int		ft_isdigit(char c);
 int		ft_isascii(int c);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
-size_t	ft_strlcpy(char *destination, const	char *source, size_t size);
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
+
 void	*ft_memset(void *pointer, int value, size_t count);
 void	*ft_memmove(void *dest, const void *src, size_t count);
 void	*ft_memcpy(void *destination, const void *source, size_t size);
 void	*ft_memchr(const void *memoryBlock, int searchedChar, size_t size);
 void	*ft_calloc(size_t elementCount, size_t elementSize);
 void	ft_bzero(void *str, size_t n);
+
 char	*ft_strrchr(const char *string, int searchedChar);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strdup(const char *source);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *string, int searchedChar);
+char    **ft_split(char const *s, char c);
+char	*ft_strjoin(char const *s1, char const *s2);
+char    *ft_strtrim(char const *s1, char const *set);
+
+size_t	ft_strlcpy(char *destination, const	char *source, size_t size);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
+
 #endif

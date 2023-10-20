@@ -1,45 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 12:48:55 by loris             #+#    #+#             */
-/*   Updated: 2023/10/19 16:43:02 by loris            ###   ########.fr       */
+/*   Created: 2023/09/02 15:51:07 by lkary-po          #+#    #+#             */
+/*   Updated: 2023/10/19 17:32:10 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stddef.h>
 #include <stdlib.h>
 #include "libft.h"
 
-void	*ft_calloc(size_t elementCount, size_t elementSize)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*t;
-
-	if (elementSize == 0 || elementCount == 0)
-		return (malloc(0));
-	if ((SIZE_MAX / elementCount < elementSize)
-		|| (SIZE_MAX / elementSize < elementCount))
+	char *s;
+	size_t		len_tot;
+	
+	len_tot = (ft_strlen(s1) + ft_strlen(s2));
+	s = malloc(len_tot + 1);
+	if (!s)
 		return (NULL);
-	t = (void *)malloc(elementSize * elementCount);
-	if (!t)
-		return (NULL);
-	ft_bzero(t, elementCount * elementSize);
-	return (t);
+	ft_strlcpy(s, s1, (ft_strlen(s1) + 1));
+	ft_strlcat(s, s2, (len_tot + 1));
+	return (s);
 }
 /*
-int main()
+int	main()
 {
-	char *t;
-	int i = 0;
-	
-	t = calloc(10, 1);
-	while (i < 10)
+	int	i;
+	char	*strs[4];
+	char	*sep = " ";
+	char	*tab;
+	strs[0] = "hhh";
+	strs[1] = "iii";
+	strs[2] = "jjj";
+	strs[3] = "kkk";
+	tab = ft_strjoin(4, strs, sep);
+
+	i = 0;	
+	while (tab[i])
 	{
-		printf("%d", t[i]);
+		printf("%c", tab[i]);
 		i++;
 	}
 }

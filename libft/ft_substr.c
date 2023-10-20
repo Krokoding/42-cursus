@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 12:31:52 by loris             #+#    #+#             */
-/*   Updated: 2023/10/19 14:31:59 by loris            ###   ########.fr       */
+/*   Created: 2023/10/19 14:15:16 by loris             #+#    #+#             */
+/*   Updated: 2023/10/19 17:09:32 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
 #include "libft.h"
+#include <stdlib.h>
 
-char	*ft_strdup(const char *source)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int		len;
-	char	*t;
-	int		i;
+	char					*dst;
+	size_t					s_len;
+	size_t					end;
 
-	i = 0;
-	len = ft_strlen(source);
-	t = malloc(sizeof(const char) * len + 1);
-	if (t == NULL)
-		return (0);
-	while (i < len)
-	{
-		t[i] = source[i];
-		i++;
-	}
-	t[i] = '\0';
-	return (t);
+	end = 0;
+	s_len = ft_strlen(s);
+	if (s_len > start)
+		end = s_len - start;
+	if (end > len)
+		end = len;
+	dst = malloc(end + 1);
+	if (!dst)
+		return (NULL);
+	ft_strlcpy(dst, &s[start], end + 1);
+	return (dst);
 }
