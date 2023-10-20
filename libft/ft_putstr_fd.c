@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 10:25:58 by loris             #+#    #+#             */
-/*   Updated: 2023/10/20 16:48:28 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/20 18:17:46 by lkary-po          #+#    #+#             */
+/*   Updated: 2023/10/20 18:21:51 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *string, int searchedChar)
+void	ft_putstr_fd(char *s, int fd)
 {
-	int	len;
+	int	i;
 
-	len = ft_strlen(string);
-	while (len >= 0)
+	i = 0;
+	while (s[i])
 	{
-		if (string[len] == (char)searchedChar)
-			return ((char *)(string + len));
-		len--;
+		write(fd, &s[i], 1);
+		i++;
 	}
-	return (NULL);
 }
-// #include <stdio.h>
-
-// int main()
-// {
-// 	const char s[] = "teste";
-// 	printf("%s", ft_strrchr(s, 'x'));
-// }
