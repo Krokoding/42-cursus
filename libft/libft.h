@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:32:58 by loris             #+#    #+#             */
-/*   Updated: 2023/10/19 19:43:07 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/20 11:23:49 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stddef.h>
 # include <stdio.h>
 # include <stdint.h>
+# include <stdlib.h>
 
 int		ft_tolower(int c);
 int		ft_toupper(int c);
@@ -40,9 +41,9 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strdup(const char *source);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *string, int searchedChar);
-char    **ft_split(char const *s, char c);
+char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
-char    *ft_strtrim(char const *s1, char const *set);
+char	*ft_strtrim(char const *s1, char const *set);
 
 size_t	ft_strlcpy(char *destination, const	char *source, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
