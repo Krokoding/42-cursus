@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:32:58 by loris             #+#    #+#             */
-/*   Updated: 2023/10/20 11:23:49 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/20 13:01:11 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*ft_strchr(const char *string, int searchedChar);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_itoa(int n);
 
 size_t	ft_strlcpy(char *destination, const	char *source, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
