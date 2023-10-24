@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:20:38 by loris             #+#    #+#             */
-/*   Updated: 2023/10/24 14:40:05 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:34:00 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_list	*ft_lstnew(char *content)
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*temp;
-
 	if (lst && new)
 	{
 		if (*lst == NULL)
@@ -72,5 +71,5 @@ int	ft_lst_check(t_list **lst)
 		}
 		temp = temp->next;
 	}
-	return (0);
+	return (1);
 }

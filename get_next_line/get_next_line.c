@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:21:10 by loris             #+#    #+#             */
-/*   Updated: 2023/10/24 14:40:37 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:12:00 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,27 @@ char	*get_next_line(int fd)
 	char			*line_str;
 	static t_list	*lst;
 	int				n;
-	char			c;
 
-	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buff)
-		return (NULL);
-	n = read(fd, buff, BUFFER_SIZE);
-	c = n + '0';
-	if (n <= 0)
-		return (NULL);
-	buff[n] = '\0';
 	while (ft_lst_check(&lst))
+	{
+		buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (!buff)
+			return (NULL);
+		n = read(fd, buff, BUFFER_SIZE);
+		if (!buff)
+		{
+			free(buff);
+			return (NULL);
+		}
+		if (n <= 0)
+			return (NULL);
 		ft_lstadd_back(&lst, ft_lstnew(buff));
+	}
 	line_str = malloc(sizeof(char) * ft_nextline(&lst));
 	if (!line_str)
 		return (NULL);
 	ft_lsttostr(&lst, line_str);
-	ft_lstclear(lst);
+	ft_lstclear(&lst);
 	return (line_str);
 }
 
@@ -46,6 +50,7 @@ int	ft_nextline(t_list **lst)
 
 	temp = *lst;
 	k = 0;
+
 	while (temp)
 	{
 		i = 0;
@@ -84,44 +89,54 @@ void	ft_lsttostr(t_list **lst, char *str)
 			i++;
 			j++;
 		}
-		temp = (temp)->next;
+		temp = temp->next;
 	}
 }
 
-void	ft_lstclear(t_list *lst)
+void	ft_lstclear(t_list **lst)
 {
 	t_list	*last_node;
 	t_list	*new_node;
+	char	*rest_buffer;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	last_node = malloc(sizeof(t_list));
-	if (!new_node || !last_node)
+	rest_buffer = malloc(BUFFER_SIZE + 1);
+	new_node = malloc(sizeof(t_list));
+	if (!new_node || !rest_buffer)
 		return ;
-	last_node = ft_lstlast(lst);
+	last_node = ft_lstlast(*lst);
 	while (last_node->content[i] != '\0' && last_node->content[i] != '\n')
 		i++;
 	while (last_node->content[i] && last_node->content[i] != '\n')
-		new_node->content[j++] = last_node->content[i++];
-	new_node->content[j] = '\0';
-	ft_free(lst, new_node);
+		rest_buffer[j++] = last_node->content[i++];
+	new_node = ft_lstnew(rest_buffer);
+	ft_free(lst, new_node, rest_buffer);
 }
 
-void	ft_free(t_list *lst, t_list *new_node)
+void	ft_free(t_list **lst, t_list *new_node, char *rest_buffer)
 {
 	t_list	*temp;
 
 	if (!lst)
 		return ;
-	while (lst)
+	while (*lst)
 	{
-		temp = (lst)->next;
-		free(lst);
-		lst = temp;
+		temp = (*lst)->next;
+		free((*lst)->content);
+		free(*lst);
+		*lst = temp;
 	}
-	ft_lstadd_back(&lst, new_node);
+	*lst = NULL;
+	if (new_node->content[0])
+		*lst = new_node;
+	else
+	{
+		free(rest_buffer);
+		free(new_node);
+	}
 }
 
 int main() {
@@ -129,14 +144,14 @@ int main() {
     char *line;
 
 
-    while ((line = get_next_line(fd)) != NULL) {
-        // Faites quelque chose avec la ligne, par exemple l'imprimer
-        printf("%s", line);
-        // Libérez la mémoire allouée pour la ligne après utilisation
-        free(line);
-    }
-
-    // Fermez le descripteur de fichier une fois que vous avez fini de lire
+    line = get_next_line(fd);
+	printf("%s\n", line);
+    line = get_next_line(fd);
+	printf("%s\n", line);
+	line = get_next_line(fd);
+	printf("%s\n", line);
+    line = get_next_line(fd);
+	printf("%s\n", line);
     close(fd);
     return 0;
 }
