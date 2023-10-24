@@ -6,29 +6,35 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:21:10 by loris             #+#    #+#             */
-/*   Updated: 2023/10/24 10:52:52 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/24 14:12:57 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>>
 #include "get_next_line.h"
-
-
 
 char	*get_next_line(int fd)
 {
 	char			*buff;
 	char			*line_str;
-	static t_list	**lst;
+	static t_list	*lst;
+	int				n;
+	char				c;
 	
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	while (ft_nextline)
-	{
-		buff[BUFFER_SIZE] = '\0';
-		ft_lstadd_back(lst, ft_lstnew(buff));
-	}
-	line_str = malloc(sizeof(char) * ft_nextline(lst));
-	line_str = ft_lsttostr(lst, ft_nextline(lst));
+	if (!buff)
+		return (NULL);
+		
+	n = read(fd, buff, BUFFER_SIZE);
+	c = n + '0';
+	
+	if (n <= 0)
+		return (NULL);
+	buff[n] = '\0';
+	ft_lstadd_back(&lst, ft_lstnew(buff));
+	line_str = malloc(sizeof(char) * ft_nextline(&lst));
+	if (!line_str)
+		return (NULL);
+	ft_lsttostr(&lst, line_str);
 	ft_lstclear(lst);
 	return(line_str);
 }
@@ -37,48 +43,53 @@ int	ft_nextline(t_list **lst)
 {
 	int	i;
 	int	k;
+	t_list	*temp;
 	
+	temp = *lst;
 	k = 0;
-	while (lst)
+	while (temp)
 	{
 		i = 0;
-		while (lst->content[i])
+		while (temp->content[i])
 		{
-			if (lst->content[i] == '\n')
-				return (k);
+			if (temp->content[i] == '\n')
+				return (++k);
 			k++;
 			i++;
 		}
-		lst = lst->next;
+		temp = temp->next;
 	}
-	return (0);
+	return (k);
 }
 
-int	ft_lsttostr(t_list **lst, char *str, int size)
+void	ft_lsttostr(t_list **lst, char *str)
 {
 	int	i;
 	int	j;
-	
-	while (lst)
+	t_list	*temp;
+
+	j = 0;
+	temp = *lst;
+	while (temp)
 	{
 		i = 0;
-		while (lst->content[i])
+		while (temp->content[i])
 		{
-			str[j] = lst->content[i];
-			if (lst->content[i] == '\n')
+			if ((temp)->content[i] == '\n')
 			{
 				str[++j] = '\0';
 				str[j] = '\n';
 				return ;
 			}
+			str[j] = (temp)->content[i];
 			i++;
 			j++;
 		}
-		lst = lst->next;
+		temp = (temp)->next;
 	}
 }
 
-void	*ft_lstclear(t_list **lst)
+void	ft_lstclear(t_list *lst)
 {
 	t_list	*last_node;
 	t_list	*new_node;
@@ -90,26 +101,48 @@ void	*ft_lstclear(t_list **lst)
 	last_node = malloc(sizeof(t_list));
 	new_node = malloc(sizeof(t_list));
 	if (!new_node || !last_node)
-		return (0);
+		return ;
 	last_node = ft_lstlast(lst);
 	while (last_node->content[i] != '\0' && last_node->content[i] != '\n')
+	{
 		i++;
+	}
 	while (last_node->content[i] && last_node->content[i] != '\n')
+	{
 		new_node->content[j++] = last_node->content[i++];
+	}
 	new_node->content[j] = '\0';
 	ft_free(lst, new_node);
 }
-void	*ft_free(t_list **lst, t_list *new_node)
+
+void	ft_free(t_list *lst, t_list *new_node)
 {
 	t_list	*temp;
 
-	if (!lst || !del)
+	if (!lst)
 		return ;
-	while (*lst)
+	while (lst)
 	{
-		temp = (*lst)->next;
-		free(*lst);
-		*lst = temp;
+		temp = (lst)->next;
+		free(lst);
+		lst = temp;
 	}
-	ft_lstadd_back(lst, new_node);
+	ft_lstadd_back(&lst, new_node);
+}
+
+int main() {
+    int fd = open("exemple.txt", O_RDONLY); // Ou utiliser 0 pour l'entrée standard (stdin)
+    char *line;
+
+
+    while ((line = get_next_line(fd)) != NULL) {
+        // Faites quelque chose avec la ligne, par exemple l'imprimer
+        printf("%s", line);
+        // Libérez la mémoire allouée pour la ligne après utilisation
+        free(line);
+    }
+
+    // Fermez le descripteur de fichier une fois que vous avez fini de lire
+    close(fd);
+    return 0;
 }

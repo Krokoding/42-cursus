@@ -6,16 +6,15 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:20:38 by loris             #+#    #+#             */
-/*   Updated: 2023/10/24 10:25:54 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/24 13:46:19 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get"
+#include "get_next_line.h"
 
 t_list	*ft_lstnew(char *content)
 {
 	t_list	*node;
-
 	node = malloc(sizeof(t_list));
 	if (!node)
 		return (0);
