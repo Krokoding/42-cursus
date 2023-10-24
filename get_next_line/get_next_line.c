@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:21:10 by loris             #+#    #+#             */
-/*   Updated: 2023/10/24 14:12:57 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/24 14:40:37 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,32 @@ char	*get_next_line(int fd)
 	char			*line_str;
 	static t_list	*lst;
 	int				n;
-	char				c;
-	
+	char			c;
+
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
-		
 	n = read(fd, buff, BUFFER_SIZE);
 	c = n + '0';
-	
 	if (n <= 0)
 		return (NULL);
 	buff[n] = '\0';
-	ft_lstadd_back(&lst, ft_lstnew(buff));
+	while (ft_lst_check(&lst))
+		ft_lstadd_back(&lst, ft_lstnew(buff));
 	line_str = malloc(sizeof(char) * ft_nextline(&lst));
 	if (!line_str)
 		return (NULL);
 	ft_lsttostr(&lst, line_str);
 	ft_lstclear(lst);
-	return(line_str);
+	return (line_str);
 }
 
 int	ft_nextline(t_list **lst)
 {
-	int	i;
-	int	k;
+	int		i;
+	int		k;
 	t_list	*temp;
-	
+
 	temp = *lst;
 	k = 0;
 	while (temp)
@@ -64,8 +63,8 @@ int	ft_nextline(t_list **lst)
 
 void	ft_lsttostr(t_list **lst, char *str)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	t_list	*temp;
 
 	j = 0;
@@ -93,24 +92,19 @@ void	ft_lstclear(t_list *lst)
 {
 	t_list	*last_node;
 	t_list	*new_node;
-	int	i;
-	int	j;
-	
+	int		i;
+	int		j;
+
 	i = 0;
 	j = 0;
 	last_node = malloc(sizeof(t_list));
-	new_node = malloc(sizeof(t_list));
 	if (!new_node || !last_node)
 		return ;
 	last_node = ft_lstlast(lst);
 	while (last_node->content[i] != '\0' && last_node->content[i] != '\n')
-	{
 		i++;
-	}
 	while (last_node->content[i] && last_node->content[i] != '\n')
-	{
 		new_node->content[j++] = last_node->content[i++];
-	}
 	new_node->content[j] = '\0';
 	ft_free(lst, new_node);
 }

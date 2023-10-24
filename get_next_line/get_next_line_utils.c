@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:20:38 by loris             #+#    #+#             */
-/*   Updated: 2023/10/24 13:46:19 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/24 14:40:05 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,27 @@ t_list	*ft_lstlast(t_list *lst)
 	while (temp->next != NULL)
 		temp = temp->next;
 	return (temp);
+}
+
+int	ft_lst_check(t_list **lst)
+{
+	int		i;
+	int		k;
+	t_list	*temp;
+
+	temp = *lst;
+	k = 0;
+	while (temp)
+	{
+		i = 0;
+		while (temp->content[i])
+		{
+			if (temp->content[i] == '\n')
+				return (0);
+			k++;
+			i++;
+		}
+		temp = temp->next;
+	}
+	return (0);
 }
