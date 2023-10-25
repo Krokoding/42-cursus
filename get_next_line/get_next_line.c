@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:21:10 by loris             #+#    #+#             */
-/*   Updated: 2023/10/25 11:40:03 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/25 10:22:05 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ char	*get_next_line(int fd)
 		}
 		if (n <= 0)
 			return (NULL);
+		buff[n] = '\0';
 		ft_lstadd_back(&lst, ft_lstnew(buff));
 	}
 	line_str = malloc(sizeof(char) * (ft_nextline(&lst) + 1));
 	if (!line_str)
 		return (NULL);
-//	printf("malloc len = %d\n", ft_nextline(&lst));
 	ft_lsttostr(&lst, line_str);
 	ft_lstclear(&lst);
 	return (line_str);
@@ -149,27 +149,19 @@ void	ft_free(t_list **lst, t_list *new_node, char *rest_buffer)
 	}
 }
 
-int main() {
-    int fd = open("exemple.txt", O_RDONLY); // Ou utiliser 0 pour l'entrée standard (stdin)
+int main()
+{
+    int fd;
     char *line;
-	int i;
 
-	i = 0;
+    fd = open(argv[1], O_RDONLY);
 
-    line = get_next_line(fd);
-	printf("%s\n", line);
-    line = get_next_line(fd);
-	while(line[i])
-	{
-		printf("%c", line[i]);
-		i++;
-	}
-	line = get_next_line(fd);
-	printf("%s\n", line);
-    line = get_next_line(fd);
-	printf("%s\n", line);
-	line = get_next_line(fd);
-	printf("%s\n", line);
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s\n", line));
+        free(line);
+    }
+	printf("d");
     close(fd);
-    return 0;
+    return (0);
 }
