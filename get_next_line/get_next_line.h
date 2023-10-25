@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 09:30:44 by loris             #+#    #+#             */
-/*   Updated: 2023/10/24 18:09:55 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/25 14:26:38 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void	ft_lsttostr(t_list **lst, char *str);
 void	ft_lstclear(t_list **lst);
 void	ft_free(t_list **lst, t_list *new_node, char *rest_buffer);
 int		ft_lst_check(t_list **lst);
-char	*ft_strdup(char *source);
+char	*next_line(int fd, t_list	*lst);
+void	creat_next_line(t_list **lst, int fd);
+
 
 
 #endif

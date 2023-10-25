@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:20:38 by loris             #+#    #+#             */
-/*   Updated: 2023/10/24 17:34:00 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/25 14:10:59 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ t_list	*ft_lstnew(char *content)
 {
 	t_list	*node;
 	node = malloc(sizeof(t_list));
+	if (!content)
+		return (NULL);
 	if (!node)
 		return (0);
 	node->content = content;
