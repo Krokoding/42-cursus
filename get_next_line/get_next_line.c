@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:21:10 by loris             #+#    #+#             */
-/*   Updated: 2023/10/24 18:12:00 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/25 11:40:03 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ char	*get_next_line(int fd)
 			return (NULL);
 		ft_lstadd_back(&lst, ft_lstnew(buff));
 	}
-	line_str = malloc(sizeof(char) * ft_nextline(&lst));
+	line_str = malloc(sizeof(char) * (ft_nextline(&lst) + 1));
 	if (!line_str)
 		return (NULL);
+//	printf("malloc len = %d\n", ft_nextline(&lst));
 	ft_lsttostr(&lst, line_str);
 	ft_lstclear(&lst);
 	return (line_str);
@@ -50,14 +51,16 @@ int	ft_nextline(t_list **lst)
 
 	temp = *lst;
 	k = 0;
-
 	while (temp)
 	{
 		i = 0;
 		while (temp->content[i])
 		{
 			if (temp->content[i] == '\n')
-				return (++k);
+			{
+				k++;
+				return (k);
+			}
 			k++;
 			i++;
 		}
@@ -81,7 +84,8 @@ void	ft_lsttostr(t_list **lst, char *str)
 		{
 			if ((temp)->content[i] == '\n')
 			{
-				str[++j] = '\0';
+				str[j] = '\0';
+				j++;
 				str[j] = '\n';
 				return ;
 			}
@@ -105,14 +109,20 @@ void	ft_lstclear(t_list **lst)
 	j = 0;
 	rest_buffer = malloc(BUFFER_SIZE + 1);
 	new_node = malloc(sizeof(t_list));
-	if (!new_node || !rest_buffer)
+	last_node = malloc(sizeof(t_list));
+	if (!new_node || !rest_buffer || !last_node)
 		return ;
 	last_node = ft_lstlast(*lst);
 	while (last_node->content[i] != '\0' && last_node->content[i] != '\n')
+	{
 		i++;
-	while (last_node->content[i] && last_node->content[i] != '\n')
-		rest_buffer[j++] = last_node->content[i++];
+	}
+	while (last_node->content[i] != '\0' && last_node->content[++i] != '\n')
+	{
+		rest_buffer[j++] = last_node->content[i];
+	}
 	new_node = ft_lstnew(rest_buffer);
+	
 	ft_free(lst, new_node, rest_buffer);
 }
 
@@ -142,15 +152,23 @@ void	ft_free(t_list **lst, t_list *new_node, char *rest_buffer)
 int main() {
     int fd = open("exemple.txt", O_RDONLY); // Ou utiliser 0 pour l'entrée standard (stdin)
     char *line;
+	int i;
 
+	i = 0;
 
     line = get_next_line(fd);
+	printf("%s\n", line);
+    line = get_next_line(fd);
+	while(line[i])
+	{
+		printf("%c", line[i]);
+		i++;
+	}
+	line = get_next_line(fd);
 	printf("%s\n", line);
     line = get_next_line(fd);
 	printf("%s\n", line);
 	line = get_next_line(fd);
-	printf("%s\n", line);
-    line = get_next_line(fd);
 	printf("%s\n", line);
     close(fd);
     return 0;
