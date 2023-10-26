@@ -1,9 +1,0 @@
-In C, static variables have
-a lifetime that spans the entire
-execution of the program. They are
-allocated in the data segment of
-your program, not on the stack or
-the heap. Because of this, they
-do not need to be (and in fact, cannot be)
-freed like dynamically allocated memory
-from the heap
