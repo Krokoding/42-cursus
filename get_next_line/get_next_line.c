@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:21:10 by loris             #+#    #+#             */
-/*   Updated: 2023/10/26 10:10:22 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/26 20:38:08 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,19 @@ char	*get_next_line(int fd)
 {
 	char			*line_str;
 	static t_list	*lst;
+	t_list			*temp;
 
 	if (BUFFER_SIZE <= 0 || read(fd, &line_str, 0) < 0 || fd < 0)
+	{
+		while (lst)
+		{
+			temp = (lst)->next;
+			free((lst)->content);
+			free(lst);
+			lst = temp;
+		}
 		return (NULL);
+	}
 	creat_next_line(&lst, fd);
 	if (lst == NULL)
 		return (NULL);
@@ -136,11 +146,41 @@ int main()
 
     fd = open("exemple.txt", O_RDONLY);
 
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        printf("%s", line);
-        free(line);
-    }
+	line = get_next_line(fd);
+    printf("%s", line);
+	free(line);
+
+	line = get_next_line(fd);
+    printf("%s", line);
+	free(line);
+	
+	close(fd);
+	
+	fd = open("/home/loris/test", O_RDONLY);
+	line = get_next_line(fd);
+    printf("%s", line);
+	free(line);
+	
+	line = get_next_line(fd);
+    printf("%s", line);
+	free(line);
+
+	line = get_next_line(fd);
+    printf("%s", line);
+	free(line);
+
+	close(fd);
+
+	fd = open("exemple.txt", O_RDONLY);
+	
+	line = get_next_line(fd);
+    printf("%s", line);
+	free(line);
+	
+	line = get_next_line(fd);
+    printf("%s", line);
+	free(line);
+	
     close(fd);
     return (0);
 }
