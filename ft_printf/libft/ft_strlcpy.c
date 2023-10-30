@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:28:35 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/16 14:57:09 by lkary-po          #+#    #+#             */
+/*   Updated: 2023/10/23 09:21:04 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdio.h>
+#include "libft.h"
 
-int	ft_printf_int(int nb)
+size_t	ft_strlcpy(char *destination, const	char *source, size_t size)
 {
-	char	*num;
-	int	i;
+	size_t	i;
+	size_t	len;
 
-	num = ft_itoa(nb);
-	i = ft_print_str(num);
-	return (i);
+	len = ft_strlen(source);
+	i = 0;
+	if (!destination || !source)
+		return (0);
+	if (size == 0)
+		return (len);
+	while (i < size -1 && source[i])
+	{
+		destination[i] = source[i];
+		i++;
+	}
+	destination[i] = '\0';
+	return (len);
 }

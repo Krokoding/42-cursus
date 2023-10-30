@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:28:35 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/16 14:37:35 by lkary-po          #+#    #+#             */
+/*   Updated: 2023/10/23 09:18:52 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int	ft_printf_int(int nb)
+int	ft_isalnum(int c)
 {
-	char	*num;
-	int	i;
-
-	num = ft_itoa(nb);
-	i = ft_print_str(num);
-	return (i);
+	if ((c <= '9' && c >= '0') || (c >= 'A' && c <= 'Z')
+		|| (c >= 'a' && c <= 'z'))
+		return (1);
+	return (0);
 }
+/*
+#include <stdio.h>
+
+int main ()
+{
+	int c = '-';
+
+	printf("%d", ft_isalnum(c));
+}
+*/

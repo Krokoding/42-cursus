@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:28:35 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/18 10:25:58 by loris             #+#    #+#             */
+/*   Updated: 2023/10/23 09:21:19 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf_int(int nb)
+char	*ft_strrchr(const char *string, int searchedChar)
 {
-	char	*num;
-	int	i;
+	int	len;
 
-	num = ft_itoa(nb);
-	i = ft_print_str(num);
-	return (i);
+	len = ft_strlen(string);
+	while (len >= 0)
+	{
+		if (string[len] == (char)searchedChar)
+			return ((char *)(string + len));
+		len--;
+	}
+	return (NULL);
 }
+// #include <stdio.h>
+
+// int main()
+// {
+// 	const char s[] = "teste";
+// 	printf("%s", ft_strrchr(s, 'x'));
+// }

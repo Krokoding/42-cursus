@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:28:35 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/16 13:48:42 by lkary-po          #+#    #+#             */
+/*   Updated: 2023/10/23 09:19:13 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int	ft_printf_int(int nb)
+int	ft_isascii(int c)
 {
-	char	*num;
-	int	i;
-
-	num = ft_itoa(nb);
-	i = ft_print_str(num);
-	return (i);
+	if (c < 0 || c > 127)
+		return (0);
+	else
+		return (1);
 }

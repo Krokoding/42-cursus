@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:28:35 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/20 17:29:05 by lkary-po          #+#    #+#             */
+/*   Updated: 2023/10/23 09:21:11 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf_int(int nb)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*num;
-	int	i;
+	int					len;
+	char				*str;
+	unsigned int		i;
 
-	num = ft_itoa(nb);
-	i = ft_print_str(num);
-	return (i);
+	i = 0;
+	len = ft_strlen(s);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (0);
+	while (len)
+	{
+		str[i] = (*f)(i, s[i]);
+		i++;
+		len--;
+	}
+	str[i] = '\0';
+	return (str);
 }

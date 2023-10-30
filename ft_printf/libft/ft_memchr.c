@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:28:35 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/18 10:48:10 by loris             #+#    #+#             */
+/*   Updated: 2023/10/23 09:20:14 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stddef.h>
 
-int	ft_printf_int(int nb)
+void	*ft_memchr(const void *memoryBlock, int searchedChar, size_t size)
 {
-	char	*num;
-	int	i;
+	unsigned char	*mblock;
 
-	num = ft_itoa(nb);
-	i = ft_print_str(num);
-	return (i);
+	mblock = (unsigned char *)memoryBlock;
+	while (size--)
+	{
+		if (*mblock == ((unsigned char)searchedChar))
+			return ((void *)mblock);
+		mblock++;
+	}
+	return (0);
 }

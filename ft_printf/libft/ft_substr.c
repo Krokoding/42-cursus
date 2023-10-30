@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:28:35 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/19 14:15:16 by loris             #+#    #+#             */
+/*   Updated: 2023/10/23 09:21:25 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int	ft_printf_int(int nb)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*num;
-	int	i;
+	char					*dst;
+	size_t					s_len;
+	size_t					end;
 
-	num = ft_itoa(nb);
-	i = ft_print_str(num);
-	return (i);
+	end = 0;
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	if (s_len > start)
+		end = s_len - start;
+	if (end > len)
+		end = len;
+	dst = malloc(end + 1);
+	if (!dst)
+		return (NULL);
+	ft_strlcpy(dst, &s[start], end + 1);
+	return (dst);
 }

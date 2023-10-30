@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:28:35 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/19 17:33:34 by loris             #+#    #+#             */
+/*   Updated: 2023/10/23 09:21:23 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int	ft_printf_int(int nb)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*num;
-	int	i;
+	int	start;
+	int	end;
 
-	num = ft_itoa(nb);
-	i = ft_print_str(num);
-	return (i);
+	end = ft_strlen(s1);
+	start = 0;
+	while (ft_strchr(set, s1[start]) != 0 && s1[start])
+		start++;
+	while (ft_strrchr(set, s1[end]) != 0)
+		end--;
+	return (ft_substr(s1, start, (end - start + 1)));
 }

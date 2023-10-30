@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:21:10 by loris             #+#    #+#             */
-/*   Updated: 2023/10/26 21:39:10 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/27 11:21:40 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_next_line(int fd)
 	creat_next_line(&lst, fd);
 	if (lst == NULL)
 		return (NULL);
-	line_str = malloc(sizeof(char) * (ft_nextline(&lst) + 1));
+	line_str = malloc(sizeof(char) * (ft_nextline(&lst, 0) + 1));
 	if (!line_str)
 		return (NULL);
 	ft_lsttostr(&lst, line_str);
@@ -40,12 +40,14 @@ char	*get_next_line(int fd)
 	return (line_str);
 }
 
-int	ft_nextline(t_list **lst)
+int	ft_nextline(t_list **lst, int j)
 {
 	int		i;
 	int		k;
 	t_list	*temp;
+	int		back_slash_inspector;
 
+	back_slash_inspector = 0;
 	temp = *lst;
 	k = 0;
 	while (temp)
@@ -54,16 +56,17 @@ int	ft_nextline(t_list **lst)
 		while (temp->content[i])
 		{
 			if (temp->content[i] == '\n')
-			{
-				k++;
-				return (k);
-			}
+				return (++k);
 			k++;
+			if (temp->content[i] == '\0')
+				back_slash_inspector = 1;
+			if (back_slash_inspector == 0)
+				j++;
 			i++;
 		}
 		temp = temp->next;
 	}
-	return (k);
+	return (j);
 }
 
 void	ft_lsttostr(t_list **lst, char *str)
@@ -138,39 +141,3 @@ void	ft_free(t_list **lst, t_list *new_node, char *rest_buffer)
 		free(new_node);
 	}
 }
-/*
-int main()
-{
-    int fd;
-    char *line;
-
-    fd = open("exemple.txt", O_RDONLY);
-
-	line = get_next_line(fd);
-    printf("%s", line);
-	free(line);
-
-	line = get_next_line(fd);
-    printf("%s", line);
-	free(line);
-	
-	line = get_next_line(fd);
-    printf("%s", line);
-	free(line);
-	
-	line = get_next_line(fd);
-    printf("%s", line);
-	free(line);
-	
-	line = get_next_line(fd);
-    printf("%s", line);
-	free(line);	
-	
-	line = get_next_line(fd);
-    printf("%s", line);
-	free(line);	
-
-    close(fd);
-    return (0);
-}
-*/

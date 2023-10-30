@@ -1,56 +1,67 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_p.c                                       :+:      :+:    :+:   */
+/*   ft_print_x.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:13:20 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:29:16 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/30 13:45:39 by lkary-po          #+#    #+#             */
+/*   Updated: 2023/10/30 14:42:46 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ptr_len(uintptr_t ull)
+int	ptr_len(unsigned int nb)
 {
 	int	i;
 
 	i = 0;
-	while (ull / 16)
+	while (nb / 16)
 	{
-		ull = ull / 16;
+		nb = nb / 16;
 		i++;
 	}
 	return (i);
 }
 
-void	ft_pointer_hexa_printer(uintptr_t ull)
+void	ft_print_x(unsigned int nb)
 {
 	char							*base;
 
 	base = "0123456789abcdef";
-	if (ull > 16)
+	if (nb > 16)
 	{
-		(ft_print_pointer(ull / 16));
-		(ft_print_pointer(ull % 16));
+		(ft_print_x(nb / 16));
+		(ft_print_x(nb % 16));
 	}
 	else
-		ft_putchar_fd(base[ull], 1);
+		ft_putchar_fd(base[nb], 1);
 }
 
-int	ft_print_pointer(unsigned long long ull)
+void	ft_print_X(unsigned int nb)
+{
+	char							*base;
+
+	base = "0123456789ABCDEF";
+	if (nb > 16)
+	{
+		(ft_print_X(nb / 16));
+		(ft_print_X(nb % 16));
+	}
+	else
+		ft_putchar_fd(base[nb], 1);
+}
+
+int	ft_print_hex(unsigned int nb, int i)
 {
 	int	count;
 
 	count = 0;
-	count += write(1, "0x", 2);
-	if (ull == 0)
-		count += write(1, "0", 1);
-	else
-	{
-		ft_pointer_hexa_printer((uintptr_t) &ull);
-		count += ptr_len(ull);
-	}
+	if (i == 0)
+		ft_print_x(nb);
+	if (i == 1)
+		ft_print_x(nb);
+	count += ptr_len(nb);
 	return (count);
 }

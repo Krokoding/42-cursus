@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:28:35 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/21 11:02:00 by loris             #+#    #+#             */
+/*   Updated: 2023/10/23 09:22:21 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf_int(int nb)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	char	*num;
-	int	i;
+	t_list	*temp;
 
-	num = ft_itoa(nb);
-	i = ft_print_str(num);
-	return (i);
+	if (lst && new)
+	{
+		if (*lst == NULL)
+		{
+			*lst = new;
+		}
+		else
+		{
+			temp = ft_lstlast(*lst);
+			temp->next = new;
+		}
+	}
 }

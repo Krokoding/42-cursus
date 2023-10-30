@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:28:35 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/17 12:26:59 by loris             #+#    #+#             */
+/*   Updated: 2023/10/23 09:18:43 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stddef.h>
 
-int	ft_printf_int(int nb)
+void	ft_bzero(void *str, size_t n)
 {
-	char	*num;
-	int	i;
+	char	*c;
 
-	num = ft_itoa(nb);
-	i = ft_print_str(num);
-	return (i);
+	c = str;
+	while (n)
+	{
+		*c = 0;
+		n--;
+		c++;
+	}
 }

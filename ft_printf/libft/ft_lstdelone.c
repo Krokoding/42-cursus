@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:28:35 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/22 19:00:28 by loris             #+#    #+#             */
+/*   Updated: 2023/10/23 09:23:18 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf_int(int nb)
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	char	*num;
-	int	i;
-
-	num = ft_itoa(nb);
-	i = ft_print_str(num);
-	return (i);
+	if (!lst || !del)
+		return ;
+	(*del)(lst->content);
+	free(lst);
 }

@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:28:35 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/17 16:22:12 by loris             #+#    #+#             */
+/*   Updated: 2023/10/23 09:21:31 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-int	ft_printf_int(int nb)
+int	ft_toupper(int c)
 {
-	char	*num;
-	int	i;
-
-	num = ft_itoa(nb);
-	i = ft_print_str(num);
-	return (i);
+	if (c <= 'z' && c >= 'a')
+		c -= 32;
+	return (c);
 }
