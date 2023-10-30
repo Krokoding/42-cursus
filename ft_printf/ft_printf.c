@@ -3,30 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 11:32:07 by loris             #+#    #+#             */
-/*   Updated: 2023/10/30 09:32:17 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/30 10:58:10 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include <unistd.h>
+#include "../libft/libft.h"
+#include "ft_printf.h"
 
-int ft_printf(const char *str_to_print, ...)
-{
-	va_list args;
-	
-	va_start(args, str_to_print);
-	while(str_to_print)
-	{
-		if (*str_to_print == '%')
-			print_type_redirector(*(++str_to_print), args);
-		else
-			write(1, str_to_print, 1);
-		str_to_print++;
-	}
-}
 
 
 int    print_type_redirector(char c, va_list args)
@@ -75,26 +63,26 @@ int	ft_print_str(char *str)
 	return (byte_number);
 }
 
-int	ft_print_pointer(unsigned long long p)
+int ft_printf(const char *str_to_print, ...)
 {
-	unsigned long long *ull;
-	char	*base;
+	va_list args;
 	
-	base = "0123456789abcdef";
-	ull = &p;
-	if (p > 16)
-		return (ft_print_pointer(p / 16));
+	va_start(args, str_to_print);
+	while(str_to_print)
+	{
+		if (*str_to_print == '%')
+			print_type_redirector(*(++str_to_print), args);
+		else
+			write(1, str_to_print, 1);
+		str_to_print++;
+	}
 }
 
-int	len_hexadec(unsigned long long p)
+int main()
 {
 	int	i;
 
-	i = 0;
-	while (p / 16)
-	{
-		p = p / 16;
-		i++;
-	}
-	return (i);
+	i = 42;
+	
+	ft_printf("bonjour %p", i);
 }
