@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_x.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 13:45:39 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 19:28:25 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/31 11:21:43 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ptr_lenx(unsigned int nb)
 	int	i;
 
 	i = 0;
-	while (nb / 16)
+	while (nb)
 	{
 		nb = nb / 16;
 		i++;
@@ -30,7 +30,7 @@ void	ft_print_x(unsigned int nb)
 	char							*base;
 
 	base = "0123456789abcdef";
-	if (nb > 16)
+	if (nb >= 16)
 	{
 		(ft_print_x(nb / 16));
 		(ft_print_x(nb % 16));
@@ -44,7 +44,7 @@ void	ft_print_X(unsigned int nb)
 	char							*base;
 
 	base = "0123456789ABCDEF";
-	if (nb > 16)
+	if (nb >= 16)
 	{
 		(ft_print_X(nb / 16));
 		(ft_print_X(nb % 16));
@@ -57,10 +57,14 @@ int	ft_print_hex(unsigned int nb, int i)
 {
 	int	count;
 	count = 0;
-	if (i == 0)
+	if (nb == 0)
+	{
+		count += write(1, "0", 1);
+	}
+	else if (i == 0)
 		ft_print_X(nb);
-	if (i == 1)
+	else if (i == 1)
 		ft_print_x(nb);
-	count += ptr_len(nb);
+	count += ptr_lenx(nb);
 	return (count);
 }

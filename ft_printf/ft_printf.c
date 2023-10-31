@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 11:32:07 by loris             #+#    #+#             */
-/*   Updated: 2023/10/31 09:19:50 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/31 11:09:28 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,14 @@ int	ft_print_str(char *str)
 	int	byte_number;
 
 	byte_number = 0;
+	if (str == NULL)
+	{
+		byte_number += write(1, "(null)", 6);
+		return (byte_number);
+	}
 	while (*str)
 	{
-		byte_number = write(1, str, 1);
+		byte_number += write(1, str, 1);
 		str++;
 	}
 	return (byte_number);

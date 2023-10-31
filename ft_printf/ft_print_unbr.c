@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_unbr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:36:24 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 18:45:00 by loris            ###   ########.fr       */
+/*   Updated: 2023/10/31 11:15:43 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,20 @@ char	*ft_uitoa(unsigned int n)
 		return (0);
 	nbr_in_str[1] = '\0';
 	nbr_in_str[size] = '\0';
-	while (size)
+	while (--size > -1)
 	{
 		nbr_in_str[size] = (n % 10 + '0');
 		n = (n / 10);
-		size--;
 	}
 	return (nbr_in_str);
 }
 
 int	ft_print_uint(unsigned int n)
 {
-	ft_print_str(ft_uitoa(n));
+	char	*str;
+	
+	str = ft_uitoa(n);
+	ft_print_str(str);
+	free(str);
 	return (ft_sizee(n));
 }
