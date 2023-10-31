@@ -6,17 +6,15 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 11:32:07 by loris             #+#    #+#             */
-/*   Updated: 2023/10/31 11:09:28 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:51:19 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
-
-int    print_type_redirector(char c, va_list args)
+int	print_type_redirector(char c, va_list args)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (c == 'c')
@@ -24,7 +22,7 @@ int    print_type_redirector(char c, va_list args)
 	else if (c == 's')
 		count += ft_print_str(va_arg(args, char *));
 	else if (c == 'p')
-		count += ft_print_pointer(va_arg(args, int));
+		count += ft_print_pointer(va_arg(args, unsigned long long));
 	else if (c == 'd')
 		count += ft_print_decimal(va_arg(args, int));
 	else if (c == 'i')
@@ -44,7 +42,7 @@ int    print_type_redirector(char c, va_list args)
 
 int	ft_print_char(char c)
 {
-   return (write(1, &c, 1));
+	return (write(1, &c, 1));
 }
 
 int	ft_print_str(char *str)
@@ -65,12 +63,12 @@ int	ft_print_str(char *str)
 	return (byte_number);
 }
 
-int ft_printf(const char *str_to_print, ...)
+int	ft_printf(const char *str_to_print, ...)
 {
-	va_list args;
-	int count;
-	int	i;
-	
+	va_list	args;
+	int		count;
+	int		i;
+
 	i = 0;
 	count = 0;
 	va_start(args, str_to_print);

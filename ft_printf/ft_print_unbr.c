@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:36:24 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/31 11:15:43 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:12:11 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_uitoa(unsigned int n)
 int	ft_print_uint(unsigned int n)
 {
 	char	*str;
-	
+
 	str = ft_uitoa(n);
 	ft_print_str(str);
 	free(str);

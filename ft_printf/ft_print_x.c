@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 13:45:39 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/31 11:21:43 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:54:10 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_print_x(unsigned int nb)
 		ft_putchar_fd(base[nb], 1);
 }
 
-void	ft_print_X(unsigned int nb)
+void	ft_print_xupp(unsigned int nb)
 {
 	char							*base;
 
@@ -56,6 +56,7 @@ void	ft_print_X(unsigned int nb)
 int	ft_print_hex(unsigned int nb, int i)
 {
 	int	count;
+	
 	count = 0;
 	if (nb == 0)
 	{

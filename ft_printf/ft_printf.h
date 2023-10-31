@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:51:54 by loris             #+#    #+#             */
-/*   Updated: 2023/10/31 11:07:30 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/31 12:10:59 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ char	*ft_uitoa(unsigned int n);
 int		ft_print_uint(unsigned int n);
 int		ptr_len(uintptr_t ull);
 void	ft_pointer_hexa_printer(uintptr_t ull);
-int		ft_print_pointer(unsigned int ull);
+int		ft_print_pointer(unsigned long long ull);
 int		ft_print_decimal(int nb);
-
 
 #endif
