@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_unbr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:36:24 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 13:07:16 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/30 18:45:00 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_size(unsigned int nb)
+int	ft_sizee(unsigned int nb)
 {
 	int				i;
 
@@ -35,7 +35,7 @@ char	*ft_uitoa(unsigned int n)
 	char			*nbr_in_str;
 	int				size;
 
-	size = (ft_size(n));
+	size = (ft_sizee(n));
 	nbr_in_str = malloc((size + 1) * sizeof(char));
 	if (nbr_in_str == 0)
 		return (0);
@@ -53,5 +53,5 @@ char	*ft_uitoa(unsigned int n)
 int	ft_print_uint(unsigned int n)
 {
 	ft_print_str(ft_uitoa(n));
-	return (ft_size(n));
+	return (ft_sizee(n));
 }

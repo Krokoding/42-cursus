@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_p.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:13:20 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:29:16 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:18:16 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ptr_len(uintptr_t ull)
 
 void	ft_pointer_hexa_printer(uintptr_t ull)
 {
-	char							*base;
+	char	*base;
 
 	base = "0123456789abcdef";
 	if (ull > 16)

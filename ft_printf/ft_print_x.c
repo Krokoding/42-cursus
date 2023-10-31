@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_x.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 13:45:39 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/30 14:42:46 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:28:25 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ptr_len(unsigned int nb)
+int	ptr_lenx(unsigned int nb)
 {
 	int	i;
 
@@ -56,10 +56,9 @@ void	ft_print_X(unsigned int nb)
 int	ft_print_hex(unsigned int nb, int i)
 {
 	int	count;
-
 	count = 0;
 	if (i == 0)
-		ft_print_x(nb);
+		ft_print_X(nb);
 	if (i == 1)
 		ft_print_x(nb);
 	count += ptr_len(nb);

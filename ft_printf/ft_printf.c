@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 11:32:07 by loris             #+#    #+#             */
-/*   Updated: 2023/10/30 14:41:29 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/31 09:19:50 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <unistd.h>
-#include "../libft/libft.h"
 #include "ft_printf.h"
 
 
@@ -27,11 +24,11 @@ int    print_type_redirector(char c, va_list args)
 	else if (c == 's')
 		count += ft_print_str(va_arg(args, char *));
 	else if (c == 'p')
-		count += ft_print_pointer(va_arg(args, unsigned long long));
+		count += ft_print_pointer(va_arg(args, int));
 	else if (c == 'd')
 		count += ft_print_decimal(va_arg(args, int));
 	else if (c == 'i')
-		count += ft_print_int(va_arg(args, int));
+		count += ft_print_decimal(va_arg(args, int));
 	else if (c == 'u')
 		count += ft_print_uint(va_arg(args, unsigned int));
 	else if (c == 'x')
@@ -66,23 +63,22 @@ int	ft_print_str(char *str)
 int ft_printf(const char *str_to_print, ...)
 {
 	va_list args;
-	
-	va_start(args, str_to_print);
-	while(str_to_print)
-	{
-		if (*str_to_print == '%')
-			print_type_redirector(*(++str_to_print), args);
-		else
-			write(1, str_to_print, 1);
-		str_to_print++;
-	}
-}
-
-int main()
-{
+	int count;
 	int	i;
-
-	i = 42;
 	
-	ft_printf("bonjour %p", i);
+	i = 0;
+	count = 0;
+	va_start(args, str_to_print);
+	while(str_to_print[i])
+	{
+		if (str_to_print[i] == '%')
+		{
+			i++;
+			count += print_type_redirector(str_to_print[i], args);
+		}
+		else
+			count += write(1, &str_to_print[i], 1);
+		i++;
+	}
+	return (count);
 }
