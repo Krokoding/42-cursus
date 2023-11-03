@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:51:54 by loris             #+#    #+#             */
-/*   Updated: 2023/10/31 12:10:59 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/03 09:30:23 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_print_str(char *str);
 int		ft_printf(const char *str_to_print, ...);
 int		ptr_lenx(unsigned int nb);
 void	ft_print_x(unsigned int nb);
-void	ft_print_X(unsigned int nb);
+void	ft_print_xupp(unsigned int nb);
 int		ft_print_hex(unsigned int nb, int i);
 int		ft_sizee(unsigned int nb);
 char	*ft_uitoa(unsigned int n);

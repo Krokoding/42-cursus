@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 13:45:39 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/31 14:54:10 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/03 09:30:07 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	ft_print_xupp(unsigned int nb)
 	base = "0123456789ABCDEF";
 	if (nb >= 16)
 	{
-		(ft_print_X(nb / 16));
-		(ft_print_X(nb % 16));
+		(ft_print_xupp(nb / 16));
+		(ft_print_xupp(nb % 16));
 	}
 	else
 		ft_putchar_fd(base[nb], 1);
@@ -56,14 +56,14 @@ void	ft_print_xupp(unsigned int nb)
 int	ft_print_hex(unsigned int nb, int i)
 {
 	int	count;
-	
+
 	count = 0;
 	if (nb == 0)
 	{
 		count += write(1, "0", 1);
 	}
 	else if (i == 0)
-		ft_print_X(nb);
+		ft_print_xupp(nb);
 	else if (i == 1)
 		ft_print_x(nb);
 	count += ptr_lenx(nb);
