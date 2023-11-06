@@ -6,51 +6,69 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:13:20 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/31 14:04:50 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:14:19 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ptr_len(uintptr_t ull)
+int	ft_size_base_p(uintptr_t nb)
 {
-	int	i;
+	int				i;
 
 	i = 0;
-	while (ull)
+	if (nb == 0)
+		return (1);
+	else
 	{
-		ull = ull / 16;
-		i++;
+		while (nb != 0)
+		{
+			nb = nb / 16;
+			i++;
+		}
 	}
 	return (i);
 }
 
-void	ft_pointer_hexa_printer(uintptr_t ull)
+char	*ft_itoa_base_p(uintptr_t n, char *base)
 {
-	char	*base;
+	char			*nbr_in_str;
+	int				size;
 
-	base = "0123456789abcdef";
-	if (ull >= 16)
+	size = (ft_size_base_p(n));
+	nbr_in_str = malloc((size + 1) * sizeof(char));
+	if (nbr_in_str == 0)
+		return (0);
+	if (n != 0)
+		nbr_in_str[1] = '\0';
+	nbr_in_str[size] = '\0';
+	while (--size > -1)
 	{
-		ft_pointer_hexa_printer(ull / 16);
-		ft_pointer_hexa_printer(ull % 16);
+		nbr_in_str[size] = (base[n % 16]);
+		n = (n / 16);
 	}
-	else
-		ft_putchar_fd(base[ull], 1);
+	return (nbr_in_str);
 }
 
-int	ft_print_pointer(unsigned long long ull)
+int	ft_print_base_p(unsigned long long nb)
 {
-	int	count;
+	char	*str;
+	int		ret_valu;
 
-	count = 0;
-	if (ull == 0)
-		count += write(1, "0x0", 3);
+	if (nb == 0)
+		ret_valu = write(1, "0x0", 3);
 	else
 	{
-		count += write(1, "0x", 2);
-		ft_pointer_hexa_printer(ull);
-		count += ptr_len(ull);
+		ret_valu = write (1, "0x", 2);
+		if (ret_valu < 0)
+			return (-1);
+		str = ft_itoa_base_p((uintptr_t)nb, "0123456789abcdef");
+		ret_valu = ft_print_str(str);
+		free(str);
+		if (ret_valu < 0)
+			return (-1);
+		else
+			ret_valu += 2;
 	}
-	return (count);
+	return (ret_valu);
 }

@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 17:51:54 by loris             #+#    #+#             */
-/*   Updated: 2023/11/03 09:30:23 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:11:49 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ int		print_type_redirector(char c, va_list args);
 int		ft_print_char(char c);
 int		ft_print_str(char *str);
 int		ft_printf(const char *str_to_print, ...);
-int		ptr_lenx(unsigned int nb);
-void	ft_print_x(unsigned int nb);
-void	ft_print_xupp(unsigned int nb);
-int		ft_print_hex(unsigned int nb, int i);
-int		ft_sizee(unsigned int nb);
 char	*ft_uitoa(unsigned int n);
 int		ft_print_uint(unsigned int n);
-int		ptr_len(uintptr_t ull);
-void	ft_pointer_hexa_printer(uintptr_t ull);
-int		ft_print_pointer(unsigned long long ull);
+int		ft_print_base(unsigned int nb, int base);
+char	*ft_itoa_base(unsigned int n, char *base);
+int		ft_size_base(unsigned int nb);
 int		ft_print_decimal(int nb);
+int		ft_print_base_p(unsigned long long nb);
+char	*ft_itoa_base_p(uintptr_t n, char *base);
+int		ft_size_base_p(uintptr_t nb);
+int		write_polemik(const char *str_to_print, va_list args, int i, int count);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:36:24 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/10/31 14:12:11 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/03 13:48:27 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ char	*ft_uitoa(unsigned int n)
 	nbr_in_str = malloc((size + 1) * sizeof(char));
 	if (nbr_in_str == 0)
 		return (0);
-	nbr_in_str[1] = '\0';
+	if (n != 0)
+		nbr_in_str[1] = '\0';
 	nbr_in_str[size] = '\0';
 	while (--size > -1)
 	{
@@ -52,9 +53,10 @@ char	*ft_uitoa(unsigned int n)
 int	ft_print_uint(unsigned int n)
 {
 	char	*str;
+	int		i;
 
 	str = ft_uitoa(n);
-	ft_print_str(str);
+	i = ft_print_str(str);
 	free(str);
-	return (ft_sizee(n));
+	return (i);
 }

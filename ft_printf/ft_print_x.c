@@ -6,66 +6,59 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 13:45:39 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/03 09:30:07 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/03 12:21:13 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ptr_lenx(unsigned int nb)
+int	ft_size_base(unsigned int nb)
 {
-	int	i;
+	int				i;
 
 	i = 0;
-	while (nb)
+	if (nb == 0)
+		return (1);
+	else
 	{
-		nb = nb / 16;
-		i++;
+		while (nb != 0)
+		{
+			nb = nb / 16;
+			i++;
+		}
 	}
 	return (i);
 }
 
-void	ft_print_x(unsigned int nb)
+char	*ft_itoa_base(unsigned int n, char *base)
 {
-	char							*base;
+	char			*nbr_in_str;
+	int				size;
 
-	base = "0123456789abcdef";
-	if (nb >= 16)
+	size = (ft_size_base(n));
+	nbr_in_str = malloc((size + 1) * sizeof(char));
+	if (nbr_in_str == 0)
+		return (0);
+	nbr_in_str[1] = '\0';
+	nbr_in_str[size] = '\0';
+	while (--size > -1)
 	{
-		(ft_print_x(nb / 16));
-		(ft_print_x(nb % 16));
+		nbr_in_str[size] = (base[n % 16]);
+		n = (n / 16);
 	}
-	else
-		ft_putchar_fd(base[nb], 1);
+	return (nbr_in_str);
 }
 
-void	ft_print_xupp(unsigned int nb)
+int	ft_print_base(unsigned int nb, int base)
 {
-	char							*base;
+	char	*str;
+	int		ret_valu;
 
-	base = "0123456789ABCDEF";
-	if (nb >= 16)
-	{
-		(ft_print_xupp(nb / 16));
-		(ft_print_xupp(nb % 16));
-	}
-	else
-		ft_putchar_fd(base[nb], 1);
-}
-
-int	ft_print_hex(unsigned int nb, int i)
-{
-	int	count;
-
-	count = 0;
-	if (nb == 0)
-	{
-		count += write(1, "0", 1);
-	}
-	else if (i == 0)
-		ft_print_xupp(nb);
-	else if (i == 1)
-		ft_print_x(nb);
-	count += ptr_lenx(nb);
-	return (count);
+	if (base == 1)
+		str = ft_itoa_base(nb, "0123456789abcdef");
+	if (base == 0)
+		str = ft_itoa_base(nb, "0123456789ABCDEF");
+	ret_valu = ft_print_str(str);
+	free(str);
+	return (ret_valu);
 }
