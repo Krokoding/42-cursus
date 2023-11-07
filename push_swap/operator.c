@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:50:59 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/06 16:21:46 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/07 14:05:31 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_rotate(t_swaplst	**lst)
 
 	if (lst == NULL || *lst == NULL || (*lst)->next == NULL)
 		return ;
-	last = ft_lstlast(*lst);
+	last = ft_lstl(*lst);
 	first = *lst;
 	last->next = first;
 	*lst = first->next;
@@ -65,4 +65,16 @@ void	ft_rrotate(t_swaplst **lst)
 		second_last->next = NULL;
 	last->next = *lst;
 	*lst = last;
+}
+
+t_swaplst	*ft_lstl(t_swaplst *lst)
+{
+	t_swaplst	*temp;
+
+	if (lst == NULL)
+		return (0);
+	temp = lst;
+	while (temp->next != NULL)
+		temp = temp->next;
+	return (temp);
 }

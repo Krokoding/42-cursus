@@ -3,45 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   lst_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:59:42 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/07 09:42:06 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/07 14:22:08 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_pile_a_binary_normalizer(t_swaplst	*pile_a)
+void	ft_pile_a_binary_normalizer(t_swaplst	**pile_a)
 {
 	t_swaplst	*temp;
-	t_swaplst	*last_smaller;
-	t_swaplst	*first;
+	int			size;
 	int			i;
-	int			pile_a_size;
-	int			value;
-// Normalize (start with the smaller give him 0 in binary and so on)
-	pile_a_size = ft_pile_asize(pile_a);
+	
 	i = 0;
-	first = pile_a;
-	temp = pile_a;
-	last_smaller->c = pile_a->c;
-	while (i < pile_a_size)
+	size = ft_pile_asize(pile_a);
+	while (i < size)
 	{
-		temp = first;
-		while (temp)
+		temp = find_smallest(*pile_a);
+		temp->bc = ft_itoa_b(i, size);
+		i++;
+	}
+}
+
+t_swaplst	*find_smallest(t_swaplst *pile_a)
+{
+	t_swaplst	*temp;
+	int			value;
+	t_swaplst	*ret_node;
+	
+	temp = pile_a;
+	while (temp->bc)
+		temp = temp->next;
+	value = temp->c;
+	while (temp)
+	{
+		if (temp->c <= value && !(temp->bc))
 		{
-			while (temp->bc == NULL)
-				temp = temp->next;
 			value = temp->c;
-			if (temp->c <= value)
-			{
-				value = temp->c;
-				last_smaller = temp;
-			}
+			ret_node = temp;
 		}
 		temp = temp->next;
 	}
-	last_smaller->bc = ft_itoa_b(i++, pile_a_size);
+	return (ret_node);
 }
-

@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:15:23 by loris             #+#    #+#             */
-/*   Updated: 2023/11/07 09:44:40 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/07 14:38:32 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	bin_check(char *binary, int pos)
+int	bin_check(char b)
 {
-	if (binary[pos] == 1)
+	if (b == '1')
 		return (1);
 	return (0);
 }
+
 t_swaplst	*ft_lstn(int content)
 {
 	t_swaplst	*node;
@@ -55,43 +56,18 @@ int	ft_lsts(t_swaplst *lst)
 	return (i);
 }
 
-int	ft_pile_asize(t_swaplst *lst)
+int	ft_pile_asize(t_swaplst **lst)
 {
-	int		i;
+	int			i;
 	t_swaplst	*temp;
-
 	i = 0;
-	temp = lst;
-	while (temp != NULL)
+
+	temp = *lst;
+	while (temp)
 	{
 		temp = temp->next;
 		i++;
 	}
+
 	return (i);
-}
-
-int	ft_atoi(const char *nptr)
-{
-	int	i;
-	int	nb;
-	int	signe;
-
-	signe = 1;
-	nb = 0;
-	i = 0;
-	while ((nptr[i] <= 13 && nptr[i] >= 9) || nptr[i] == 32)
-		i++;
-	if (nptr[i] == '-')
-	{
-		signe *= -1;
-		i++;
-	}
-	else if (nptr[i] == '+')
-		i++;
-	while (nptr[i] <= '9' && nptr[i] >= '0')
-	{
-		nb = nb * 10 + (nptr[i] - 48);
-		i++;
-	}
-	return (nb * signe);
 }
