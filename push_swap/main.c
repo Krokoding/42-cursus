@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:52:02 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/07 15:34:07 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/07 22:29:18 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,30 @@ int main(int ac, char **av)
     
     pile_a = NULL;
     pile_b = NULL;
-    creat_pile_a(&pile_a, ac, av);
+    
+    pile_a = creat_pile_a(&pile_a, ac, av);
+    
     size = ft_pile_asize(&pile_a);
+    
     ft_pile_a_binary_normalizer(&pile_a);
-    t_swaplst   *temp;
-    temp = pile_a;
-    while (temp != NULL)
-    {
-        printf("pile a[%d] = %d    //    ", i, temp->c);
-        printf("bc[%d] = %s     ||      \n", i, temp->bc);
-        temp = temp->next;
-        i++;
-    }
+
     push_swap(&pile_a, &pile_b, size);
     
-
-
 }
 
-void    creat_pile_a(t_swaplst **pile_a, int ac, char **av)
+t_swaplst    *creat_pile_a(t_swaplst **pile_a, int ac, char **av)
 {
     int         i;
     int         value;
-
+    t_swaplst   *node;
     
     i = 1;
     while (i < ac)
     {   
-
         value = ft_atoi(av[i]);
-        ft_lstadd_f(pile_a, ft_lstn(value));
+        node = ft_lstn(value);
+        ft_lstadd_f(pile_a, node);
         i++;
     }
+    return (node);
 }

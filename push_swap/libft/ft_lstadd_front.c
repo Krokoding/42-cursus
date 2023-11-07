@@ -6,13 +6,13 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 09:55:30 by loris             #+#    #+#             */
-/*   Updated: 2023/11/06 16:02:18 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/07 23:10:57 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_f(t_list **lst, t_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if (lst && new)
 	{

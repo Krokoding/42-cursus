@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:50:59 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/07 15:29:10 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/07 23:19:19 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,46 @@ void	ft_swap(t_swaplst	**lst)
 	second->next = first;
 	*lst = second;
 }
-void	ft_push(t_swaplst **from, t_swaplst **to)
+
+t_swaplst	*ft_pop(t_swaplst **a)
 {
-	t_swaplst	*temp;
+	t_swaplst	*top;
+
+	if (a)
+	{
+		top = *a;
+		*a = (*a)->next;
+		top->next = NULL;
+	}
+	return (top);
+}
+
+void	ft_push(t_swaplst **a, t_swaplst **b)
+{
+	t_swaplst	*node;
 	
-	temp = *from;		//temp = tete de liste
-	*from = (*from)->next; // decalage de la tete de liste
-	write(1, "u", 1); 	   // de from (pile b)
-	temp->next = *to; // on place le pointeur du premier noeud from
-	*to = temp;  	 // sur le premier noeud de to, place en premier place de to
+	if (a && b)
+	{
+		node = ft_pop(a);
+		if (node)
+			ft_lstadd_f(b, node);
+	}
+}
+
+
+void	ft_pushb(t_swaplst **a, t_swaplst **b)
+{
+	t_swaplst	*node;
+	t_swaplst	*top;
+	
+	node = *b;
+	top = *b;
+	if (*b)
+		ft_lstadd_f(a, node);
+	if ((*b)->next)
+	{
+		*b = (*b)->next;
+	}
 }
 void	ft_rotate(t_swaplst	**lst)
 {
