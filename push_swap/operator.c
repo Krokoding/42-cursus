@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:50:59 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/07 14:05:31 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:29:10 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ void	ft_push(t_swaplst **from, t_swaplst **to)
 {
 	t_swaplst	*temp;
 	
-	temp = *from;
-	*from = (*from)->next;
-	temp->next = *to;
-	*to = temp;
+	temp = *from;		//temp = tete de liste
+	*from = (*from)->next; // decalage de la tete de liste
+	write(1, "u", 1); 	   // de from (pile b)
+	temp->next = *to; // on place le pointeur du premier noeud from
+	*to = temp;  	 // sur le premier noeud de to, place en premier place de to
 }
 void	ft_rotate(t_swaplst	**lst)
 {

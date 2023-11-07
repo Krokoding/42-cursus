@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:52:02 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/07 14:30:18 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:34:07 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,17 @@ int main(int ac, char **av)
     creat_pile_a(&pile_a, ac, av);
     size = ft_pile_asize(&pile_a);
     ft_pile_a_binary_normalizer(&pile_a);
-    push_swap(&pile_a, &pile_b, size);
     t_swaplst   *temp;
+    temp = pile_a;
     while (temp != NULL)
     {
-        printf("c[%d] = %d    //    ", i, temp->c);
+        printf("pile a[%d] = %d    //    ", i, temp->c);
         printf("bc[%d] = %s     ||      \n", i, temp->bc);
         temp = temp->next;
         i++;
     }
+    push_swap(&pile_a, &pile_b, size);
+    
 
 
 }
