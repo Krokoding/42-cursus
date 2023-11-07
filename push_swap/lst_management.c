@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 11:59:42 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/06 11:59:49 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/07 09:42:06 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	ft_pile_a_binary_normalizer(t_swaplst	*pile_a)
 		}
 		temp = temp->next;
 	}
-	last_smaller->bc = ft_itoa_binary(i++);
+	last_smaller->bc = ft_itoa_b(i++, pile_a_size);
 }
 

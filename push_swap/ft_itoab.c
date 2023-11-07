@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_binary.c                                   :+:      :+:    :+:   */
+/*   ft_itoab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:43:15 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/06 14:27:56 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/07 10:20:16 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-int	ft_size_base(int nb)
+int	ft_size_b(int nb)
 {
 	int				i;
 
@@ -30,23 +30,24 @@ int	ft_size_base(int nb)
 	return (i);
 }
 
-char	*ft_itoa_binary(int n)
+char	*ft_itoa_b(int n, int size)
 {
-	char			*nbr_in_str;
-	int				size;
-	char			*base;
-
-	base = "0, 1";
-	size = (ft_size_base(n));
+	char	*nbr_in_str;
+	char    *base;
+    int     i;
+    
+	base = "01";
 	nbr_in_str = malloc((size + 1) * sizeof(char));
-	if (nbr_in_str == 0)
+    if (nbr_in_str == 0)
 		return (0);
+    ft_bzero(nbr_in_str, size);
 	nbr_in_str[1] = '\0';
 	nbr_in_str[size] = '\0';
-	while (--size > -1)
+	while (i < size)
 	{
-		nbr_in_str[size] = (base[n % 2]);
+		nbr_in_str[i] = (base[n % 2]);
 		n = (n / 2);
+        i++;
 	}
 	return (nbr_in_str);
 }

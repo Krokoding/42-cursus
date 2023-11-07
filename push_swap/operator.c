@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operator.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:50:59 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/06 12:49:48 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/06 16:21:46 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,15 @@ void	ft_swap(t_swaplst	**lst)
 	second->next = first;
 	*lst = second;
 }
-
+void	ft_push(t_swaplst **from, t_swaplst **to)
+{
+	t_swaplst	*temp;
+	
+	temp = *from;
+	*from = (*from)->next;
+	temp->next = *to;
+	*to = temp;
+}
 void	ft_rotate(t_swaplst	**lst)
 {
 	t_swaplst	*last;
