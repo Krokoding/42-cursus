@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:28:25 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/07 23:03:57 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/08 11:51:31 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_listb
 }				t_swaplst;
 
 
+char    	*find_next_top(t_swaplst **pile_a, int n);
 char		*ft_itoa_b(int n, int size);
 
 t_swaplst	*ft_lstn(int content);
@@ -33,7 +34,8 @@ t_swaplst	*ft_lstl(t_swaplst *lst);
 t_swaplst	*find_smallest(t_swaplst *pile_a);
 t_swaplst   *creat_pile_a(t_swaplst **pile_a, int ac, char **av);
 t_swaplst	*ft_pop(t_swaplst **a);
-t_swaplst	*ft_popb(t_swaplst **a);
+t_swaplst	*ft_push(t_swaplst **a, t_swaplst **b);
+t_swaplst	*push_to_b(t_swaplst **pile_a, t_swaplst **pile_b, int n);
 
 int			ft_size_b(int nb);
 int			main(int ac, char **av);
@@ -41,17 +43,16 @@ int			ft_lsts(t_swaplst *lst);
 int			ft_pile_asize(t_swaplst **lst);
 int			bin_check(char b);
 int 		lst_checker_binary(t_swaplst **pile, int n);
+int			check_sort(t_swaplst **pile_a);
 
 void		ft_lstadd_f(t_swaplst **lst, t_swaplst *new);
 void		ft_rrotate(t_swaplst **lst);
 void		ft_swap(t_swaplst	**lst);
-void		ft_push(t_swaplst **from, t_swaplst **to);
 void		ft_rotate(t_swaplst	**lst);
 void		ft_pile_a_binary_normalizer(t_swaplst	**pile_a);
 void		push_swap(t_swaplst **pile_a, t_swaplst	**pile_b, int size);
-void		push_to_b(t_swaplst **pile_a, t_swaplst **pile_b, int n);
 void		push_to_a(t_swaplst **pile_a, t_swaplst **pile_b);
-void    	ft_print_each_list(t_swaplst **a, t_swaplst **b);
+void    	ft_print_each_list(t_swaplst **a);
 void		ft_pushb(t_swaplst **a, t_swaplst **b);
 
 #endif

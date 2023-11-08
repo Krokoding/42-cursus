@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:52:02 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/07 22:29:18 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/08 12:20:32 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,11 @@ int main(int ac, char **av)
     t_swaplst   *pile_b;
     
     pile_a = NULL;
-    pile_b = NULL;
-    
+    pile_b = NULL; 
     pile_a = creat_pile_a(&pile_a, ac, av);
-    
     size = ft_pile_asize(&pile_a);
-    
     ft_pile_a_binary_normalizer(&pile_a);
-
     push_swap(&pile_a, &pile_b, size);
-    
 }
 
 t_swaplst    *creat_pile_a(t_swaplst **pile_a, int ac, char **av)

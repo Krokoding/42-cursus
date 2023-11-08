@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:50:59 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/07 23:19:19 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/08 11:56:12 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_swaplst	*ft_pop(t_swaplst **a)
 	return (top);
 }
 
-void	ft_push(t_swaplst **a, t_swaplst **b)
+t_swaplst	*ft_push(t_swaplst **a, t_swaplst **b)
 {
 	t_swaplst	*node;
 	
@@ -49,6 +49,8 @@ void	ft_push(t_swaplst **a, t_swaplst **b)
 		if (node)
 			ft_lstadd_f(b, node);
 	}
+	ft_putstr_fd("pb\n", 1);
+	return (node);
 }
 
 
@@ -58,13 +60,13 @@ void	ft_pushb(t_swaplst **a, t_swaplst **b)
 	t_swaplst	*top;
 	
 	node = *b;
-	top = *b;
-	if (*b)
-		ft_lstadd_f(a, node);
-	if ((*b)->next)
+	if (a && b)
 	{
-		*b = (*b)->next;
+		top = ft_pop(a);
+		if (top)
+			ft_lstadd_f(b, top);
 	}
+	ft_putstr_fd("pa\n", 1);
 }
 void	ft_rotate(t_swaplst	**lst)
 {
@@ -78,6 +80,8 @@ void	ft_rotate(t_swaplst	**lst)
 	last->next = first;
 	*lst = first->next;
 	first->next = NULL;
+	ft_putstr_fd("ra\n", 1);
+
 }
 
 void	ft_rrotate(t_swaplst **lst)

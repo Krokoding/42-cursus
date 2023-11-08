@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:15:23 by loris             #+#    #+#             */
-/*   Updated: 2023/11/07 23:11:57 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/08 12:04:18 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,20 @@ int	ft_pile_asize(t_swaplst **lst)
 	}
 
 	return (i);
+}
+int	check_sort(t_swaplst **pile_a)
+{
+	t_swaplst	*temp;
+	t_swaplst	*verif;
+	int	memo;
+	
+	temp = *pile_a;
+	verif = *pile_a;
+	while(temp->next)
+	{
+		if (temp->c > (temp->next)->c)
+			return (0);
+		temp = temp->next;
+	}
+	return (1);
 }
