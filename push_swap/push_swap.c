@@ -1,11 +1,10 @@
 #include "push_swap.h"
 
-void	push_swap(t_swaplst **pile_a, t_swaplst	**pile_b, int size)
+void	push_swap(t_swaplst **pile_a, t_swaplst	**pile_b)
 {
 	int	i;
 
 	i = 0;
-
     while (!(check_sort(pile_a)))
     {
         push_to_b(pile_a, pile_b, i);
@@ -17,7 +16,6 @@ void	push_swap(t_swaplst **pile_a, t_swaplst	**pile_b, int size)
 
 t_swaplst	*push_to_b(t_swaplst **pile_a, t_swaplst **pile_b, int n)
 {
-	t_swaplst	*tem;
 	t_swaplst	*node;
     char        *memo;
 
@@ -56,13 +54,11 @@ char    *find_next_top(t_swaplst **pile_a, int n)
         temp = temp->next;
 
     }
+    return (0);
 }
 
 void	push_to_a(t_swaplst **pile_a, t_swaplst **pile_b)
 {
-	t_swaplst	*temp;
-
-	temp = *pile_b;
 	while (*pile_b)
 	{
 		ft_pushb(pile_b, pile_a);

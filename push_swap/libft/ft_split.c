@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 18:47:48 by loris             #+#    #+#             */
-/*   Updated: 2023/10/23 09:20:49 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/08 17:00:58 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,21 +156,3 @@ char	**ft_split(char const *s, char c)
 {
 	return (ft_spli(s, c, 0, 0));
 }
-/*
-int main()
-{
-	char const s[] = "split";
-	char c = ' ';
-	char **sp;
-	int i;
-
-	i = 0;
-	sp = ft_split(s, c);
-	while (sp[i] != 0)
-	{
-		printf ("%d   ", i);
-		printf("split result = %s\n", sp[i]);
-		i++;
-	}
-}
-*/
