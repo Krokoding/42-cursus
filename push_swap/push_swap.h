@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:28:25 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/08 17:52:09 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/08 20:57:15 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int 		lst_checker_binary(t_swaplst **pile, int n);
 int			check_sort(t_swaplst **pile_a);
 int 		ft_check_double(t_swaplst **pile_a);
 int 		ft_check_str_entry(char *str);
+int 		double_error(t_swaplst **pile_a);
+int 		entrnt_checker(char *str, t_swaplst **pile_a);
 
 void		ft_lstadd_f(t_swaplst **lst, t_swaplst *new);
 void		ft_lstadd_ba(t_swaplst **lst, t_swaplst *new);

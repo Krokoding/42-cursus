@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:52:02 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/08 17:59:06 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/08 21:07:51 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,39 @@ int main(int ac, char **av)
         ft_putstr_fd("Error\n", 1);
         return (1);
     }
+    if (entrnt_checker(av[1], &pile_a))
+        return (1);
     if (ac == 2)
         pile_a = creat_pile_avone(&pile_a, av[1]);
     else if (ac > 2)
         pile_a = creat_pile_a(&pile_a, ac, av);
+    if (double_error(&pile_a))
+        return (1);
     ft_pile_a_binary_normalizer(&pile_a);
     push_swap(&pile_a, &pile_b);
     ft_lstfree(&pile_a);
 }
 // things to to : check for entry no int, int_MIN int_MAX
-int error_checker(t_swaplst **pile_a, char *str)
+int double_error(t_swaplst **pile_a)
+{
+    if (ft_check_double(pile_a))
+    {
+        ft_putstr_fd("Error", 1);
+        ft_lstfree(pile_a);
+        return (1);
+    }
+    return (0);
+}
+int entrnt_checker(char *str, t_swaplst **pile_a)
 {
     
     if (ft_check_str_entry(str))
     {
         ft_putstr_fd("Error\n", 1);
+        ft_lstfree(pile_a);
         return (1);
     }
-    if (ft_check_double(&pile_a))
-    {
-        ft_putstr_fd("Error", 1);
-        ft_lstfree(&pile_a);
-        return (1);
-    }
-    else
-        return (0);
+    return (0);
 }
 int ft_check_str_entry(char *str)
 {
@@ -57,7 +65,7 @@ int ft_check_str_entry(char *str)
     i = 0;
     while (str[i])
     {
-        if ((str[i] > '9' || str[i] < '0') && str[i] != ' ')
+        if (((str[i] > '9' || str[i] < '0') && str[i] != ' '))
             return (1);
         i++;
     }
