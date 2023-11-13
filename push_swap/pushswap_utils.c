@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 14:15:23 by loris             #+#    #+#             */
-/*   Updated: 2023/11/08 17:06:11 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/13 12:59:35 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_lstadd_f(t_swaplst **lst, t_swaplst *new)
 
 int	ft_lsts(t_swaplst *lst)
 {
-	int		i;
+	int			i;
 	t_swaplst	*temp;
 
 	i = 0;
@@ -60,71 +60,13 @@ int	ft_pile_asize(t_swaplst **lst)
 {
 	int			i;
 	t_swaplst	*temp;
-	i = 0;
 
+	i = 0;
 	temp = *lst;
 	while (temp)
 	{
 		temp = temp->next;
 		i++;
 	}
-
 	return (i);
-}
-int	check_sort(t_swaplst **pile_a)
-{
-	t_swaplst	*temp;
-	
-	temp = *pile_a;
-	while(temp->next)
-	{
-		if (temp->c > (temp->next)->c)
-			return (0);
-		temp = temp->next;
-	}
-	return (1);
-}
-
-void	ft_lstadd_ba(t_swaplst **lst, t_swaplst *new)
-{
-	t_swaplst	*temp;
-
-	if (lst && new)
-	{
-		if (*lst == NULL)
-		{
-			*lst = new;
-		}
-		else
-		{
-			temp = ft_lstla(*lst);
-			temp->next = new;
-		}
-	}
-}
-
-t_swaplst	*ft_lstla(t_swaplst *lst)
-{
-	t_swaplst	*temp;
-
-	if (lst == NULL)
-		return (0);
-	temp = lst;
-	while (temp->next != NULL)
-		temp = temp->next;
-	return (temp);
-}
-
-void	ft_lstfree(t_swaplst **pile_a)
-{
-	t_swaplst	*temp;
-
-	temp = *pile_a;
-	while (*pile_a)
-		{
-			temp = (*pile_a)->next;
-			free((*pile_a)->bc);
-			free(*pile_a);
-			(*pile_a) = temp;
-		}
 }

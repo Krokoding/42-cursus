@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:32:58 by loris             #+#    #+#             */
-/*   Updated: 2023/11/06 10:22:59 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:16:25 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int		ft_isalpha(int c);
 int		ft_lstsize(t_list *lst);
 int		ft_isalnum(int c);
 int		ft_size_base(unsigned int nb);
+
+long int	ft_atoli(const char *nptr);
 
 void	ft_putnbr_fd(int nb, int fd);
 void	ft_putstr_fd(char *s, int fd);

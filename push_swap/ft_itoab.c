@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:43:15 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/08 11:18:36 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/13 12:29:58 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,20 @@ int	ft_size_b(int nb)
 char	*ft_itoa_b(int n, int size)
 {
 	char	*nbr_in_str;
-	char    *base;
-    int     i;
-    
+	char	*base;
+	int		i;
+
 	base = "10";
 	i = 0;
 	size = ft_size_b(size);
 	nbr_in_str = malloc((size + 1) * sizeof(char));
-    if (nbr_in_str == 0)
+	if (nbr_in_str == 0)
 		return (0);
-    ft_bzero(nbr_in_str, size);
-
+	ft_bzero(nbr_in_str, size);
 	nbr_in_str[1] = '\0';
 	nbr_in_str[size] = '\0';
 	while (i < size)
 	{
-		
 		nbr_in_str[i] = (base[n % 2]);
 		n = (n / 2);
 		i++;
