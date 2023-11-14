@@ -5,7 +5,7 @@ CFLAGS			=	-Wall -Wextra -Werror
 
 RM				=	rm -rf
 
-SRC				=	ft_itoab lst_management operator operator2 push_swap pushswap_utils pushswap_utils2 ft_error main
+SRC				=	ft_itoab lst_management operator operator2 push_swap pushswap_utils pushswap_utils2 ft_error main chtoupsi_sort
 SRCS 			=	$(addsuffix .c, $(SRC))
 
 LIBFT_PATH		=	./libft

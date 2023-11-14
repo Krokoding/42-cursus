@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:28:25 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/13 15:18:03 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/14 10:15:28 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int			double_error(t_swaplst **pile_a);
 int			entrnt_checker(char **av, int end);
 int			check_max_minlst(char *str);
 int			check_max_mintab(int ac, char **av);
+int			pos_max(t_swaplst **pile_a);
+int			pos_min(t_swaplst **pile_a);
 
 void		ft_lstadd_f(t_swaplst **lst, t_swaplst *new);
 void		ft_lstadd_ba(t_swaplst **lst, t_swaplst *new);
@@ -62,5 +64,8 @@ void		push_to_a(t_swaplst **pile_a, t_swaplst **pile_b);
 void		ft_print_each_list(t_swaplst **a);
 void		ft_pushb(t_swaplst **a, t_swaplst **b);
 void		ft_lstfree(t_swaplst **pile_a);
+void   		four_sort(t_swaplst **pile_a, t_swaplst **pile_b);
+void    	three_sort(t_swaplst **pile_a);
+void    	chtoupsi_sort(t_swaplst **pile_a, t_swaplst **pile_b);
 
 #endif

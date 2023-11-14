@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:52:02 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/13 15:12:43 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/14 09:34:00 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int	main(int ac, char **av)
 	if (double_error(&pile_a))
 		return (1);
 	ft_pile_a_binary_normalizer(&pile_a);
-	push_swap(&pile_a, &pile_b);
+	if (ft_lst_len(&pile_a) < 6)
+		chtoupsi_sort(&pile_a);
+	else (ft_lst_len(&pile_a) > 10)
+		push_swap(&pile_a, &pile_b);
 	ft_lstfree(&pile_a);
 }
 
