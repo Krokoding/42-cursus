@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:02:28 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/13 18:11:17 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/14 11:08:50 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	entrnt_checker(char **av, int end)
 		j = 0;
 		while (av[i][j])
 		{
-			if ((av[i][j] > '9' || av[i][j] < '0') && av[i][j] != ' ' && av[i][j] != '-')
+			if ((av[i][j] > '9' || av[i][j] < '0')
+			&& av[i][j] != ' ' && av[i][j] != '-')
 			{
 				ft_putstr_fd("Error", 1);
 				return (1);
@@ -74,7 +75,7 @@ int	ft_check_double(t_swaplst **pile_a)
 int	check_max_mintab(int ac, char **av)
 {
 	int					i;
-	long	int			value;
+	long int			value;
 
 	i = 1;
 	while (i < ac)
@@ -89,10 +90,10 @@ int	check_max_mintab(int ac, char **av)
 
 int	check_max_minlst(char *str)
 {
-	char		**list;
-	long	int			value;
-	int			i;
-	int			j;
+	char				**list;
+	long int			value;
+	int					i;
+	int					j;
 
 	j = 0;
 	i = 0;
@@ -101,7 +102,7 @@ int	check_max_minlst(char *str)
 	{
 		value = ft_atoli(list[i]);
 		if (value < -2147483648 || value > 2147483647)
-		{	
+		{
 			while (list[j])
 				free(list[j++]);
 			free(list);

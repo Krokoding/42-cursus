@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 13:03:09 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/13 13:03:14 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/14 10:46:50 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_rrotate(t_swaplst **lst)
 	if (lst == NULL || *lst == NULL || (*lst)->next == NULL)
 		return ;
 	second_last = NULL;
+	last = *lst;
 	while (last->next != NULL)
 	{
 		second_last = last;
@@ -29,6 +30,7 @@ void	ft_rrotate(t_swaplst **lst)
 		second_last->next = NULL;
 	last->next = *lst;
 	*lst = last;
+	ft_putstr_fd("rra\n", 1);
 }
 
 t_swaplst	*ft_lstl(t_swaplst *lst)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap_utils3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 09:42:22 by loris             #+#    #+#             */
-/*   Updated: 2023/11/14 09:54:43 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/14 11:07:05 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	pos_min(t_swaplst **pile_a)
 	int			pos;
 	int			i;
 	int			biggest_value;
-	
+
 	biggest_value = INT32_MAX;
 	i = 0;
 	pos = 0;
@@ -33,7 +33,7 @@ int	pos_min(t_swaplst **pile_a)
 		temp = temp->next;
 		i++;
 	}
-	return (pos)
+	return (pos);
 }
 
 int	pos_max(t_swaplst **pile_a)
@@ -42,7 +42,7 @@ int	pos_max(t_swaplst **pile_a)
 	int			pos;
 	int			i;
 	int			biggest_value;
-	
+
 	biggest_value = INT32_MIN;
 	i = 0;
 	pos = 0;
@@ -57,5 +57,5 @@ int	pos_max(t_swaplst **pile_a)
 		temp = temp->next;
 		i++;
 	}
-	return (pos)
+	return (pos);
 }

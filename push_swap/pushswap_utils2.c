@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pushswap_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 12:59:53 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/14 09:54:28 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/14 10:23:48 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,4 @@ void	ft_lstadd_ba(t_swaplst **lst, t_swaplst *new)
 			temp->next = new;
 		}
 	}
-}
-
-int	pos_max(t_swaplst **pile_a)
-{
-	t_swaplst	*temp;
-	int			pos;
-	int			i;
-	int			biggest_value;
-	
-	biggest_value = INT32_MIN;
-	i = 0;
-	pos = 0;
-	temp = *pile_a;
-	while (temp)
-	{
-		if (temp->c > biggest_value)
-		{
-			biggest_value = temp->c;
-			pos = i;
-		}
-		temp = temp->next;
-		i++;
-	}
-	return (pos)
 }

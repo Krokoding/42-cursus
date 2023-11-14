@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:50:59 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/13 12:56:23 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/14 10:43:00 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_swap(t_swaplst	**lst)
 	first->next = second->next;
 	second->next = first;
 	*lst = second;
+	ft_putstr_fd("sa\n", 1);
 }
 
 t_swaplst	*ft_pop(t_swaplst **a)

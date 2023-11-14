@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:28:25 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/14 10:15:28 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/14 12:38:52 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void		push_to_a(t_swaplst **pile_a, t_swaplst **pile_b);
 void		ft_print_each_list(t_swaplst **a);
 void		ft_pushb(t_swaplst **a, t_swaplst **b);
 void		ft_lstfree(t_swaplst **pile_a);
-void   		four_sort(t_swaplst **pile_a, t_swaplst **pile_b);
-void    	three_sort(t_swaplst **pile_a);
-void    	chtoupsi_sort(t_swaplst **pile_a, t_swaplst **pile_b);
+void		four_sort(t_swaplst **pile_a, t_swaplst **pile_b);
+void		three_sort(t_swaplst **pile_a);
+void		chtoupsi_sort(t_swaplst **pile_a, t_swaplst **pile_b);
 
 #endif
