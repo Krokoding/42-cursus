@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:28:25 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/15 08:25:59 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/15 14:25:00 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_swaplst	*push_to_b(t_swaplst **pile_a, t_swaplst **pile_b, int n);
 t_swaplst	*creat_pile_avone(t_swaplst **pile_a, char *str);
 t_swaplst	*ft_lstla(t_swaplst *lst);
 t_swaplst	*ch_push(t_swaplst **a, t_swaplst **b);
+t_swaplst	*ch_creat_pile_a(t_swaplst **pile_a, int ac, char **av);
+t_swaplst	*ch_creat_pile_avone(t_swaplst **pile_a, char *str);
 
 int			ft_size_b(int nb);
 int			main(int ac, char **av);
@@ -54,6 +56,12 @@ int			check_max_mintab(int ac, char **av);
 int			pos_max(t_swaplst **pile_a);
 int			pos_min(t_swaplst **pile_a);
 int			checker(t_swaplst **pile_a, t_swaplst **pile_b);
+int			normoperator_redirector(char *line,
+				t_swaplst **pile_a, t_swaplst **pile_b);
+int			operator_redirector(char *line,
+				t_swaplst **pile_a, t_swaplst **pile_b);
+int			normoperator_redirector2(char *line,
+				t_swaplst **pile_a, t_swaplst **pile_b);
 
 void		ft_lstadd_f(t_swaplst **lst, t_swaplst *new);
 void		ft_lstadd_ba(t_swaplst **lst, t_swaplst *new);
@@ -69,7 +77,6 @@ void		ft_lstfree(t_swaplst **pile_a);
 void		four_sort(t_swaplst **pile_a, t_swaplst **pile_b);
 void		three_sort(t_swaplst **pile_a);
 void		chtoupsi_sort(t_swaplst **pile_a, t_swaplst **pile_b);
-void		operator_redirector(char *line, t_swaplst **pile_a, t_swaplst **pile_b);
 void		ch_rotate(t_swaplst	**lst);
 void		ch_pushb(t_swaplst **a, t_swaplst **b);
 void		ch_swap(t_swaplst	**lst);

@@ -7,7 +7,7 @@ CFLAGS			=	-Wall -Wextra -Werror
 RM				=	rm -rf
 
 SRC				=	lst_management operator operator2 push_swap pushswap_utils pushswap_utils2 ft_error chtoupsi_sort pushswap_utils3 create_linked_list main
-BONUS_SRC		= 	checker checker_operator checker_operator2 lst_management operator operator2 push_swap pushswap_utils pushswap_utils2 ft_error chtoupsi_sort pushswap_utils3 create_linked_list
+BONUS_SRC		= 	checker_operator checker_operator2 lst_management operator operator2 push_swap pushswap_utils pushswap_utils2 ft_error chtoupsi_sort pushswap_utils3 create_linked_list checker
 
 BONUS_SRCS		=	$(addsuffix .c, $(BONUS_SRC))
 SRCS 			=	$(addsuffix .c, $(SRC))
