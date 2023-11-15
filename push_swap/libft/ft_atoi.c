@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:51:00 by loris             #+#    #+#             */
-/*   Updated: 2023/11/14 11:10:34 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/10/23 09:18:40 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 int	ft_atoi(const char *nptr)
 {
-	int			i;
-	int			nb;
-	int			signe;
+	int	i;
+	int	nb;
+	int	signe;
 
 	signe = 1;
 	nb = 0;
@@ -38,3 +38,13 @@ int	ft_atoi(const char *nptr)
 	}
 	return (nb * signe);
 }
+/*
+int main()
+{
+	char *t = "5";
+
+	printf("mon atoi = %d\n", ft_atoi(t));
+	printf("fonction atoi %d\n", atoi(t));
+
+}
+*/

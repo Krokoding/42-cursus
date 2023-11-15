@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/21 09:55:30 by loris             #+#    #+#             */
-/*   Updated: 2023/10/23 09:22:40 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
+/*   Updated: 2023/11/14 16:48:05 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+int	ft_print_decimal(int nb)
 {
-	if (lst && new)
-	{
-		new->next = *lst;
-		*lst = new;
-	}
+	char	*num;
+	int		i;
+
+	num = ft_itoa(nb);
+	i = ft_print_str(num);
+	free(num);
+	return (i);
 }

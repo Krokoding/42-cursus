@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:20:38 by loris             #+#    #+#             */
-/*   Updated: 2023/10/27 11:22:52 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:17:11 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-t_list	*ft_lstnew(char *content)
+t_list	*ft_lstnouv(char *content)
 {
 	t_list	*node;
 
@@ -26,7 +26,7 @@ t_list	*ft_lstnew(char *content)
 	return (node);
 }
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_der(t_list **lst, t_list *new)
 {
 	t_list	*temp;
 
@@ -36,14 +36,14 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 			*lst = new;
 		else
 		{
-			temp = ft_lstlast(*lst);
+			temp = ft_lstder(*lst);
 			temp->next = new;
 		}
 		new->next = NULL;
 	}
 }
 
-t_list	*ft_lstlast(t_list *lst)
+t_list	*ft_lstder(t_list *lst)
 {
 	t_list	*temp;
 
@@ -92,6 +92,6 @@ void	creat_next_line(t_list **lst, int fd)
 			return ;
 		}
 		buff[n] = '\0';
-		ft_lstadd_back(lst, ft_lstnew(buff));
+		ft_lstadd_der(lst, ft_lstnouv(buff));
 	}
 }

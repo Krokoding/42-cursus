@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoab.c                                         :+:      :+:    :+:   */
+/*   ft_print_unbr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 09:43:15 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/13 12:29:58 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/30 12:36:24 by lkary-po          #+#    #+#             */
+/*   Updated: 2023/11/14 16:47:58 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_size_b(int nb)
+int	ft_sizee(unsigned int nb)
 {
 	int				i;
 
@@ -21,35 +21,42 @@ int	ft_size_b(int nb)
 		return (1);
 	else
 	{
-		while (nb)
+		while (nb != 0)
 		{
-			nb = nb / 2;
+			nb = nb / 10;
 			i++;
 		}
 	}
 	return (i);
 }
 
-char	*ft_itoa_b(int n, int size)
+char	*ft_uitoa(unsigned int n)
 {
-	char	*nbr_in_str;
-	char	*base;
-	int		i;
+	char			*nbr_in_str;
+	int				size;
 
-	base = "10";
-	i = 0;
-	size = ft_size_b(size);
+	size = (ft_sizee(n));
 	nbr_in_str = malloc((size + 1) * sizeof(char));
 	if (nbr_in_str == 0)
 		return (0);
-	ft_bzero(nbr_in_str, size);
-	nbr_in_str[1] = '\0';
+	if (n != 0)
+		nbr_in_str[1] = '\0';
 	nbr_in_str[size] = '\0';
-	while (i < size)
+	while (--size > -1)
 	{
-		nbr_in_str[i] = (base[n % 2]);
-		n = (n / 2);
-		i++;
+		nbr_in_str[size] = (n % 10 + '0');
+		n = (n / 10);
 	}
 	return (nbr_in_str);
+}
+
+int	ft_print_uint(unsigned int n)
+{
+	char	*str;
+	int		i;
+
+	str = ft_uitoa(n);
+	i = ft_print_str(str);
+	free(str);
+	return (i);
 }
