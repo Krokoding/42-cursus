@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_print_nbr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 08:38:12 by loris             #+#    #+#             */
-/*   Updated: 2023/10/23 09:20:32 by lkary-po         ###   ########.fr       */
+/*   Created: 2023/10/30 11:40:40 by lkary-po          #+#    #+#             */
+/*   Updated: 2023/11/14 16:48:05 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-void	*ft_memset(void *pointer, int value, size_t count)
+int	ft_print_decimal(int nb)
 {
-	char	*ptr;
+	char	*num;
 	int		i;
 
-	i = count;
-	ptr = pointer;
-	while (count)
-	{
-		*ptr = value;
-		ptr++;
-		count--;
-	}
-	return (ptr - i);
+	num = ft_itoa(nb);
+	i = ft_print_str(num);
+	free(num);
+	return (i);
 }

@@ -6,11 +6,11 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:21:10 by loris             #+#    #+#             */
-/*   Updated: 2023/10/27 11:21:40 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/15 11:04:27 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 char	*get_next_line(int fd)
 {
@@ -36,7 +36,7 @@ char	*get_next_line(int fd)
 	if (!line_str)
 		return (NULL);
 	ft_lsttostr(&lst, line_str);
-	ft_lstclear(&lst);
+	ft_lstpropre(&lst);
 	return (line_str);
 }
 
@@ -96,7 +96,7 @@ void	ft_lsttostr(t_list **lst, char *str)
 	str[j] = '\0';
 }
 
-void	ft_lstclear(t_list **lst)
+void	ft_lstpropre(t_list **lst)
 {
 	t_list	*last_node;
 	t_list	*new_node;
@@ -109,13 +109,13 @@ void	ft_lstclear(t_list **lst)
 	rest_buffer = malloc(BUFFER_SIZE + 1);
 	if (!rest_buffer)
 		return ;
-	last_node = ft_lstlast(*lst);
+	last_node = ft_lstder(*lst);
 	while (last_node->content[i] != '\0' && last_node->content[i] != '\n')
 		i++;
 	while (last_node->content[i] != '\0' && last_node->content[++i])
 		rest_buffer[j++] = last_node->content[i];
 	rest_buffer[j] = '\0';
-	new_node = ft_lstnew(rest_buffer);
+	new_node = ft_lstnouv(rest_buffer);
 	ft_free(lst, new_node, rest_buffer);
 }
 

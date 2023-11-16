@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   itoa_base.c                                        :+:      :+:    :+:   */
+/*   ft_itoab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:43:15 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/06 09:49:43 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:20:40 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_size_base(unsigned int nb)
+int	ft_size_b(int nb)
 {
 	int				i;
 
@@ -21,7 +21,7 @@ int	ft_size_base(unsigned int nb)
 		return (1);
 	else
 	{
-		while (nb != 0)
+		while (nb)
 		{
 			nb = nb / 2;
 			i++;
@@ -30,29 +30,26 @@ int	ft_size_base(unsigned int nb)
 	return (i);
 }
 
-char	*ft_itoa_base(unsigned int n, char *base)
+char	*ft_itoa_b(int n, int size)
 {
-	char			*nbr_in_str;
-	int				size;
+	char	*nbr_in_str;
+	char	*base;
+	int		i;
 
-	size = (ft_size_base(n));
+	base = "10";
+	i = 0;
+	size = ft_size_b(size);
 	nbr_in_str = malloc((size + 1) * sizeof(char));
 	if (nbr_in_str == 0)
 		return (0);
+	ft_bzero(nbr_in_str, size);
 	nbr_in_str[1] = '\0';
 	nbr_in_str[size] = '\0';
-	while (--size > -1)
+	while (i < size)
 	{
-		nbr_in_str[size] = (base[n % 2]);
+		nbr_in_str[i] = (base[n % 2]);
 		n = (n / 2);
+		i++;
 	}
 	return (nbr_in_str);
-}
-
-char	*ft_print_base(unsigned int nb)
-{
-	char	*str;
-
-	str = ft_itoa_base(nb, "01");
-	return (str);
 }
