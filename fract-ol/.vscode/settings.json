@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "mlx.h": "c",
+        "x.h": "c",
+        "keysym.h": "c",
+        "keysymdef.h": "c",
+        "unistd.h": "c",
+        "array": "c",
+        "deque": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "iterator": "c",
+        "string_view": "c"
+    }
+}
