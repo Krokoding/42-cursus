@@ -1,6 +1,6 @@
 NAME			=	fractol
 
-CC				=	clang
+CC				=	clang -fsanitize=address -g3
 CFLAGS			=	-lX11 -lXext -lmlx
 
 RM				=	rm -rf
