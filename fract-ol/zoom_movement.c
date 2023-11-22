@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zoom_movement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:15:13 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/21 15:15:45 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/22 08:42:49 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,17 @@ int movement(int keysym, t_data *data)
 	return (0);
 }
 
+int	mouse_centred_zoom(int keysim, t_data *data)
+{
+	
+}
+
 int	julia_change(int keysym, t_data *data)
 {
-	if (keysym = XK_c)
+	if (keysym == XK_c)
 		data->start += 0.01;
 	if (keysym == XK_x)
 		data->start -= 0.01;
-	ft_printf("%f \n", data->start);
 }
 
 int	key_press(int keysym, t_data *data)

@@ -25,7 +25,16 @@ int main(void)
 	data.min_y = -2;
 	data.max_y = 2;
 	data.scale = 0.1;
-	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, key_press, &data);	
+	mlx_hook(data.win_ptr, KeyPress, KeyPressMask, key_press, &data);
+	mlx_mouse_hook(data.win_ptr, mo)
 
 	mlx_loop(data.mlx_ptr);
 }
+
+/*
+	things to add : 
+		- drag and drop with the mouse
+		- mwhelleup/down mouse centered zoom
+		- make the custommer choose when the progrqm start
+		- implement some ensemble
+*/
