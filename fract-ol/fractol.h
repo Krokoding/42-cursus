@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 11:54:37 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/22 15:17:27 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:44:09 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ typedef struct s_data
 	int		width;
 	int		height;
 	double	t;
+	double 	reel;
+	double	image;
 	t_color	color;
 }	t_data;
 
@@ -67,6 +69,7 @@ int		movement(int keysym, t_data *data);
 void	plot_line(t_data *data);
 void	to_pixel(int x, int y, double echelle_x, t_data *data);
 int		julia(double a, double b, t_data *data);
+void	julia_change(int keysym, t_data *data);
 int		mandelbrot(double a, double b, t_data *data);
 int		colorchange(int keysim, t_color *color);
 t_data	init(void);
@@ -78,5 +81,7 @@ int		mouse_centred_zoom(int keysim, int x, int y, t_data *data);
 void	unzoom(t_data *data);
 void	zoom(t_data *data, double ratio_pos_y, double ratio_pos_x);
 int		close_windows(int keysym, t_data *data);
+int 	argument_to_set(char *av, t_data *data);
+void 	julia_s_set(char **av, t_data *data);
 
 #endif

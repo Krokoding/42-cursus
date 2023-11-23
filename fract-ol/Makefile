@@ -5,7 +5,7 @@ CFLAGS			=	-lX11 -lXext -lmlx
 
 RM				=	rm -rf
 
-SRC				=	fractol zoom_movement color utils ensemble
+SRC				=	fractol zoom_movement color utils ensemble handle_entry
 
 SRCS 			=	$(addsuffix .c, $(SRC))
 

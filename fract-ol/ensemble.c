@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ensemble.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:38:11 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/22 15:15:21 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/23 08:50:06 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	julia(double a, double b, t_data *data)
 	i = 0;
 	while (i < data->max_iter && (fabs(a) + fabs(b)) < data->diverge)
 	{
-		temp = a * a - b * b + data->start;
-		b = 2 * a * b;
+		temp = a * a - b * b + data->reel;
+		b = 2 * a * b + data->image;
 		a = temp;
 		i++;
 	}
@@ -34,17 +34,17 @@ int	mandelbrot(double b, double a, t_data *data)
 	int		i;
 	double	result;
 	double	temp;
-	double	reel;
-	double	imag;
+	double	r;
+	double	im;
 
-	reel = 0;
-	imag = 0;
+	r = 0;
 	i = 0;
-	while (i < data->max_iter && (fabs(imag) + fabs(reel)) < data->diverge)
+	i = 0;
+	while (i < data->max_iter && (fabs(im) + fabs(r)) < data->diverge)
 	{
-		temp = reel * reel - imag * imag;
-		imag = 2 * reel * imag + a;
-		reel = temp + b;
+		temp = r * r - im * im;
+		im = 2 * r * im + a;
+		r = temp + b;
 		i++;
 	}
 	return (i);
@@ -53,9 +53,9 @@ int	mandelbrot(double b, double a, t_data *data)
 void	julia_change(int keysym, t_data *data)
 {
 	if (keysym == XK_c)
-		data->start += 0.01;
+		data->reel -= 0.01;
 	if (keysym == XK_x)
-		data->start -= 0.01;
+		data->image -= 0.01;
 	if (keysym == XK_l)
 		data->t += 0.001;
 }

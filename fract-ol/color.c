@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:38:57 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/22 14:46:40 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/22 19:03:21 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	color_set(int i, t_color *c, t_data *data)
 		return (0x000000);
 	iternomalized = (double)i / data->max_iter / data->t;
 	red = (unsigned int)(c->red * iternomalized);
-	blue = (unsigned int)((c->blue * iternomalized));
+	blue = (unsigned int)(1 - (c->blue * iternomalized));
 	green = (unsigned int)(c->green * iternomalized);
 	colori = (red << 24) + (green << 16) + (blue << 8) + 255;
 	return (colori);

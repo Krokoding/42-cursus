@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:39:19 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/22 15:01:37 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/23 08:41:26 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,24 +35,24 @@ void	to_pixel(int x, int y, double echelle_x, t_data *data)
 {
 	int		pixel;
 	int		pos;
-	double	reel;
-	double	imaginaire;
+	double	r;
+	double	i;
 	double	echelle_y;
 
 	echelle_y = data->range_y / data->height;
-	reel = (x * echelle_x) + data->min_x;
-	imaginaire = (y * echelle_y) + data->min_y;
-	pos = fractol(reel, imaginaire, data);
+	r = (x * echelle_x) + data->min_x;
+	i = (y * echelle_y) + data->min_y;
+	pos = fractol(r, i, data);
 	pixel = data->bit_per_pixel * x / 8 + data->size_line * y;
 	*(int *)(data->addr + pixel) = color_set(pos, &data->color, data);
 }
 
-int	fractol(double reel, double imaginaire, t_data *data)
+int	fractol(double r, double i, t_data *data)
 {
 	if (data->selector == 0)
-		return (mandelbrot(reel, imaginaire, data));
+		return (mandelbrot(r, i, data));
 	if (data->selector == 1)
-		return (julia(reel, imaginaire, data));
+		return (julia(r, i, data));
 	else
 		return (0);
 }

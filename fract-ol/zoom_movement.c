@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zoom_movement.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 12:15:13 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/22 15:15:28 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:57:16 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ void	unzoom(t_data *data)
 
 void	zoom(t_data *data, double ratio_pos_y, double ratio_pos_x)
 {
-	data->min_y += ratio_pos_y;
-	data->max_y += ratio_pos_y;
-	data->min_x += ratio_pos_x;
-	data->max_x += ratio_pos_x;
 	data->range_x = (data->min_x - data->max_x) * -1;
 	data->range_y = (data->min_y - data->max_y) * -1;
 	data->max_x = data->max_x - (data->range_x / 2) * data->scale;
@@ -47,12 +43,16 @@ int	mouse_centred_zoom(int keysim, int x, int y, t_data *data)
 
 	data->range_x = (data->min_x - data->max_x) * -1;
 	data->range_y = (data->min_y - data->max_y) * -1;
-	pos_x = x - (data->width / 2);
+	pos_x = x - 450;
 	ratio_pos_x = (pos_x * data->range_x / data->width) * 0.3;
-	pos_y = y - (data->height / 2);
+	pos_y = y - 450;
 	ratio_pos_y = (pos_y * data->range_y / data->height) * 0.3;
 	if (keysim == 4)
 	{
+		data->min_y += ratio_pos_y;
+		data->max_y += ratio_pos_y;
+		data->min_x += ratio_pos_x;
+		data->max_x += ratio_pos_x;
 		zoom(data, ratio_pos_y, ratio_pos_y);
 	}
 	if (keysim == 5)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:19:54 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/11/22 15:24:40 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/23 08:49:01 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,20 @@
 
 void	welcome(void)
 {
-	ft_printf("\n\nWelcome to the Interactive Fract'ol Experience!     \n\n\n");
-	ft_printf("--------------------------------------------------------\n");
-	ft_printf("*'M' Key: Switch to the Mandelbrot Set.                *\n");
-	ft_printf("*Mouse Wheel Up/Down: Zoom in and out of the fractal.  *\n");
-	ft_printf("*'+' and '-' Keys: Adjust the color of the fractal.    *\n");
-	ft_printf("* 'C' and 'X' Keys: Adjust of the fractal you choose.  *\n");
-	ft_printf("--------------------------------------------------------\n\n\n");
-	ft_printf("Explore the depths of fractal with intuitive controls.  \n");
-	ft_printf("Ready to dive into a world of endless patterns!         \n");
-	ft_printf("********************************************************\n\n\n");
+	ft_printf("\n---------------------------------------------------------\n");
+	ft_printf("*       'M' Key: Switch to the Mandelbrot Set.          *\n");
+	ft_printf("*       'J' Key: Switch to the Julia Set.               *\n");
+	ft_printf("* Mouse Wheel Up/Down: Zoom in and out of the fractal.  *\n");
+	ft_printf("*  '+' and '-' Keys: Adjust the color of the fractal.   *\n");
+	ft_printf("*       'C' and 'X' Keys: Adjust of the Julia.          *\n");
+	ft_printf("---------------------------------------------------------\n\n");
+	ft_printf(" Explore the depths of fractal with intuitive controls. \n");
+	ft_printf("    Ready to dive into a world of endless patterns!     \n");
+	ft_printf("\n********************************************************\n");
+	ft_printf("*       1st param is for the set you want to see       *");
+	ft_printf("\n*    2nd and 3rd param are the value for Julia set     *");
+	ft_printf("\n********************************************************\n");
+
 }
 
 void	fractol_selector(int keysym, t_data *data)
@@ -50,6 +54,25 @@ void	fractol_selector(int keysym, t_data *data)
 	}
 }
 
+int	fractol_preselector(int ac, char **av, t_data *data)
+{
+	if (ac != 4)
+	{
+		welcome();
+		return (0);
+	}
+	if (ft_strlen(av[1]) > 1)
+		return (0);
+	else
+	{
+		if (!argument_to_set(av[1], data))
+			return (0);
+		else if (argument_to_set(av[1], data) == 1)
+			julia_s_set(av, data);
+	}
+	return (1);
+}
+
 void	reset_params(t_data *data)
 {
 	data->start = 0;
@@ -64,7 +87,6 @@ t_data	init(void)
 {
 	t_data	data;
 
-	welcome();
 	data.color.red = RED;
 	data.color.green = GREEN;
 	data.color.blue = BLUE;
@@ -84,9 +106,13 @@ t_data	init(void)
 
 int	main(int ac, char *av[])
 {
+	welcome();
 	t_data	data;
 	
 	data = init();
+	
+	if (!fractol_preselector(ac, av, &data))
+		return (0);
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, data.width, data.height, "");
 	data.image_ptr = mlx_new_image(data.mlx_ptr, data.width, data.height);
