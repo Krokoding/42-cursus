@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:20:54 by loris             #+#    #+#             */
-/*   Updated: 2023/11/27 11:19:30 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/28 21:31:28 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,15 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include "libft.h"
+#include "../libft.h"
 
 
-int		put_in_pipe(int **fd, char **av);
-char	*path_creator(char *program_name);
-int		put_in_file(int	**fd, char **av);
-int		cat_first_file(int **fd, char **av);
+int	    put_in_pipe(int *fd, char **av, char **envp);
+char    *path_creator(char *cmd, char **env, char *pathvar);
+int	    put_in_file(int	*fd, char **av, char **envp);
+char    *find_in_envp(char **env, char *pathvar);
+void    free_tab(char **tab);
+char    *cmd_slash(char *cmd);
+int	    create_pipe(int *fd, char **av, char **envp);
 
 #endif

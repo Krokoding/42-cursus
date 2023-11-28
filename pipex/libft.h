@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:32:58 by loris             #+#    #+#             */
-/*   Updated: 2023/11/22 18:02:01 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/28 11:25:06 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_itoa(int n);
 char		*ft_itoab(int n, int size);
+char    	*ft_strjoinsep(char *a, char *b, char sep);
 
 size_t		ft_strlcpy(char *destination, const	char *source, size_t size);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
