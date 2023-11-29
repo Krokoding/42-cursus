@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 10:48:05 by loris             #+#    #+#             */
-/*   Updated: 2023/11/29 15:01:51 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:09:52 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*path_creator(char *cmd, char **env, char *pathvar)
 	allpath = find_in_envp(env, pathvar);
 	i = 0;
 	different_path = ft_split(allpath, ':');
+	if (!different_path)
+		return (0);
 	while (different_path[i])
 	{
 		str = ft_strjoin(different_path[i], cmd);
@@ -83,6 +85,8 @@ char	*cmd_slash(char *cmd)
 	j = 1;
 	i = 0;
 	str = malloc(sizeof(char) * (ft_strlen(cmd) + 2));
+	if (!str)
+		return (NULL);
 	str[0] = '/';
 	while (cmd[i])
 	{
@@ -104,7 +108,11 @@ int	execute_command(char *av, char **envp)
 	if (!command)
 		return (0);
 	command_slash = cmd_slash(command[0]);
+	if (command_slash == NULL)
+		return (0);
 	path = path_creator(command_slash, envp, "PATH");
+	if (!path)
+		return (0);
 	if (-1 == execve(path, command, NULL))
 	{
 		free(command_slash);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:09:58 by loris             #+#    #+#             */
-/*   Updated: 2023/11/29 15:02:46 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:13:32 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ char	*path_creator(char *cmd, char **env, char *pathvar)
 	allpath = find_in_envp(env, pathvar);
 	i = 0;
 	different_path = ft_split(allpath, ':');
+	if (!different_path)
+		return (0);
 	while (different_path[i])
 	{
 		str = ft_strjoin(different_path[i], cmd);
