@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:04 by loris             #+#    #+#             */
-/*   Updated: 2023/11/28 22:08:21 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/29 15:03:21 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
-	int i;
-	int fd_start;
-	int fd_end;
-	char **command;
-	char *path;
+	int	i;
+	int	fd_start;
+	int	fd_end;
 
 	if (ac < 5)
 		exit (0);
@@ -31,24 +29,21 @@ int main(int ac, char **av, char **envp)
 	else
 	{
 		i = 2;
-		ft_printf("okkkkk");
 		fd_start = open(av[1], O_RDONLY);
 		fd_end = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		dup2(fd_start, 0);
 	}
-	while(i < ac - 2)
-		pipe_creator(envp, av[i++]);
+	pipex_utils_creator(i, ac, av, envp);
 	dup2(fd_end, STDOUT_FILENO);
-	command = ft_split(av[ac - 2], ' ');
-	path = path_creator(cmd_slash(command[0]), envp, "PATH");
-	execve(path, command, NULL);
+	if (!execute_command(av[ac - 2], envp))
+		error_msg(av[ac - 2], "command not found: ");
 }
 
 int	open_here_doc(char **av)
 {
 	int	fd[2];
 	int	id;
-	
+
 	if (pipe(fd) == -1)
 		return (0);
 	id = fork();
@@ -64,9 +59,9 @@ int	open_here_doc(char **av)
 
 int	here_doc(char **av, int *fd)
 {
-	char *str;
+	char	*str;
 
-	while(1)
+	while (1)
 	{
 		str = get_next_line(0);
 		if (ft_strncmp(str, av[2], ft_strlen(av[2])) == 0)
@@ -79,12 +74,10 @@ int	here_doc(char **av, int *fd)
 	}
 }
 
-int pipe_creator(char **env, char *av)
+int	pipe_creator(char **env, char *av)
 {
-	int     fd[2];
-	int     id;
-	char    **command;
-	char    *path;
+	int		fd[2];
+	int		id;
 
 	if (pipe(fd) == -1)
 		return (0);
@@ -93,19 +86,36 @@ int pipe_creator(char **env, char *av)
 		exit (0);
 	if (!id)
 	{
-		command = ft_split(av, ' ');
-		path = path_creator(cmd_slash(command[0]), env, "PATH");
-		ft_printf("%s\n", path);
 		close(fd[0]);
 		dup2(fd[1], 1);
-		execve(path, command, NULL);
-		free_tab(command);
-		free(path);
+		if (!execute_command(av, env))
+			return (0);
 	}
 	else
 	{
 		close(fd[1]);
 		dup2(fd[0], 0);
 	}
-	return (0);
+	return (1);
+}
+
+int	execute_command(char *av, char **envp)
+{
+	char	*command_slash;
+	char	*path;
+	char	**command;
+
+	command = ft_split(av, ' ');
+	command_slash = cmd_slash(command[0]);
+	if (!command_slash)
+		return (0);
+	path = path_creator(command_slash, envp, "PATH");
+	if (-1 == execve(path, command, NULL))
+	{
+		free(command_slash);
+		free_tab(command);
+		free(path);
+		return (0);
+	}
+	return (1);
 }
