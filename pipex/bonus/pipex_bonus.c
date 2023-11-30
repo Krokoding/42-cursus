@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:04 by loris             #+#    #+#             */
-/*   Updated: 2023/11/29 18:11:38 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/30 14:49:59 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int	here_doc(char **av, int *fd)
 		str = get_next_line(0);
 		if (!str || ((ft_strlen(str) == ft_strlen(av[2]) + 1) && (ft_strncmp(str, av[2], ft_strlen(av[2])) == 0)))
 		{
-			free(str);
+			if (str)
+				free(str);
 			exit(0);
 		}
 		ft_putstr_fd(str, fd[1]);
@@ -112,10 +113,17 @@ int	execute_command(char *av, char **envp)
 		return (0);
 	command_slash = cmd_slash(command[0]);
 	if (!command_slash)
+	{
+		free_tab(command);
 		return (0);
+	}
 	path = path_creator(command_slash, envp, "PATH");
 	if (!path)
+	{
+		free_tab(command);
+		free(command_slash);
 		return (0);
+	}
 	if (-1 == execve(path, command, NULL))
 	{
 		free(command_slash);

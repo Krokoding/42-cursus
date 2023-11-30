@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:09:58 by loris             #+#    #+#             */
-/*   Updated: 2023/11/29 17:13:32 by loris            ###   ########.fr       */
+/*   Updated: 2023/11/30 14:44:29 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*find_in_envp(char **env, char *pathvar)
 		while (env[i][j] && env[i][j] != '=')
 			j++;
 		str = ft_substr(env[i], 0, j);
+		if (!str)
+			return (0);
 		if (ft_strncmp(pathvar, str, 4) == 0)
 		{
 			free(str);
