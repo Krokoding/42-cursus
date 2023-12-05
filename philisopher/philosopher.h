@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:37:05 by loris             #+#    #+#             */
-/*   Updated: 2023/12/04 10:15:12 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/04 14:08:21 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,20 @@ typedef struct s_sstruct
 	t_time			timer;
 	pthread_mutex_t fork;
 	int				number_of_philosopher;
+	double			time_left;
 }   t_data;
 
 
-int 	think(unsigned int time_to_sleep, double start, int philosopher_num);
-int 	slip(unsigned int time_to_sleep, double start, int philosopher_num);
+int 	thinki_time(t_data *data, double time);
+int 	slipi_time(t_data *data);
 void	*philo_action(void *data);
 double	time_management(void);
 int		table(int number_of_philosopher, int time_to_die, int time_to_eat, int time_to_sleep);
-int		eating_time(t_data *data, int time_eat);
-
+int		eating_time(t_data *data);
+int		odd_philosopher(t_data *data);
+int		even_philosopher(t_data *data);
+int		time_or_die(t_data *data, double time);
+double	time_to_think_calculator(t_data *data);
+int		even_odd_manager(t_data *data);
 
 #endif

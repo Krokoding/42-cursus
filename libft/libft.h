@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:32:58 by loris             #+#    #+#             */
-/*   Updated: 2023/11/15 13:54:36 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:32:56 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ typedef struct s_list
 	struct s_list	*next;
 }				t_list;
 
+int			ft_strisdigit(char *str);
 long int	ft_atoli(const char *nptr);
-
+double		ft_atof(const char *str);
 int			ft_tolower(int c);
 int			ft_toupper(int c);
 int			ft_memcmp(const void *pointer1, const void *pointer2, size_t size);
@@ -75,6 +76,7 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strtrim(char const *s1, char const *set);
 char		*ft_itoa(int n);
 char		*ft_itoab(int n, int size);
+char		*ft_strjoinsep(char const *s1, char const *s2, char sep);
 
 size_t		ft_strlcpy(char *destination, const	char *source, size_t size);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
