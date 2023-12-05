@@ -6,7 +6,7 @@ CFLAGS			=	-lpthread
 
 RM				=	rm -rf
 
-SRC				=	philosopher sleep_and_think
+SRC				=	philosopher eat_sleep_and_think rotation_of_action thread_management philosopher_utils
 
 SRCS 			=	$(addsuffix .c, $(SRC))
 
