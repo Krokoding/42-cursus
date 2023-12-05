@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:19:20 by loris             #+#    #+#             */
-/*   Updated: 2023/11/29 15:00:38 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/05 09:29:44 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ int	put_in_pipe(int *fd, char **av, char **envp)
 	fd_op = open(av[1], O_RDONLY);
 	if (fd_op == -1)
 		return (-1);
-	dup2(fd_op, STDIN_FILENO);
-	dup2(fd[1], STDOUT_FILENO);
+	if (-1 == dup2(fd_op, STDIN_FILENO))
+		return (-1);
+	if (-1 == dup2(fd[1], STDOUT_FILENO))
+		return (-1);
 	if (!execute_command(av[2], envp))
 		return (0);
 	return (1);
@@ -71,9 +73,23 @@ int	put_in_file(int *fd, char **av, char **envp)
 	if (fd_outfile == -1)
 		return (-1);
 	close(fd[1]);
-	dup2(fd[0], STDIN_FILENO);
-	dup2(fd_outfile, STDOUT_FILENO);
+	if (-1 == dup2(fd[0], STDIN_FILENO))
+		return (-1);
+	if (-1 == dup2(fd_outfile, STDOUT_FILENO))
+		return (-1);
 	if (!execute_command(av[3], envp))
 		return (0);
+	return (1);
+}
+
+int	norme_execute_command(char *path, char **command, char *command_slash)
+{
+	if (execve(path, command, NULL) == -1)
+	{
+		free(command_slash);
+		free_tab(command);
+		free(path);
+		return (-1);
+	}
 	return (1);
 }

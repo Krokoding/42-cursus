@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 10:48:05 by loris             #+#    #+#             */
-/*   Updated: 2023/11/29 16:09:52 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/05 09:30:08 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*find_in_envp(char **env, char *pathvar)
 		while (env[i][j] && env[i][j] != '=')
 			j++;
 		str = ft_substr(env[i], 0, j);
+		if (!str)
+			return (0);
 		if (ft_strncmp(pathvar, str, 4) == 0)
 		{
 			free(str);
@@ -86,7 +88,7 @@ char	*cmd_slash(char *cmd)
 	i = 0;
 	str = malloc(sizeof(char) * (ft_strlen(cmd) + 2));
 	if (!str)
-		return (NULL);
+		return (0);
 	str[0] = '/';
 	while (cmd[i])
 	{
@@ -109,16 +111,18 @@ int	execute_command(char *av, char **envp)
 		return (0);
 	command_slash = cmd_slash(command[0]);
 	if (command_slash == NULL)
-		return (0);
-	path = path_creator(command_slash, envp, "PATH");
-	if (!path)
-		return (0);
-	if (-1 == execve(path, command, NULL))
 	{
-		free(command_slash);
 		free_tab(command);
-		free(path);
 		return (0);
 	}
+	path = path_creator(command_slash, envp, "PATH");
+	if (!path)
+	{
+		free_tab(command);
+		free(command_slash);
+		return (0);
+	}
+	if (-1 == norme_execute_command(path, command, command_slash))
+		return (0);
 	return (1);
 }

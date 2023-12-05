@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:20:54 by loris             #+#    #+#             */
-/*   Updated: 2023/11/29 12:55:01 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/05 09:30:53 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ char	*cmd_slash(char *cmd);
 int		create_pipe(int *fd, char **av, char **envp);
 int		execute_command(char *av, char **envp);
 void	error_msg(char *cmd, char *msg);
+int		norme_execute_command(char *path, char **command, char *command_slash);
 
 #endif

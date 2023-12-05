@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:10:04 by loris             #+#    #+#             */
-/*   Updated: 2023/11/30 14:49:59 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/05 09:20:35 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	here_doc(char **av, int *fd)
 	while (1)
 	{
 		str = get_next_line(0);
-		if (!str || ((ft_strlen(str) == ft_strlen(av[2]) + 1) && (ft_strncmp(str, av[2], ft_strlen(av[2])) == 0)))
+		if (!str || ((ft_strlen(str) == ft_strlen(av[2]) + 1)
+				&& (ft_strncmp(str, av[2], ft_strlen(av[2])) == 0)))
 		{
 			if (str)
 				free(str);
@@ -124,12 +125,7 @@ int	execute_command(char *av, char **envp)
 		free(command_slash);
 		return (0);
 	}
-	if (-1 == execve(path, command, NULL))
-	{
-		free(command_slash);
-		free_tab(command);
-		free(path);
+	if (-1 == norme_execute_command(path, command, command_slash))
 		return (0);
-	}
 	return (1);
 }

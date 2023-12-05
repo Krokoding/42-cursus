@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 10:53:47 by loris             #+#    #+#             */
-/*   Updated: 2023/12/04 18:25:03 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/05 13:15:38 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main(int ac, char **av)
 {
-	table(11, 3500000, 2000000, 1000000);
+	table(11, 2500000, 2000000, 1000000);
 }
 
 
@@ -80,7 +80,7 @@ void	*philo_action(void *data)
 
 	fata = (t_data *)data;
 	if (!even_odd_manager(fata))
-		
+		return (0);
 }
 int	even_odd_manager(t_data *data)
 {
@@ -120,22 +120,30 @@ int	even_philosopher(t_data *data)
 	{
 		if (i == 0 && data->philosophers_num == data->number_of_philosopher -1)
 		{
+			if (!slipi_time(data))
+				return (0);
 			time_think = time_to_think_calculator(data);
 			if (!time_or_die(data, time_think))
 				return (0);
 			if (time_think)
 				thinki_time(data, time_think);
 		}
+		i = 1;
 		if (!eating_time(data))
 		{
 			return (0);
 		}
+		// printf("philo %d %f\n",data->philosophers_num, data->time_left);
 		slipi_time(data);
+		// printf("philo %d %f\n",data->philosophers_num, data->time_left);
 		time_think = time_to_think_calculator(data);
 		if (!time_or_die(data, time_think))
 			return (0);
 		if (time_think)
+		{
 			thinki_time(data, time_think);
+			// printf("philo %d %f\n",data->philosophers_num, data->time_left);
+		}
 	}
 	return (1);
 }
@@ -147,6 +155,7 @@ int	time_or_die(t_data *data, double time)
 	data->time_left -= time;
 	if (data->time_left <= 0)
 	{
+		printf("%d %d is sleeping\n", (int)(time_management() - data->start_time), data->philosophers_num);
 		usleep(time_before_message);
 		printf("%d %d died\n", (int)(time_management() - data->start_time), data->philosophers_num);
 		return (0);
@@ -157,26 +166,28 @@ int	time_or_die(t_data *data, double time)
 int	eating_time(t_data *data)
 {
 	pthread_mutex_lock(&data->fork);
-	printf("%d %d has taken a fork\n", (int)(time_management() - data->start_time), data->philosophers_num, data->philosophers_num);
+	printf("%d %d has taken a fork\n", (int)(time_management() - data->start_time), data->philosophers_num);
 	if (data->philosophers_num != ((data->number_of_philosopher - 1)))
 	{
 		pthread_mutex_lock(&data[1].fork);
-		printf("%d %d has taken a fork\n", (int)(time_management() - data->start_time), data->philosophers_num, data[1].philosophers_num);
+		printf("%d %d has taken a fork\n", (int)(time_management() - data->start_time), data->philosophers_num);
 	}
 	else
 	{
 		pthread_mutex_lock(&data[-(data->number_of_philosopher - 1)].fork);
-		printf("%d %d has taken a fork\n", (int)(time_management() - data->start_time), data->philosophers_num, data[-(data->number_of_philosopher - 1)].philosophers_num);		
+		printf("%d %d has taken a fork\n", (int)(time_management() - data->start_time), data->philosophers_num);
 	}
-	printf("%d %d is eating\n", (int)(time_management() - data->start_time), data->philosophers_num);		
+	printf("%d %d is eating\n", (int)(time_management() - data->start_time), data->philosophers_num);
 	data->timer.start_eat = time_management() - data->start_time;
 	data->time_left = data->timer.die;
 	usleep(data->timer.eat);
+	data->time_left -= data->timer.eat;
 	if (data->philosophers_num != ((data->number_of_philosopher - 1)))
 		pthread_mutex_unlock(&data[1].fork);
 	else
 		pthread_mutex_unlock(&data[-(data->number_of_philosopher - 1)].fork);
 	pthread_mutex_unlock(&data->fork);
+	printf("philo %d, finished eat\n", data->philosophers_num);
 	return (1);
 }
 
