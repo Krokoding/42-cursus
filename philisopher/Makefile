@@ -2,7 +2,7 @@ NAME			=	philo
 
 
 CC				=	cc
-CFLAGS			=	-lpthread
+CFLAGS			=	-lpthread 
 
 RM				=	rm -rf
 
@@ -13,7 +13,7 @@ SRCS 			=	$(addsuffix .c, $(SRC))
 all:				$(NAME)
 
 $(NAME):
-			$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+			$(CC) $(CFLAGS) $(SRCS) libft.a -o $(NAME)
 
 clean:
 

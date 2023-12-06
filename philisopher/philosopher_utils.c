@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:09:08 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/05 14:26:05 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/06 08:36:54 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int	time_or_die(t_data *data, double time)
 {
 	double time_before_message;
-
+	double	time_left;
 	time_before_message = data->time_left;
-	data->time_left -= time;
-	if (data->time_left <= 0)
+	time_left = data->time_left;
+	time_left -= time;
+	if (time_left <= 0)
 	{
 		set_die_indicator(data);
-		printf("%d %d is sleeping\n", (int)(time_management() - data->start_time), data->philosophers_num);
 		usleep(time_before_message);
 		printf("%d %d died\n", (int)(time_management() - data->start_time), data->philosophers_num);
 		return (0);
@@ -32,8 +32,11 @@ int	time_or_die(t_data *data, double time)
 double	time_to_think_calculator(t_data *data)
 {
 	double	time_to_think;
-
-	time_to_think = (data->timer.eat / 1000) - (data->timer.start_eat - (time_management() - data->start_time));
+	if (data->philosophers_num != data->number_of_philosopher - 1)
+		time_to_think = (data->timer.eat / 1000) - ((time_management() - data->start_time) - data[1].timer.start_eat);
+	else
+		time_to_think = (data->timer.eat / 1000) - ((time_management() - data->start_time) - data[-1].timer.start_eat);
+	time_to_think *= 1000;
 	return (time_to_think);
 }
 
@@ -51,4 +54,30 @@ double	time_management(void)
 int	set_die_indicator(t_data *data)
 {
 	data[-data->philosophers_num].dead = 1;
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int	i;
+	int	nb;
+	int	signe;
+
+	signe = 1;
+	nb = 0;
+	i = 0;
+	while ((nptr[i] <= 13 && nptr[i] >= 9) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '-')
+	{
+		signe *= -1;
+		i++;
+	}
+	else if (nptr[i] == '+')
+		i++;
+	while (nptr[i] <= '9' && nptr[i] >= '0')
+	{
+		nb = nb * 10 + (nptr[i] - 48);
+		i++;
+	}
+	return (nb * signe);
 }

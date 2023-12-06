@@ -3,39 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   thread_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:07:32 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/05 14:09:39 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:53:18 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int	table(int number_of_philosopher, int time_to_die, int time_to_eat, int time_to_sleep)
+int	table(t_data *data)
 {
-	t_data		*data;
 	pthread_t	*philosopher;
 	int			i;
 
-	data = malloc(sizeof(t_data) * number_of_philosopher);
-	philosopher = malloc(sizeof(pthread_t) * number_of_philosopher);
 	i = 0;
-	init(number_of_philosopher, time_to_die, time_to_eat, time_to_sleep, data);
-	while (i < number_of_philosopher)
+	philosopher = malloc(sizeof(pthread_t) * data->number_of_philosopher);
+
+	while (i < data->number_of_philosopher)
 	{
 		pthread_mutex_init(&data[i].fork, NULL);
 		pthread_create(&philosopher[i], NULL, philo_action, &data[i]);
 		i++;
 	}
 	i = 0;
-	while (i < number_of_philosopher)
+	while (i < data->number_of_philosopher)
 	{
 		pthread_join(philosopher[i], NULL);
 		i++;
 	}
 	i = 0;
-	while (i < number_of_philosopher)
+	while (i < data->number_of_philosopher)
 		pthread_mutex_destroy(&data[i++].fork);
 	free(data);
 	free(philosopher);
