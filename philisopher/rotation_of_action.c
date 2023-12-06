@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotation_of_action.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:04:35 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/06 08:41:27 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/06 09:59:00 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@ int	odd_philosopher(t_data *data)
 	double	time_think;
 	while (data[-data->philosophers_num].dead == 0)
 	{
-		printf("slipi_time = %f\n", data->timer.sleep);
 		if (!slipi_time(data))
 			return (0);
 		time_think = time_to_think_calculator(data);
-		printf("thinki_time = %f\n", time_think);
-		if (time_think)
+		if (time_think > 0)
 			thinki_time(data, time_think);
 		eating_time(data);
 	}
@@ -40,19 +38,13 @@ int	processus_for_even_philo(t_data *data, int i)
 	}
 	i = 1;
 	eating_time(data);
-	// if (data->philosophers_num == 0)
-	// 	printf("philo %d, time left after eat = %lf \n", data->philosophers_num, data->time_left);
 	if (!slipi_time(data))
 		return (0);
-	// if (data->philosophers_num == 0)
-	// 	printf("philo %d, time left after sleep = %lf \n", data->philosophers_num, data->time_left);
 	time_think = time_to_think_calculator(data);
-	if (!time_or_die(data, time_think))
-		return (0);
+	// if (!time_or_die(data, time_think))
+	// 	return (0);
 	if (time_think > 0)
 		thinki_time(data, time_think);
-	// if (data->philosophers_num == 0)
-	// 	printf("philo %d, time left after think = %lf \n", data->philosophers_num, data->time_left);
 	return (1);
 }
 
