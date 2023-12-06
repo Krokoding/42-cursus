@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:09:08 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/06 08:36:54 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/06 12:35:27 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int	time_or_die(t_data *data, double time)
+int	time_or_die(t_data *data, double time, int action)
 {
 	double time_before_message;
 	double	time_left;
@@ -21,8 +21,14 @@ int	time_or_die(t_data *data, double time)
 	time_left -= time;
 	if (time_left <= 0)
 	{
-		set_die_indicator(data);
+		if (action == 1)
+			printf("%d %d is thinking\n", (int)(time_management() - data->start_time), data->philosophers_num);
+		if (action == 0)
+			printf("%d %d is sleeping\n", (int)(time_management() - data->start_time), data->philosophers_num);
+		if (action == 2)
+			printf("%d %d is eating\n", (int)(time_management() - data->start_time), data->philosophers_num);
 		usleep(time_before_message);
+		set_die_indicator(data);
 		printf("%d %d died\n", (int)(time_management() - data->start_time), data->philosophers_num);
 		return (0);
 	}

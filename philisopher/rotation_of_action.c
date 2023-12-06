@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:04:35 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/06 09:59:00 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/06 12:54:39 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	odd_philosopher(t_data *data)
 	{
 		if (!slipi_time(data))
 			return (0);
+		usleep(1000);
 		time_think = time_to_think_calculator(data);
 		if (time_think > 0)
 			thinki_time(data, time_think);
@@ -40,9 +41,8 @@ int	processus_for_even_philo(t_data *data, int i)
 	eating_time(data);
 	if (!slipi_time(data))
 		return (0);
+	usleep(1000);
 	time_think = time_to_think_calculator(data);
-	// if (!time_or_die(data, time_think))
-	// 	return (0);
 	if (time_think > 0)
 		thinki_time(data, time_think);
 	return (1);

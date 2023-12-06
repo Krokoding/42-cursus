@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:37:05 by loris             #+#    #+#             */
-/*   Updated: 2023/12/05 17:21:38 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/06 11:56:46 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		table(t_data *data);
 int		eating_time(t_data *data);
 int		odd_philosopher(t_data *data);
 int		even_philosopher(t_data *data);
-int		time_or_die(t_data *data, double time);
+int		time_or_die(t_data *data, double time, int action);
 double	time_to_think_calculator(t_data *data);
 int		even_odd_manager(t_data *data);
 t_data	*init(int number_of_philosopher, int time_to_die, int time_to_eat, int time_to_sleep, t_data *data);
