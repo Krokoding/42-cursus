@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 10:53:47 by loris             #+#    #+#             */
-/*   Updated: 2023/12/05 18:18:29 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/07 11:20:58 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ int	main(int ac, char **av)
 	data = malloc(sizeof(t_data) * atoi(av[1]));
 	data = init(atoi(av[1]), time_to_die, time_to_eat, time_to_sleep, data);
 	table(data);
-	while (1);
-	{
-		if (data->dead == 1)
-			return (0);
-	}
 }
 
 t_data	*init(int number_of_philosopher, int time_to_die, int time_to_eat, int time_to_sleep, t_data *data)
@@ -41,6 +36,7 @@ t_data	*init(int number_of_philosopher, int time_to_die, int time_to_eat, int ti
 	pthread_mutex_init(&data->lock, NULL);
 	while (i < number_of_philosopher)
 	{
+		data[i].fork_indic = 0;
 		data[i].start_time = time_management();
 		data[i].time_left = time_to_die;
 		data[i].timer.die = time_to_die;

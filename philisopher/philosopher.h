@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:37:05 by loris             #+#    #+#             */
-/*   Updated: 2023/12/06 11:56:46 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/07 10:36:24 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_sstruct
 	int				dead;
 	int				number_of_philosopher;
 	double			time_left;
+	int				fork_indic;
 }	t_data;
 
 int		thinki_time(t_data *data, double time);

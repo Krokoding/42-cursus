@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:04:35 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/06 12:54:39 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/07 11:42:40 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,16 @@ int	odd_philosopher(t_data *data)
 	{
 		if (!slipi_time(data))
 			return (0);
-		usleep(1000);
-		time_think = time_to_think_calculator(data);
-		if (time_think > 0)
-			thinki_time(data, time_think);
+		if (data->philosophers_num == (data->number_of_philosopher - 1))
+		{
+			if (data->fork_indic == 1 || data[-data->philosophers_num].fork_indic == 1)
+				thinki_time(data, time_think);
+		}
+		else
+		{
+			if (data->fork_indic == 1 || data[1].fork_indic == 1)
+				thinki_time(data, time_think);
+		}
 		eating_time(data);
 	}
 	return (1);
@@ -32,7 +38,7 @@ int	processus_for_even_philo(t_data *data, int i)
 {
 	double	time_think;
 
-	if (i == 0 && data->philosophers_num == data->number_of_philosopher -1)
+	if (i == 0 && data->philosophers_num == data->number_of_philosopher - 1)
 	{
 		if (!first_rotation_even_philosopher(data))
 			return (0);
@@ -41,10 +47,16 @@ int	processus_for_even_philo(t_data *data, int i)
 	eating_time(data);
 	if (!slipi_time(data))
 		return (0);
-	usleep(1000);
-	time_think = time_to_think_calculator(data);
-	if (time_think > 0)
-		thinki_time(data, time_think);
+	if (data->philosophers_num == (data->number_of_philosopher - 1))
+	{
+		if (data->fork_indic == 1 || data[-data->philosophers_num].fork_indic == 1)
+			thinki_time(data, time_think);
+	}
+	else
+	{
+		if (data->fork_indic == 1 || data[1].fork_indic == 1)
+			thinki_time(data, time_think);
+	}
 	return (1);
 }
 
