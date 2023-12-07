@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:04:35 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/07 11:42:40 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/07 14:13:43 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,12 @@ int	processus_for_even_philo(t_data *data, int i)
 	}
 	i = 1;
 	eating_time(data);
+	if (data->philosophers_num == 8)
+		printf("time left after iti = %lf\n", data->time_left);
 	if (!slipi_time(data))
 		return (0);
+			if (data->philosophers_num == 8)
+		printf("time left after sleepi = %lf\n", data->time_left);
 	if (data->philosophers_num == (data->number_of_philosopher - 1))
 	{
 		if (data->fork_indic == 1 || data[-data->philosophers_num].fork_indic == 1)
@@ -57,6 +61,8 @@ int	processus_for_even_philo(t_data *data, int i)
 		if (data->fork_indic == 1 || data[1].fork_indic == 1)
 			thinki_time(data, time_think);
 	}
+		if (data->philosophers_num == 8)
+		printf("time left after tiki = %lf\n", data->time_left);
 	return (1);
 }
 

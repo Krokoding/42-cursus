@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 10:44:13 by loris             #+#    #+#             */
-/*   Updated: 2023/12/07 11:29:25 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/07 14:43:25 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,29 @@ int thinki_time(t_data *data, double time)
 	{
 		if (data->fork_indic == 1 || data[-data->philosophers_num].fork_indic == 1)
 			printf("%d %d is thinking\n", (int)(time_management() - data->start_time), data->philosophers_num);
+		while (data->fork_indic == 1 || data[-data->philosophers_num].fork_indic == 1)
+		{
+			if (!time_or_die(data, 1000, 1))
+				return (0);
+			if (data[-data->philosophers_num].dead == 1)
+				return (0);
+			usleep(1000);
+			data->time_left -= 1000;
+		}
 	}
 	else
 	{
 		if (data->fork_indic == 1 || data[1].fork_indic == 1)
 			printf("%d %d is thinking\n", (int)(time_management() - data->start_time), data->philosophers_num);
-	}
-	while (data->fork_indic == 1 || data[1].fork_indic == 1)
-	{
-		if (!time_or_die(data, 1000, 1))
-			return (0);
-		if (data[-data->philosophers_num].dead == 1)
-			return (0);
-		usleep(1000);
-		data->time_left -= 1000;
+		while (data->fork_indic == 1 || data[1].fork_indic == 1)
+		{
+			if (!time_or_die(data, 1000, 1))
+				return (0);
+			if (data[-data->philosophers_num].dead == 1)
+				return (0);
+			usleep(1000);
+			data->time_left -= 1000;
+		}
 	}
 	return (1);
 }

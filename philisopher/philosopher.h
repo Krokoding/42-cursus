@@ -6,7 +6,7 @@
 /*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:37:05 by loris             #+#    #+#             */
-/*   Updated: 2023/12/07 10:36:24 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/07 14:21:23 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ int		processus_for_even_philo(t_data *data, int i);
 int		first_rotation_even_philosopher(t_data *data);
 int		set_die_indicator(t_data *data);
 int		ft_atoi(const char *nptr);
+int		check_if_fork_available(t_data *data);
 
 #endif
