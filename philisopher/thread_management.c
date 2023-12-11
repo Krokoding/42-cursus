@@ -3,58 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   thread_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:07:32 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/07 11:12:14 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/10 19:39:24 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int	table(t_data *data)
+int	table(t_data *d)
 {
-	pthread_t	*philosopher;
-	int			i;
-
-	i = 0;
-	philosopher = malloc(sizeof(pthread_t) * data->number_of_philosopher);
-
-	while (i < data->number_of_philosopher)
+	int	i;
+	t_philos *philosopher;
+	
+	philosopher = d->philo;
+	i = -1;
+	// start all thread
+	while (++i < d->n_o_p)
 	{
-		pthread_mutex_init(&data[i].fork, NULL);
-		pthread_create(&philosopher[i], NULL, philo_action, &data[i]);
-		i++;
+		mthread_manager(&philosopher[i].id, &philosopher[i], CREATE);
 	}
-	i = 0;
-	while (i < data->number_of_philosopher)
-	{
-		pthread_join(philosopher[i], NULL);
-		i++;
-	}
-	i = 0;
-	while (i < data->number_of_philosopher)
-		pthread_mutex_destroy(&data[i++].fork);
-	free(data);
-	free(philosopher);
-}
-
-void	*philo_action(void *data)
-{
-	double	start;
-	t_data	*fata;
-	double	end;
-	int		next_close_phil;
-
-	fata = (t_data *)data;
-	if (!even_odd_manager(fata))
-		return (0);
-}
-
-int	even_odd_manager(t_data *data)
-{
-	if (data->philosophers_num % 2 == 0)
-		return (even_philosopher(data));
-	if (data->philosophers_num % 2 != 0)
-		return (odd_philosopher(data));
+	// wait all thread
+	set_bool(d->data_lock, true, d->allthread_creat);
+	// check if death
+	// check if full
+	// 
 }
