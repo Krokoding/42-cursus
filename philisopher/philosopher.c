@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 10:53:47 by loris             #+#    #+#             */
-/*   Updated: 2023/12/10 12:46:36 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/11 13:40:11 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 int	main(int ac, char **av)
 {
-	t_data	d;
-	
+	t_data	*d;
+
+	d = mmalloc(sizeof(t_data));
 	if (ac == 5 || ac == 6)
 	{
-		initialisation(ac, av, &d);
+		initialisation(ac, av, d);
+		table(d);
 	}
 	else
 	{

@@ -2,11 +2,10 @@ NAME			=	philo
 
 
 CC				=	cc
-CFLAGS			=	-lpthread 
-
+CFLAGS			=	-lpthread -fsanitize=address -g3
 RM				=	rm -rf
 
-SRC				=	philosopher philosopher_utils initialisation my_func
+SRC				=	philosopher philosopher_utils initialisation my_func eat_sleep_and_think getters_setters thread_management dinner
 
 SRCS 			=	$(addsuffix .c, $(SRC))
 
@@ -22,4 +21,4 @@ fclean:				clean
 
 re:					fclean all
 
-.PHONY:				all  clean fclean re libft
+.PHONY:				all clean fclean re libft
