@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:20 by loris             #+#    #+#             */
-/*   Updated: 2023/12/12 17:12:04 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/13 12:50:52 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void parsing(int ac, char **av, t_data *d)
+void	parsing(int ac, char **av, t_data *d)
 {
 	if (ac == 6)
 		d->max_meal = ft_atoi(av[5]);
@@ -53,13 +53,15 @@ void	philo_init(int ac, char **av, t_data *d)
 	philosopher = malloc(sizeof(t_philos) * d->n_o_p);
 	i = -1;
 	while (++i < d->n_o_p)
-	{	
+	{
 		d->philo = philosopher;
 		d->philo[i].data = d;
 		d->philo[i].meal_count = 0;
 		d->philo[i].n = i + 1;
-		d->philo[i].time_left = d->timer.d;	
+		d->philo[i].time_left = d->timer.d;
 		d->philo[i].previous_fork = &d->fork[i];
+		d->philo[i].previous_fork->available = true;
+		d->philo[i].next_fork->available = true;
 		d->philo[i].next_fork = &d->fork[(i + 1) % d->n_o_p];
 	}
 }
@@ -69,4 +71,3 @@ void	initialisation(int ac, char **av, t_data *d)
 	table_init(ac, av, d);
 	philo_init(ac, av, d);
 }
-

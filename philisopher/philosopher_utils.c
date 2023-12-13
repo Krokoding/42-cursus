@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:09:08 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/12 14:46:35 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/13 11:45:12 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,28 @@ void	end_simulation(t_philos *philo)
 {
 	if (get_bool(philo->data->data_lock, philo->data->end))
 		exit(-1);
+}
+
+long	time_getter(void)
+{
+	long			time_in_ms;
+	struct timeval	tv;
+
+	if (-1 == gettimeofday(&tv, NULL))
+		msg_exit("Gettimeofday error");
+	time_in_ms = tv.tv_sec * 1000000;
+	time_in_ms += tv.tv_usec;
+	return (time_in_ms);
+}
+
+void	wait_func_bis(t_philos *philo)
+{
+	mmutex_manager(&philo->data->dead_lock, LOCK);
+	if (!get_bool(philo->data->data_lock, philo->data->end))
+	{
+		msg_action(philo->n, time_getter() - philo->data->start, DIE);
+		set_bool(philo->data->data_lock, true, &philo->data->end);
+	}
+	mmutex_manager(&philo->data->dead_lock, UNLOCK);
+	exit(-1);
 }

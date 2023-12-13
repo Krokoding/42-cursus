@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:37:05 by loris             #+#    #+#             */
-/*   Updated: 2023/12/12 17:09:37 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/13 13:28:18 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdbool.h>
 # include "libft.h"
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 
 typedef struct s_timer
 {
@@ -40,16 +40,15 @@ typedef struct s_fork
 
 typedef struct s_philos
 {
-	pthread_t id;
+	pthread_t		id;
 	int				n;
 	long			time_left;
 	t_fork			*previous_fork;
 	t_fork			*next_fork;
 	int				meal_count;
 	t_data			*data;
-} t_philos;
-
-
+	long			last_meal;
+}	t_philos;
 
 struct s_data
 {
@@ -58,14 +57,14 @@ struct s_data
 	int				n_o_p;
 	long			start;
 	t_philos		*philo;
-	t_timer 		timer;
+	t_timer			timer;
 	t_fork			*fork;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	data_lock;
 	int				max_meal;
 };
 
-typedef	enum e_eatopcode
+typedef enum e_eatopcode
 {
 	EAT,
 	SLEEP,
@@ -106,8 +105,10 @@ void	set_long(pthread_mutex_t lock, long value, long *location);
 long	get_long(pthread_mutex_t lock, long location);
 
 // time management
-long	time_getter();
+long	time_getter(void);
 void	wait_func(long time_to_wait, t_philos *philo);
+void	wait_func_bis(t_philos *philo);
+void	odd_thinking(t_philos	*philo);
 
 // dinner
 void	*diner_management(void *data);
