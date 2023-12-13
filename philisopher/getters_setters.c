@@ -3,45 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   getters_setters.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 15:09:40 by loris             #+#    #+#             */
-/*   Updated: 2023/12/11 13:53:26 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/12 08:39:21 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	set_bool(pthread_mutex_t lock, bool value, bool location)
+void	set_bool(pthread_mutex_t lock, bool value, bool *location)
 {
-	mmutex_manager(lock, LOCK);
-	location = value;
-	mmutex_manager(lock, UNLOCK);
+	mmutex_manager(&lock, LOCK);
+	*location = value;
+	mmutex_manager(&lock, UNLOCK);
 }
 
 bool	get_bool(pthread_mutex_t lock, bool location)
 {
 	bool	ret;
 	
-	mmutex_manager(lock, LOCK);
+	mmutex_manager(&lock, LOCK);
 	ret = location;
-	mmutex_manager(lock, UNLOCK);
+	mmutex_manager(&lock, UNLOCK);
 	return (ret);
 }
 
-void	set_long(pthread_mutex_t lock, long value, long location)
+void	set_long(pthread_mutex_t lock, long value, long *location)
 {
-	mmutex_manager(lock, LOCK);
-	location = value;
-	mmutex_manager(lock, UNLOCK);
+	mmutex_manager(&lock, LOCK);
+	*location = value;
+	mmutex_manager(&lock, UNLOCK);
 }
 
 long	get_long(pthread_mutex_t lock, long location)
 {
 	long	ret;
 	
-	mmutex_manager(lock, LOCK);
+	mmutex_manager(&lock, LOCK);
 	ret = location;
-	mmutex_manager(lock, UNLOCK);
+	mmutex_manager(&lock, UNLOCK);
 	return (ret);
 }

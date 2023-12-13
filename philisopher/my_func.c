@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_func.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:02:10 by loris             #+#    #+#             */
-/*   Updated: 2023/12/11 13:45:36 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/12 16:33:47 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,16 @@ void	mthread_manager(pthread_t *id, t_philos *philos, t_opcode opcode)
 		pthread_join(*id, NULL);
 }
 
-void	mmutex_manager(pthread_mutex_t mtx, t_opcode opcode)
+void	mmutex_manager(pthread_mutex_t *mtx, t_opcode opcode)
 {
+	if (opcode == LOCK)
+		pthread_mutex_lock(mtx);
+	if (opcode == UNLOCK)
+		pthread_mutex_unlock(mtx);
 	if (opcode == INIT)
-		pthread_mutex_init(&mtx, NULL);
+		pthread_mutex_init(mtx, NULL);
 	if (opcode == DESTROY)
-		pthread_mutex_destroy(&mtx);
+		pthread_mutex_destroy(mtx);
 }
 
 // write message
@@ -50,23 +54,36 @@ void	mmutex_manager(pthread_mutex_t mtx, t_opcode opcode)
 void	wait_func(long time_to_wait, t_philos *philo)
 {
 	long	start;
-	long	timer;
+	long	elapsed;
+	long	rem;
 
-	timer = 0;
 	start = time_getter();
-	while (timer < time_to_wait)
+	while (time_getter() - start < time_to_wait)
 	{
-		usleep(1000);
-		philo->time_left -= 1;
-		if (philo->time_left <= 0)
+		elapsed = time_getter() - start;
+		rem = time_to_wait - elapsed;
+		if (rem > 1000)
 		{
-			philo->data->end = 1;
-			msg_action(philo->id, time_getter() - start, DIE);
-			exit(-1);
+			usleep(rem / 2);
+			philo->time_left -= rem / 2;
+			if (philo->time_left <= 0)
+			{
+				mmutex_manager(&philo->data->dead_lock, LOCK);
+				if (!get_bool(philo->data->data_lock, philo->data->end))
+				{
+					msg_action(philo->n, time_getter() - philo->data->start, DIE);
+					set_bool(philo->data->data_lock, true, &philo->data->end);
+				}
+				mmutex_manager(&philo->data->dead_lock, UNLOCK);
+				exit(-1);
+			}
 		}
-		timer += 1;
+		else
+			while (time_getter() - start < time_to_wait)
+				;
 	}
 }
+
 
 
 // time getter
@@ -77,7 +94,7 @@ long	time_getter()
 	
 	if (-1 == gettimeofday(&tv, NULL))
 		msg_exit("Gettimeofday error");
-	time_in_ms = tv.tv_sec * 1000;
-	time_in_ms += tv.tv_usec / 1000;
+	time_in_ms = tv.tv_sec * 1000000;
+	time_in_ms += tv.tv_usec;
 	return (time_in_ms);
 }

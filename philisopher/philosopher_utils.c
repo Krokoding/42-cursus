@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:09:08 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/11 13:55:02 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/12 14:46:35 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,21 @@ int	ft_atoi(const char *nptr)
 void	msg_action(int id, long timestamp, t_eatopcode opcode)
 {
 	if (opcode == EAT)
-		printf("%ld %d is eating\n", timestamp, id);
+		printf("%ld %d is eating\n", timestamp / 1000, id);
 	else if (opcode == DIE)
-		printf("%ld %d died\n", timestamp, id);
+		printf("%ld %d died\n", timestamp / 1000, id);
 	else if (opcode == SLEEP)
-		printf("%ld %d is sleeping\n", timestamp, id);
+		printf("%ld %d is sleeping\n", timestamp / 1000, id);
 	else if (opcode == FORK)
-		printf("%ld %d has taken a fork\n", timestamp, id);
+		printf("%ld %d has taken a fork\n", timestamp / 1000, id);
 	else if (opcode == THINK)
-		printf("%ld %d is thinking\n", timestamp, id);
+		printf("%ld %d is thinking\n", timestamp / 1000, id);
 	else
 		msg_exit("Message wrong opcode");
+}
+
+void	end_simulation(t_philos *philo)
+{
+	if (get_bool(philo->data->data_lock, philo->data->end))
+		exit(-1);
 }
