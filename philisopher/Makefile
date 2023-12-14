@@ -12,7 +12,7 @@ SRCS 			=	$(addsuffix .c, $(SRC))
 all:				$(NAME)
 
 $(NAME):
-			$(CC) $(CFLAGS) $(SRCS) libft.a -o $(NAME)
+			$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
 clean:
 
@@ -21,4 +21,4 @@ fclean:				clean
 
 re:					fclean all
 
-.PHONY:				all clean fclean re libft
+.PHONY:				all clean fclean re

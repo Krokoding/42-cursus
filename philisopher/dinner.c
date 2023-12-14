@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:50:34 by loris             #+#    #+#             */
-/*   Updated: 2023/12/14 08:25:58 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/14 10:02:00 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+/*
+*	Function called by every thread.
+*	Call the functions eat sleep and think
+*	while end is true or all philo have eaten max meal
+*/
 
 void	*diner_management(void *data)
 {
@@ -22,18 +28,25 @@ void	*diner_management(void *data)
 	philo->data->start = time_getter();
 	while (!get_bool(philo->data->data_lock, philo->data->end))
 	{
+		eating(philo);
 		if (philo->data->max_meal != 0 && philo->meal_count
 			== philo->data->max_meal)
-			{
-				philo->full = true;
-				break ;
-			}
-		eating(philo);
+		{
+			philo->full = true;
+			break ;
+		}
 		sleeping(philo);
 		thinking(philo);
 	}
 	return (NULL);
 }
+
+/*
+*	The philos eat alternate if they are even or odd,
+*	the "even" philo eat first to have all the forks
+*	on the first iteration a time is set to synchronize them
+*	and have no deadlock
+*/
 
 void	mutex_odd_philo(t_philos *philo)
 {
@@ -63,4 +76,3 @@ void	mutex_even_philo(t_philos *philo)
 }
 
 // make a one philosopher dinner function
-// make the programm stop when they have all eaten the right number of times

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:37:05 by loris             #+#    #+#             */
-/*   Updated: 2023/12/14 08:14:14 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/14 12:44:52 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <sys/time.h>
 # include <stdlib.h>
 # include <stdbool.h>
-# include "libft.h"
 
 typedef struct s_data	t_data;
 
@@ -55,6 +54,7 @@ struct s_data
 {
 	bool			end;
 	bool			allthread_creat;
+	bool			all_full;
 	int				n_o_p;
 	long			start;
 	t_philos		*philo;
@@ -87,18 +87,19 @@ typedef enum e_opcode
 }	t_opcode;
 
 // error handling
-void	msg_exit(char *str);
-void	end_simulation(t_philos *philo);
+int		msg_exit(char *str);
 
 // initialisation
-void	initialisation(int ac, char **av, t_data *d);
-void	parsing(int ac, char **av, t_data *d);
-int		ft_atoi(const char *nptr);
+int		initialisation(int ac, char **av, t_data *d);
+int		parsing(int ac, char **av, t_data *d);
+long	ft_atoi(const char *nptr);
+int		philo_init(int ac, char **av, t_data *d);
+int		table_init(int ac, char **av, t_data *d);
 
 // my own malloc, mutex, printf and thread manager function
-void	mthread_manager(pthread_t *id, t_philos *philos, t_opcode opcode);
+int		mthread_manager(pthread_t *id, t_philos *philos, t_opcode opcode);
 void	mmutex_manager(pthread_mutex_t *mtx, t_opcode opcode);
-void	*mmalloc(size_t bytes);
+// void	*mmalloc(size_t bytes);
 void	msg_action(t_philos *philo, int id, long timestamp, t_eatopcode opcode);
 
 // getters and setters
@@ -121,6 +122,13 @@ void	thinking(t_philos *philo);
 void	mutex_even_philo(t_philos	*philo);
 void	mutex_odd_philo(t_philos *philo);
 void	table(t_data *d);
-int		dead_check(t_data *d);
+
+// end of the dinner
+int		dead_checker(t_data *d, int i);
+int		end_of_simulation(t_data *d);
+int		full_checker(t_data *d, int i);
+int		clean(t_data *d);
+
+
 
 #endif

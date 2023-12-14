@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:09:08 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/13 17:18:05 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/14 12:45:59 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int	ft_atoi(const char *nptr)
+long	ft_atoi(const char *nptr)
 {
-	int	i;
-	int	nb;
-	int	signe;
-
+	int		i;
+	long	nb;
+	int		signe;
+	
 	signe = 1;
 	nb = 0;
 	i = 0;
@@ -35,6 +35,8 @@ int	ft_atoi(const char *nptr)
 		nb = nb * 10 + (nptr[i] - 48);
 		i++;
 	}
+	if (nb >= 2147483647)
+		return (0);
 	return (nb * signe);
 }
 
@@ -50,12 +52,6 @@ void	msg_action(t_philos *philo, int id, long timestamp, t_eatopcode opcode)
 		printf("%ld %d has taken a fork\n", timestamp / 1000, id);
 	else if (opcode == THINK && !get_bool(philo->data->data_lock, philo->data->end))
 		printf("%ld %d is thinking\n", timestamp / 1000, id);
-}
-
-void	end_simulation(t_philos *philo)
-{
-	if (get_bool(philo->data->data_lock, philo->data->end))
-		exit(-1);
 }
 
 long	time_getter(void)

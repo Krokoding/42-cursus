@@ -3,37 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   my_func.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:02:10 by loris             #+#    #+#             */
-/*   Updated: 2023/12/13 16:58:59 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/14 12:26:50 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	*mmalloc(size_t bytes)
-{
-	void	*ret;
-
-	ret = malloc(bytes);
-	if (!ret)
-		msg_exit("Malloc failed");
-	return (ret);
-}
-
-void	msg_exit(char *str)
+int	msg_exit(char *str)
 {
 	printf("%s\n", str);
-	exit(1);
+	return(0);
 }
 
-void	mthread_manager(pthread_t *id, t_philos *philos, t_opcode opcode)
+int	mthread_manager(pthread_t *id, t_philos *philos, t_opcode opcode)
 {
 	if (opcode == CREATE)
-		pthread_create(id, NULL, diner_management, philos);
+	{
+		if (0 != pthread_create(id, NULL, diner_management, philos))
+			return (0);
+	}
 	if (opcode == JOIN)
-		pthread_join(*id, NULL);
+	{
+		if (0 != pthread_join(*id, NULL))
+			return (0);		
+	}
+	return (1);
 }
 
 void	mmutex_manager(pthread_mutex_t *mtx, t_opcode opcode)
@@ -48,8 +45,12 @@ void	mmutex_manager(pthread_mutex_t *mtx, t_opcode opcode)
 		pthread_mutex_destroy(mtx);
 }
 
-// write message
-// time manager with calculation for the death
+/*
+*	calculate remaining time and make small usleep instead of one big usleep
+*	when the remaining time is less than 1000 usec, a busy while loop is used
+*	to wait
+*/
+
 void	wait_func(long time_to_wait, t_philos *philo)
 {
 	long	start;
@@ -62,10 +63,7 @@ void	wait_func(long time_to_wait, t_philos *philo)
 		elapsed = time_getter() - start;
 		rem = time_to_wait - elapsed;
 		if (rem > 1000)
-		{
 			usleep(rem / 2);
-			philo->time_left -= rem / 2;
-		}
 		else
 		{
 			while (time_getter() - start < time_to_wait)

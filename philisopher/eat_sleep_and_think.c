@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   eat_sleep_and_think.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:17:54 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/14 08:32:46 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/14 10:43:28 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+/*
+*	Lock both fork depend if even or not
+*	Increment the meal count
+*	Unlock the forks
+*/
 
 void	eating(t_philos *philo)
 {
@@ -30,12 +36,23 @@ void	eating(t_philos *philo)
 	philo->previous_fork->available = true;
 }
 
+/*
+*	Print message and wait
+*/
+
 void	sleeping(t_philos *philo)
 {
 	msg_action(philo, philo->n, (time_getter()
 			- get_long(philo->data->data_lock, philo->data->start)), SLEEP);
 	wait_func(philo->data->timer.s, philo);
 }
+
+/*
+*	if even, the to sleep is always the same : if time to e bigger than tts
+*	think time = tts - tte
+*	if odd, odd_thinking function
+*
+*/
 
 void	thinking(t_philos *philo)
 {
@@ -60,6 +77,11 @@ void	thinking(t_philos *philo)
 	}
 }
 
+/*
+*	automaticly sleep to prevent desynchronisation
+*	then wait untill the both fork are available
+*/
+
 void	odd_thinking(t_philos *philo)
 {
 	wait_func(((philo->data->timer.e * 2) - philo->data->timer.s) * 0.42, philo);
@@ -68,43 +90,60 @@ void	odd_thinking(t_philos *philo)
 			;
 }
 
+/*
+*	check 2 things :
+*		- if all philo are full
+				block the printf
+				set end to true
+*		- if on philo died
+				printf a message and block the printing for other thread
+				set end to true
+*	End the simulation if end is true
+*/
+
 int	end_of_simulation(t_data *d)
 {
 	int	i;
 
 	while (!get_bool(d->data_lock, d->end))
 	{
+		d->all_full = true;
 		i = -1;
 		while (++i < d->n_o_p)
 		{
-			if (!d->philo[i].full && (time_getter() - d->philo[i].last_meal >= d->timer.d))
-			{
-				mmutex_manager(&d->dead_lock, LOCK);
-				if (!get_bool(d->data_lock, d->end))
-				{
-					msg_action(d->philo, d->philo[i].n, time_getter() - d->start, DIE);
-					set_bool(d->data_lock, true, &d->end);
-				}
-				mmutex_manager(&d->dead_lock, UNLOCK);
+			if (!dead_checker(d, i))
 				return (0);
-			}
+			if (!full_checker(d, i))
+				return (0);
 		}
 	}
 	return (0);
 }
 
-void	full_checker(t_philos *philo)
+int	dead_checker(t_data *d, int i)
 {
-	bool	all_full;
-	int		i;
-	
-	all_full = false;
-	while (!all_full)
-	{
-		i = -1;
-		while (++i < philo->data->n_o_p)
+	if (!d->philo[i].full && (time_getter() - d->philo[i].last_meal >= d->timer.d))
 		{
-			
+			mmutex_manager(&d->dead_lock, LOCK);
+			if (!get_bool(d->data_lock, d->end))
+			{
+				msg_action(d->philo, d->philo[i].n, time_getter() - d->start, DIE);
+				set_bool(d->data_lock, true, &d->end);
+			}
+			mmutex_manager(&d->dead_lock, UNLOCK);
+			return (0);
 		}
+	return (1);
+}
+
+int	full_checker(t_data *d, int i)
+{
+	if (!d->philo[i].full)
+		d->all_full = false;
+	if (i == d->n_o_p - 1 && d->all_full == true)
+	{
+		set_bool(d->data_lock, true, &d->end);
+		return (0);
 	}
+	return (1);
 }
