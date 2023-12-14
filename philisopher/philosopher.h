@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:37:05 by loris             #+#    #+#             */
-/*   Updated: 2023/12/13 13:28:18 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/14 08:14:14 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_philos
 	int				meal_count;
 	t_data			*data;
 	long			last_meal;
+	bool			full;
 }	t_philos;
 
 struct s_data
@@ -62,6 +63,8 @@ struct s_data
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	data_lock;
 	int				max_meal;
+	int				first_iteration;
+	pthread_mutex_t	no_eat_when_die;
 };
 
 typedef enum e_eatopcode
@@ -96,7 +99,7 @@ int		ft_atoi(const char *nptr);
 void	mthread_manager(pthread_t *id, t_philos *philos, t_opcode opcode);
 void	mmutex_manager(pthread_mutex_t *mtx, t_opcode opcode);
 void	*mmalloc(size_t bytes);
-void	msg_action(int id, long timestamp, t_eatopcode opcode);
+void	msg_action(t_philos *philo, int id, long timestamp, t_eatopcode opcode);
 
 // getters and setters
 void	set_bool(pthread_mutex_t lock, bool value, bool *location);
@@ -118,5 +121,6 @@ void	thinking(t_philos *philo);
 void	mutex_even_philo(t_philos	*philo);
 void	mutex_odd_philo(t_philos *philo);
 void	table(t_data *d);
+int		dead_check(t_data *d);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:09:08 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/13 11:45:12 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/13 17:18:05 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,18 @@ int	ft_atoi(const char *nptr)
 	return (nb * signe);
 }
 
-void	msg_action(int id, long timestamp, t_eatopcode opcode)
+void	msg_action(t_philos *philo, int id, long timestamp, t_eatopcode opcode)
 {
-	if (opcode == EAT)
+	if (opcode == EAT && !get_bool(philo->data->data_lock, philo->data->end))
 		printf("%ld %d is eating\n", timestamp / 1000, id);
 	else if (opcode == DIE)
 		printf("%ld %d died\n", timestamp / 1000, id);
-	else if (opcode == SLEEP)
+	else if (opcode == SLEEP && !get_bool(philo->data->data_lock, philo->data->end))
 		printf("%ld %d is sleeping\n", timestamp / 1000, id);
-	else if (opcode == FORK)
+	else if (opcode == FORK && !get_bool(philo->data->data_lock, philo->data->end))
 		printf("%ld %d has taken a fork\n", timestamp / 1000, id);
-	else if (opcode == THINK)
+	else if (opcode == THINK && !get_bool(philo->data->data_lock, philo->data->end))
 		printf("%ld %d is thinking\n", timestamp / 1000, id);
-	else
-		msg_exit("Message wrong opcode");
 }
 
 void	end_simulation(t_philos *philo)
@@ -72,14 +70,3 @@ long	time_getter(void)
 	return (time_in_ms);
 }
 
-void	wait_func_bis(t_philos *philo)
-{
-	mmutex_manager(&philo->data->dead_lock, LOCK);
-	if (!get_bool(philo->data->data_lock, philo->data->end))
-	{
-		msg_action(philo->n, time_getter() - philo->data->start, DIE);
-		set_bool(philo->data->data_lock, true, &philo->data->end);
-	}
-	mmutex_manager(&philo->data->dead_lock, UNLOCK);
-	exit(-1);
-}

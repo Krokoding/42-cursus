@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_func.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:02:10 by loris             #+#    #+#             */
-/*   Updated: 2023/12/13 12:01:40 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/13 16:58:59 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	wait_func(long time_to_wait, t_philos *philo)
 	long	start;
 	long	elapsed;
 	long	rem;
-	long	second_start;
 	
 	start = time_getter();
 	while (time_getter() - start < time_to_wait)
@@ -64,21 +63,13 @@ void	wait_func(long time_to_wait, t_philos *philo)
 		rem = time_to_wait - elapsed;
 		if (rem > 1000)
 		{
-			usleep(rem / 50);
-			philo->time_left -= rem / 50;
-			if (philo->time_left <= 0)
-				wait_func_bis(philo);
+			usleep(rem / 2);
+			philo->time_left -= rem / 2;
 		}
 		else
 		{
-			second_start = time_getter();
 			while (time_getter() - start < time_to_wait)
-			{
-				if (philo->time_left <= 0)
-					wait_func_bis(philo);
-			}
-				
-			return;
+				;
 		}
 	}
 }

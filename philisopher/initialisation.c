@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:20 by loris             #+#    #+#             */
-/*   Updated: 2023/12/13 12:50:52 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/14 08:15:17 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	table_init(int ac, char **av, t_data *d)
 	set_bool(d->data_lock, false, &d->end);
 	mmutex_manager(&d->data_lock, INIT);
 	mmutex_manager(&d->dead_lock, INIT);
+	mmutex_manager(&d->no_eat_when_die, INIT);
+	d->first_iteration = 1;
 	while (++i < d->n_o_p)
 	{
 		mmutex_manager(&d->fork[i].fork, INIT);
@@ -60,9 +62,11 @@ void	philo_init(int ac, char **av, t_data *d)
 		d->philo[i].n = i + 1;
 		d->philo[i].time_left = d->timer.d;
 		d->philo[i].previous_fork = &d->fork[i];
-		d->philo[i].previous_fork->available = true;
-		d->philo[i].next_fork->available = true;
+		d->philo[i].last_meal = time_getter();
 		d->philo[i].next_fork = &d->fork[(i + 1) % d->n_o_p];
+		d->philo[i].next_fork->available = true;
+		d->philo[i].previous_fork->available = true;
+		d->philo[i].full = false;
 	}
 }
 
