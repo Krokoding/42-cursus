@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 10:53:47 by loris             #+#    #+#             */
-/*   Updated: 2023/12/14 12:34:28 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/15 08:36:07 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,14 @@ int	main(int ac, char **av)
 	t_data	*d;
 
 	d = malloc(sizeof(t_data));
+	if (!d)
+		return (0);
 	if (ac == 5 || ac == 6)
 	{
 		if (!initialisation(ac, av, d))
-		{
-			free(d);
 			return (0);
-		}
-		else
-		{
 			table(d);
 			clean(d);
-		}
 	}
 	else
 	{
@@ -39,8 +35,13 @@ int	main(int ac, char **av)
 
 int	clean(t_data *d)
 {
+	int	i;
+	
+	i = -1;
 	free(d->philo);
 	free(d->fork);
 	free(d);
+	while (++i < d->n_o_p)
+		mmutex_manager(&d->fork[i].fork, DESTROY);
 	return (1);
 }

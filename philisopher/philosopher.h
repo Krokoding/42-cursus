@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:37:05 by loris             #+#    #+#             */
-/*   Updated: 2023/12/14 12:44:52 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/15 08:22:08 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void	thinking(t_philos *philo);
 void	mutex_even_philo(t_philos	*philo);
 void	mutex_odd_philo(t_philos *philo);
 void	table(t_data *d);
+void	one_philo(t_philos *philo);
 
 // end of the dinner
 int		dead_checker(t_data *d, int i);

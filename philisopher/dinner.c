@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:50:34 by loris             #+#    #+#             */
-/*   Updated: 2023/12/14 10:02:00 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/15 08:23:08 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,22 @@ void	*diner_management(void *data)
 	while (!get_bool(philo->data->data_lock, philo->data->allthread_creat))
 		;
 	philo->data->start = time_getter();
-	while (!get_bool(philo->data->data_lock, philo->data->end))
+	if (philo->data->n_o_p == 1)
+		one_philo(philo);
+	else
 	{
-		eating(philo);
-		if (philo->data->max_meal != 0 && philo->meal_count
-			== philo->data->max_meal)
+		while (!get_bool(philo->data->data_lock, philo->data->end))
 		{
-			philo->full = true;
-			break ;
+			eating(philo);
+			if (philo->data->max_meal != 0 && philo->meal_count
+				== philo->data->max_meal)
+			{
+				philo->full = true;
+				break ;
+			}
+			sleeping(philo);
+			thinking(philo);
 		}
-		sleeping(philo);
-		thinking(philo);
 	}
 	return (NULL);
 }
@@ -76,3 +81,11 @@ void	mutex_even_philo(t_philos *philo)
 }
 
 // make a one philosopher dinner function
+
+void	one_philo(t_philos *philo)
+{
+	mmutex_manager(&philo->previous_fork->fork, LOCK);
+	msg_action(philo, philo->n, time_getter() - philo->data->start, FORK);
+	wait_func(philo->data->timer.d, philo);
+	msg_action(philo, philo->n, time_getter() - philo->data->start, DIE);
+}

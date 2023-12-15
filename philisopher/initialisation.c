@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:20 by loris             #+#    #+#             */
-/*   Updated: 2023/12/14 12:46:20 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/15 08:32:03 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	philo_init(int ac, char **av, t_data *d)
 	if (!philosopher)
 	{
 		free(d->fork);
+		free(d);
 		return (0);
 	}
 	i = -1;
