@@ -1,8 +1,8 @@
 NAME			=	philo
 
 
-CC				=	cc
-CFLAGS			=	-lpthread -fsanitize=address -g3
+CC				=	gcc -g
+CFLAGS			=	-lpthread -fsanitize=thread -g3
 RM				=	rm -rf
 
 SRC				=	philosopher philosopher_utils initialisation my_func eat_sleep_and_think getters_setters thread_management dinner

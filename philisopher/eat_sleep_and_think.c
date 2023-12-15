@@ -24,16 +24,16 @@ void	eating(t_philos *philo)
 		mutex_even_philo(philo);
 	else
 		mutex_odd_philo(philo);
-	set_long(philo->data->data_lock, philo->data->timer.d, &philo->time_left);
+	set_long(&philo->data->data_lock, philo->data->timer.d, &philo->time_left);
 	msg_action(philo, philo->n, (time_getter()
-			- get_long(philo->data->data_lock, philo->data->start)), EAT);
-	philo->last_meal = time_getter();
+			- get_long(&philo->data->data_lock, &philo->data->start)), EAT);
+	set_long(&philo->data->data_lock, time_getter(), &philo->last_meal);
 	philo->meal_count++;
-	wait_func(philo->data->timer.e, philo);
+	wait_func(get_long(&philo->data->data_lock, &philo->data->timer.e), philo);
 	mmutex_manager(&philo->next_fork->fork, UNLOCK);
-	philo->next_fork->available = true;
+	set_bool(&philo->data->data_lock, true, &philo->next_fork->available);
 	mmutex_manager(&philo->previous_fork->fork, UNLOCK);
-	philo->previous_fork->available = true;
+	set_bool(&philo->data->data_lock, true, &philo->previous_fork->available);
 }
 
 /*
@@ -43,7 +43,7 @@ void	eating(t_philos *philo)
 void	sleeping(t_philos *philo)
 {
 	msg_action(philo, philo->n, (time_getter()
-			- get_long(philo->data->data_lock, philo->data->start)), SLEEP);
+			- get_long(&philo->data->data_lock, &philo->data->start)), SLEEP);
 	wait_func(philo->data->timer.s, philo);
 }
 
@@ -105,7 +105,7 @@ int	end_of_simulation(t_data *d)
 {
 	int	i;
 
-	while (!get_bool(d->data_lock, d->end))
+	while (!get_bool(&d->data_lock, &d->end))
 	{
 		d->all_full = true;
 		i = -1;
@@ -122,13 +122,13 @@ int	end_of_simulation(t_data *d)
 
 int	dead_checker(t_data *d, int i)
 {
-	if (!d->philo[i].full && (time_getter() - d->philo[i].last_meal >= d->timer.d))
+	if (!get_bool(&d->data_lock, &d->philo[i].full) && (time_getter() - get_long(&d->data_lock, &d->philo[i].last_meal) >= d->timer.d))
 		{
 			mmutex_manager(&d->dead_lock, LOCK);
-			if (!get_bool(d->data_lock, d->end))
+			if (!get_bool(&d->data_lock, &d->end))
 			{
 				msg_action(d->philo, d->philo[i].n, time_getter() - d->start, DIE);
-				set_bool(d->data_lock, true, &d->end);
+				set_bool(&d->data_lock, true, &d->end);
 			}
 			mmutex_manager(&d->dead_lock, UNLOCK);
 			return (0);
@@ -142,7 +142,7 @@ int	full_checker(t_data *d, int i)
 		d->all_full = false;
 	if (i == d->n_o_p - 1 && d->all_full == true)
 	{
-		set_bool(d->data_lock, true, &d->end);
+		set_bool(&d->data_lock, true, &d->end);
 		return (0);
 	}
 	return (1);

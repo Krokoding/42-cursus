@@ -23,14 +23,14 @@ void	*diner_management(void *data)
 	t_philos	*philo;
 
 	philo = (t_philos *)data;
-	while (!get_bool(philo->data->data_lock, philo->data->allthread_creat))
+	while (!get_bool(&philo->data->data_lock, &philo->data->allthread_creat))
 		;
-	philo->data->start = time_getter();
+	set_long(&philo->data->data_lock, time_getter(), &philo->data->start);
 	if (philo->data->n_o_p == 1)
 		one_philo(philo);
 	else
 	{
-		while (!get_bool(philo->data->data_lock, philo->data->end))
+		while (!get_bool(&philo->data->data_lock, &philo->data->end))
 		{
 			eating(philo);
 			if (philo->data->max_meal != 0 && philo->meal_count
@@ -59,25 +59,25 @@ void	mutex_odd_philo(t_philos *philo)
 		usleep(philo->data->timer.e - 5000);
 	philo->data->first_iteration = 0;
 	mmutex_manager(&philo->next_fork->fork, LOCK);
-	philo->next_fork->available = false;
+	set_bool(&philo->data->data_lock, false, &philo->next_fork->available);
 	msg_action(philo, philo->n, (time_getter()
-			- get_long(philo->data->data_lock, philo->data->start)), FORK);
+			- get_long(&philo->data->data_lock, &philo->data->start)), FORK);
 	mmutex_manager(&philo->previous_fork->fork, LOCK);
 	msg_action(philo, philo->n, (time_getter()
-			- get_long(philo->data->data_lock, philo->data->start)), FORK);
+			- get_long(&philo->data->data_lock, &philo->data->start)), FORK);
 	philo->previous_fork->available = false;
 }
 
 void	mutex_even_philo(t_philos *philo)
 {
 	mmutex_manager(&philo->previous_fork->fork, LOCK);
-	philo->previous_fork->available = false;
+	set_bool(&philo->data->data_lock, false, &philo->previous_fork->available);
 	msg_action(philo, philo->n, (time_getter()
-			- get_long(philo->data->data_lock, philo->data->start)), FORK);
+			- get_long(&philo->data->data_lock, &philo->data->start)), FORK);
 	mmutex_manager(&philo->next_fork->fork, LOCK);
-	philo->next_fork->available = false;
+	set_bool(&philo->data->data_lock, false, &philo->next_fork->available);
 	msg_action(philo, philo->n, (time_getter()
-			- get_long(philo->data->data_lock, philo->data->start)), FORK);
+			- get_long(&philo->data->data_lock, &philo->data->start)), FORK);
 }
 
 // make a one philosopher dinner function

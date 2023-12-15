@@ -42,15 +42,15 @@ long	ft_atoi(const char *nptr)
 
 void	msg_action(t_philos *philo, int id, long timestamp, t_eatopcode opcode)
 {
-	if (opcode == EAT && !get_bool(philo->data->data_lock, philo->data->end))
+	if (opcode == EAT && !get_bool(&philo->data->data_lock, &philo->data->end))
 		printf("%ld %d is eating\n", timestamp / 1000, id);
 	else if (opcode == DIE)
 		printf("%ld %d died\n", timestamp / 1000, id);
-	else if (opcode == SLEEP && !get_bool(philo->data->data_lock, philo->data->end))
+	else if (opcode == SLEEP && !get_bool(&philo->data->data_lock, &philo->data->end))
 		printf("%ld %d is sleeping\n", timestamp / 1000, id);
-	else if (opcode == FORK && !get_bool(philo->data->data_lock, philo->data->end))
+	else if (opcode == FORK && !get_bool(&philo->data->data_lock, &philo->data->end))
 		printf("%ld %d has taken a fork\n", timestamp / 1000, id);
-	else if (opcode == THINK && !get_bool(philo->data->data_lock, philo->data->end))
+	else if (opcode == THINK && !get_bool(&philo->data->data_lock, &philo->data->end))
 		printf("%ld %d is thinking\n", timestamp / 1000, id);
 }
 

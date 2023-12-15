@@ -51,11 +51,11 @@ int	table_init(int ac, char **av, t_data *d)
 	if (!d->fork)
 		return (0);
 	d->end = false;
-	set_bool(d->data_lock, false, &d->allthread_creat);
-	set_bool(d->data_lock, false, &d->end);
 	mmutex_manager(&d->data_lock, INIT);
 	mmutex_manager(&d->dead_lock, INIT);
-	mmutex_manager(&d->no_eat_when_die, INIT);
+	mmutex_manager(&d->no_eat_when_die, INIT);	
+	set_bool(&d->data_lock, false, &d->allthread_creat);
+	set_bool(&d->data_lock, false, &d->end);
 	d->first_iteration = 1;
 	while (++i < d->n_o_p)
 	{

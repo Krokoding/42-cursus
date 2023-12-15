@@ -30,8 +30,8 @@ void	table(t_data *d)
 		if (!mthread_manager(&philosopher[i].id, &philosopher[i], CREATE))
 			return ;
 	}
-	set_bool(d->data_lock, true, &d->allthread_creat);
-	if (!end_of_simulation(d))
+	set_bool(&d->data_lock, true, &d->allthread_creat);
+	if (end_of_simulation(d))
 		return ;
 	i = -1;
 	while (++i < d->n_o_p)

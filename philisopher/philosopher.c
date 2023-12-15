@@ -38,10 +38,14 @@ int	clean(t_data *d)
 	int	i;
 	
 	i = -1;
+			write(1, "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n", 35);
+
+	while (++i < d->n_o_p)
+		mmutex_manager(&d->fork[i].fork, DESTROY);
+	mmutex_manager(&d->data_lock, DESTROY);
+	mmutex_manager(&d->dead_lock, DESTROY);
 	free(d->philo);
 	free(d->fork);
 	free(d);
-	while (++i < d->n_o_p)
-		mmutex_manager(&d->fork[i].fork, DESTROY);
 	return (1);
 }

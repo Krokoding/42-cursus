@@ -103,10 +103,10 @@ void	mmutex_manager(pthread_mutex_t *mtx, t_opcode opcode);
 void	msg_action(t_philos *philo, int id, long timestamp, t_eatopcode opcode);
 
 // getters and setters
-void	set_bool(pthread_mutex_t lock, bool value, bool *location);
-bool	get_bool(pthread_mutex_t lock, bool location);
-void	set_long(pthread_mutex_t lock, long value, long *location);
-long	get_long(pthread_mutex_t lock, long location);
+void	set_bool(pthread_mutex_t *lock, bool value, bool *location);
+bool	get_bool(pthread_mutex_t *lock, bool *location);
+void	set_long(pthread_mutex_t *lock, long value, long *location);
+long	get_long(pthread_mutex_t *lock, long *location);
 
 // time management
 long	time_getter(void);
