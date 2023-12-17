@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:37:05 by loris             #+#    #+#             */
-/*   Updated: 2023/12/15 08:22:08 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/16 15:40:56 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ typedef struct s_timer
 typedef struct s_fork
 {
 	pthread_mutex_t	fork;
-	int				fork_id;
+	long			fork_id;
 	bool			available;
 }	t_fork;
 
 typedef struct s_philos
 {
 	pthread_t		id;
-	int				n;
+	long			n;
 	long			time_left;
 	t_fork			*previous_fork;
 	t_fork			*next_fork;
-	int				meal_count;
+	long			meal_count;
 	t_data			*data;
 	long			last_meal;
 	bool			full;
@@ -55,16 +55,17 @@ struct s_data
 	bool			end;
 	bool			allthread_creat;
 	bool			all_full;
-	int				n_o_p;
+	long			n_o_p;
 	long			start;
 	t_philos		*philo;
 	t_timer			timer;
 	t_fork			*fork;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	data_lock;
-	int				max_meal;
-	int				first_iteration;
+	long			max_meal;
+	long			first_iteration;
 	pthread_mutex_t	no_eat_when_die;
+	pthread_mutex_t	msg_lock;
 };
 
 typedef enum e_eatopcode

@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:20 by loris             #+#    #+#             */
-/*   Updated: 2023/12/15 08:32:03 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/16 15:41:16 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	table_init(int ac, char **av, t_data *d)
 	mmutex_manager(&d->data_lock, INIT);
 	mmutex_manager(&d->dead_lock, INIT);
 	mmutex_manager(&d->no_eat_when_die, INIT);	
+	mmutex_manager(&d->msg_lock, INIT);	
 	set_bool(&d->data_lock, false, &d->allthread_creat);
 	set_bool(&d->data_lock, false, &d->end);
 	d->first_iteration = 1;

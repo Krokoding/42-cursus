@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:09:08 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/14 12:45:59 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/16 15:42:26 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ long	ft_atoi(const char *nptr)
 
 void	msg_action(t_philos *philo, int id, long timestamp, t_eatopcode opcode)
 {
+	mmutex_manager(&philo->data->msg_lock, LOCK);
 	if (opcode == EAT && !get_bool(&philo->data->data_lock, &philo->data->end))
 		printf("%ld %d is eating\n", timestamp / 1000, id);
 	else if (opcode == DIE)
@@ -52,6 +53,7 @@ void	msg_action(t_philos *philo, int id, long timestamp, t_eatopcode opcode)
 		printf("%ld %d has taken a fork\n", timestamp / 1000, id);
 	else if (opcode == THINK && !get_bool(&philo->data->data_lock, &philo->data->end))
 		printf("%ld %d is thinking\n", timestamp / 1000, id);
+	mmutex_manager(&philo->data->msg_lock, UNLOCK);
 }
 
 long	time_getter(void)

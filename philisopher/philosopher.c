@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 10:53:47 by loris             #+#    #+#             */
-/*   Updated: 2023/12/15 08:36:07 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:28:10 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int	clean(t_data *d)
 	int	i;
 	
 	i = -1;
-			write(1, "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE\n", 35);
-
 	while (++i < d->n_o_p)
 		mmutex_manager(&d->fork[i].fork, DESTROY);
 	mmutex_manager(&d->data_lock, DESTROY);

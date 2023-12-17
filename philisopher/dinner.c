@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:50:34 by loris             #+#    #+#             */
-/*   Updated: 2023/12/15 08:23:08 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/16 15:18:38 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*diner_management(void *data)
 			if (philo->data->max_meal != 0 && philo->meal_count
 				== philo->data->max_meal)
 			{
-				philo->full = true;
+				set_bool(&philo->data->data_lock, true, &philo->full);
 				break ;
 			}
 			sleeping(philo);
@@ -55,9 +55,9 @@ void	*diner_management(void *data)
 
 void	mutex_odd_philo(t_philos *philo)
 {
-	if (philo->data->first_iteration)
+	if (get_long(&philo->data->data_lock, &philo->data->first_iteration))
 		usleep(philo->data->timer.e - 5000);
-	philo->data->first_iteration = 0;
+	set_long(&philo->data->data_lock, 0, &philo->data->first_iteration);
 	mmutex_manager(&philo->next_fork->fork, LOCK);
 	set_bool(&philo->data->data_lock, false, &philo->next_fork->available);
 	msg_action(philo, philo->n, (time_getter()
@@ -65,7 +65,7 @@ void	mutex_odd_philo(t_philos *philo)
 	mmutex_manager(&philo->previous_fork->fork, LOCK);
 	msg_action(philo, philo->n, (time_getter()
 			- get_long(&philo->data->data_lock, &philo->data->start)), FORK);
-	philo->previous_fork->available = false;
+	set_bool(&philo->data->data_lock, false, &philo->previous_fork->available);
 }
 
 void	mutex_even_philo(t_philos *philo)
@@ -80,12 +80,10 @@ void	mutex_even_philo(t_philos *philo)
 			- get_long(&philo->data->data_lock, &philo->data->start)), FORK);
 }
 
-// make a one philosopher dinner function
-
 void	one_philo(t_philos *philo)
 {
 	mmutex_manager(&philo->previous_fork->fork, LOCK);
 	msg_action(philo, philo->n, time_getter() - philo->data->start, FORK);
 	wait_func(philo->data->timer.d, philo);
-	msg_action(philo, philo->n, time_getter() - philo->data->start, DIE);
+	mmutex_manager(&philo->previous_fork->fork, UNLOCK);
 }

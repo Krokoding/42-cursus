@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eat_sleep_and_think.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:17:54 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/14 10:43:28 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/16 15:44:24 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	sleeping(t_philos *philo)
 *	if even, the to sleep is always the same : if time to e bigger than tts
 *	think time = tts - tte
 *	if odd, odd_thinking function
-*
 */
 
 void	thinking(t_philos *philo)
@@ -84,9 +83,9 @@ void	thinking(t_philos *philo)
 
 void	odd_thinking(t_philos *philo)
 {
-	wait_func(((philo->data->timer.e * 2) - philo->data->timer.s) * 0.42, philo);
-	while (!philo->next_fork->available ||
-			!philo->previous_fork->available)
+	wait_func(((get_long(&philo->data->data_lock, &philo->data->timer.e) * 2) - get_long(&philo->data->data_lock, &philo->data->timer.s)) * 0.42, philo);
+	while (!get_bool(&philo->data->data_lock, &philo->next_fork->available) ||
+			!get_bool(&philo->data->data_lock, &philo->previous_fork->available))
 			;
 }
 
@@ -122,7 +121,7 @@ int	end_of_simulation(t_data *d)
 
 int	dead_checker(t_data *d, int i)
 {
-	if (!get_bool(&d->data_lock, &d->philo[i].full) && (time_getter() - get_long(&d->data_lock, &d->philo[i].last_meal) >= d->timer.d))
+	if (!get_bool(&d->data_lock, &d->philo[i].full) && (time_getter() - get_long(&d->data_lock, &d->philo[i].last_meal) >= get_long(&d->data_lock, &d->timer.d)))
 		{
 			mmutex_manager(&d->dead_lock, LOCK);
 			if (!get_bool(&d->data_lock, &d->end))
@@ -138,7 +137,7 @@ int	dead_checker(t_data *d, int i)
 
 int	full_checker(t_data *d, int i)
 {
-	if (!d->philo[i].full)
+	if (!get_bool(&d->data_lock, &d->philo[i].full))
 		d->all_full = false;
 	if (i == d->n_o_p - 1 && d->all_full == true)
 	{
