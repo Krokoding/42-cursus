@@ -16,7 +16,9 @@ SRCS_BONUS		=	$(addsuffix .c, $(SRC))
 
 all:				$(NAME)
 
-bonus:
+bonus:				$(NAME_BONUS)
+
+$(NAME_BONUS):
 			$(CC) $(CFLAGS) $(SRCS_BONUS) -o $(NAME_BONUS)
 
 $(NAME):
