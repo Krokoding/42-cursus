@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher_bonus.h"
+#include "philosopher.h"
 
 int	parsing(int ac, char **av, t_data *d)
 {
@@ -41,6 +41,7 @@ int	parsing(int ac, char **av, t_data *d)
 
 int	table_init(int ac, char **av, t_data *d)
 {
+	t_fork		*fork;
 	int			i;
 
 	if (!parsing(ac, av, d))
@@ -49,20 +50,22 @@ int	table_init(int ac, char **av, t_data *d)
 		return (0);
 	}
 	i = -1;
-	d->fork = malloc(sizeof(bool) * d->n_o_p);
+	d->fork = malloc(sizeof(t_fork) * d->n_o_p);
 	if (!d->fork)
 		return (0);
 	d->end = false;
-	d->data_lock = sem_open("/data_lock_sem", O_CREAT, 0644, 1);
-	d->dead_lock = sem_open("/dead_lock_sem", O_CREAT, 0644, 1);
-	d->no_eat_when_die = sem_open("/no_eat_when_die_sem", O_CREAT, 0644, 1);
-	d->no_eat_when_die = sem_open("/msg_lock_sem", O_CREAT, 0644, 1);
-	d->fork_sem = sem_open("/fork_sem", O_CREAT, 0644, d->n_o_p);
+	mmutex_manager(&d->data_lock, INIT);
+	mmutex_manager(&d->dead_lock, INIT);
+	mmutex_manager(&d->no_eat_when_die, INIT);	
+	mmutex_manager(&d->msg_lock, INIT);	
 	set_bool(&d->data_lock, false, &d->allthread_creat);
 	set_bool(&d->data_lock, false, &d->end);
 	d->first_iteration = 1;
 	while (++i < d->n_o_p)
-		d->fork[i] = false;
+	{
+		mmutex_manager(&d->fork[i].fork, INIT);
+		d->fork[i].fork_id = i;
+	}
 	return (1);
 }
 
@@ -94,6 +97,8 @@ int	philo_init(int ac, char **av, t_data *d)
 		d->philo[i].previous_fork = &d->fork[i];
 		d->philo[i].last_meal = time_getter();
 		d->philo[i].next_fork = &d->fork[(i + 1) % d->n_o_p];
+		d->philo[i].next_fork->available = true;
+		d->philo[i].previous_fork->available = true;
 		d->philo[i].full = false;
 	}
 	return (1);
