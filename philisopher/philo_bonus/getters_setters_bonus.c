@@ -12,36 +12,36 @@
 
 #include "philosopher_bonus.h"
 
-void	set_bool(pthread_mutex_t *lock, bool value, bool *location)
+void	set_bool(sem_t *sem, bool value, bool *location)
 {
-	mmutex_manager(lock, LOCK);
+	msem_manager(sem, LOCK);
 	*location = value;
-	mmutex_manager(lock, UNLOCK);
+	msem_manager(sem, UNLOCK);
 }
 
-bool	get_bool(pthread_mutex_t *lock, bool *location)
+bool	get_bool(sem_t *sem, bool *location)
 {
 	bool	ret;
 
-	mmutex_manager(lock, LOCK);
+	msem_manager(sem, LOCK);
 	ret = *location;
-	mmutex_manager(lock, UNLOCK);
+	msem_manager(sem, UNLOCK);
 	return (ret);
 }
 
-void	set_long(pthread_mutex_t *lock, long value, long *location)
+void	set_long(sem_t *sem, long value, long *location)
 {
-	mmutex_manager(lock, LOCK);
+	msem_manager(sem, LOCK);
 	*location = value;
-	mmutex_manager(lock, UNLOCK);
+	msem_manager(sem, UNLOCK);
 }
 
-long	get_long(pthread_mutex_t *lock, long *location)
+long	get_long(sem_t *sem, long *location)
 {
 	long	ret;
 
-	mmutex_manager(lock, LOCK);
+	msem_manager(sem, LOCK);
 	ret = *location;
-	mmutex_manager(lock, UNLOCK);
+	msem_manager(sem, UNLOCK);
 	return (ret);
 }

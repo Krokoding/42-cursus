@@ -58,32 +58,32 @@ void	mutex_odd_philo(t_philos *philo)
 	if (get_long(&philo->data->data_lock, &philo->data->first_iteration))
 		usleep(philo->data->timer.e - 5000);
 	set_long(&philo->data->data_lock, 0, &philo->data->first_iteration);
-	mmutex_manager(&philo->next_fork->fork, LOCK);
-	set_bool(&philo->data->data_lock, false, &philo->next_fork->available);
+	msem_manager(&philo->next_fork, LOCK);
+	set_bool(&philo->data->data_lock, false, &philo->next_fork);
 	msg_action(philo, philo->n, (time_getter()
 			- get_long(&philo->data->data_lock, &philo->data->start)), FORK);
-	mmutex_manager(&philo->previous_fork->fork, LOCK);
+	msem_manager(&philo->previous_fork, LOCK);
 	msg_action(philo, philo->n, (time_getter()
 			- get_long(&philo->data->data_lock, &philo->data->start)), FORK);
-	set_bool(&philo->data->data_lock, false, &philo->previous_fork->available);
+	set_bool(&philo->data->data_lock, false, &philo->previous_fork);
 }
 
 void	mutex_even_philo(t_philos *philo)
 {
-	mmutex_manager(&philo->previous_fork->fork, LOCK);
-	set_bool(&philo->data->data_lock, false, &philo->previous_fork->available);
+	msem_manager(&philo->previous_fork, LOCK);
+	set_bool(&philo->data->data_lock, false, &philo->previous_fork);
 	msg_action(philo, philo->n, (time_getter()
 			- get_long(&philo->data->data_lock, &philo->data->start)), FORK);
-	mmutex_manager(&philo->next_fork->fork, LOCK);
-	set_bool(&philo->data->data_lock, false, &philo->next_fork->available);
+	msem_manager(&philo->next_fork, LOCK);
+	set_bool(&philo->data->data_lock, false, &philo->next_fork);
 	msg_action(philo, philo->n, (time_getter()
 			- get_long(&philo->data->data_lock, &philo->data->start)), FORK);
 }
 
 void	one_philo(t_philos *philo)
 {
-	mmutex_manager(&philo->previous_fork->fork, LOCK);
+	msem_manager(&philo->previous_fork, LOCK);
 	msg_action(philo, philo->n, time_getter() - philo->data->start, FORK);
 	wait_func(philo->data->timer.d, philo);
-	mmutex_manager(&philo->previous_fork->fork, UNLOCK);
+	msem_manager(&philo->previous_fork, UNLOCK);
 }

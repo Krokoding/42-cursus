@@ -15,7 +15,7 @@
 int	msg_exit(char *str)
 {
 	printf("%s\n", str);
-	return(0);
+	exit (0);
 }
 
 int	mthread_manager(pthread_t *id, t_philos *philos, t_opcode opcode)
@@ -33,16 +33,23 @@ int	mthread_manager(pthread_t *id, t_philos *philos, t_opcode opcode)
 	return (1);
 }
 
-void	mmutex_manager(pthread_mutex_t *mtx, t_opcode opcode)
+void	msem_manager(sem_t *sem, t_opcode opcode)
 {
 	if (opcode == LOCK)
-		pthread_mutex_lock(mtx);
+	{
+		if (sem_wait(sem))
+			msg_exit("Semaphore error");
+	}
 	if (opcode == UNLOCK)
-		pthread_mutex_unlock(mtx);
-	if (opcode == INIT)
-		pthread_mutex_init(mtx, NULL);
+	{
+		if (sem_post(sem))
+			msg_exit("Semaphore error");
+	}	
 	if (opcode == DESTROY)
-		pthread_mutex_destroy(mtx);
+	{
+		if (sem_destroy(sem))
+			msg_exit("Semaphore error");
+	}
 }
 
 /*

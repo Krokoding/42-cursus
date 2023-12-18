@@ -30,10 +30,10 @@ void	eating(t_philos *philo)
 	set_long(&philo->data->data_lock, time_getter(), &philo->last_meal);
 	philo->meal_count++;
 	wait_func(get_long(&philo->data->data_lock, &philo->data->timer.e), philo);
-	mmutex_manager(&philo->next_fork->fork, UNLOCK);
-	set_bool(&philo->data->data_lock, true, &philo->next_fork->available);
-	mmutex_manager(&philo->previous_fork->fork, UNLOCK);
-	set_bool(&philo->data->data_lock, true, &philo->previous_fork->available);
+	msem_manager(&philo->data->fork_sem, UNLOCK);
+	set_bool(&philo->data->data_lock, true, &philo->next_fork);
+	msem_manager(&philo->data->fork_sem, UNLOCK);
+	set_bool(&philo->data->data_lock, true, &philo->previous_fork);
 }
 
 /*
@@ -84,8 +84,8 @@ void	thinking(t_philos *philo)
 void	odd_thinking(t_philos *philo)
 {
 	wait_func(((get_long(&philo->data->data_lock, &philo->data->timer.e) * 2) - get_long(&philo->data->data_lock, &philo->data->timer.s)) * 0.42, philo);
-	while (!get_bool(&philo->data->data_lock, &philo->next_fork->available) ||
-			!get_bool(&philo->data->data_lock, &philo->previous_fork->available))
+	while (!get_bool(&philo->data->data_lock, &philo->next_fork) ||
+			!get_bool(&philo->data->data_lock, &philo->previous_fork))
 			;
 }
 
@@ -123,13 +123,13 @@ int	dead_checker(t_data *d, int i)
 {
 	if (!get_bool(&d->data_lock, &d->philo[i].full) && (time_getter() - get_long(&d->data_lock, &d->philo[i].last_meal) >= get_long(&d->data_lock, &d->timer.d)))
 		{
-			mmutex_manager(&d->dead_lock, LOCK);
+			msem_manager(d->fork_sem, LOCK);
 			if (!get_bool(&d->data_lock, &d->end))
 			{
 				msg_action(d->philo, d->philo[i].n, time_getter() - d->start, DIE);
 				set_bool(&d->data_lock, true, &d->end);
 			}
-			mmutex_manager(&d->dead_lock, UNLOCK);
+			msem_manager(d->fork_sem, UNLOCK);
 			return (0);
 		}
 	return (1);

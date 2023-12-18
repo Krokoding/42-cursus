@@ -27,7 +27,7 @@ void	table(t_data *d)
 	i = -1;
 	while (++i < d->n_o_p)
 	{
-		if (!mthread_manager(&philosopher[i].id, &philosopher[i], CREATE))
+		if (!pipe_creator(d))
 			return ;
 	}
 	set_bool(&d->data_lock, true, &d->allthread_creat);
@@ -36,12 +36,19 @@ void	table(t_data *d)
 	i = -1;
 	while (++i < d->n_o_p)
 	{
-		if (!mthread_manager(&philosopher[i].id, &philosopher[i], JOIN))
-			return ;
+		wait(NULL);
 	}
 }
 
-void	pipe_creator(t_data *data)
+int	pipe_creator(t_data *data)
 {
-	
+	int	id;
+
+	id = fork();
+	if (id == -1)
+		exit(0);
+	if (!id)
+	{
+		diner_management(data);
+	}
 }

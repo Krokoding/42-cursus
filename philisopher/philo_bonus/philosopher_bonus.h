@@ -19,6 +19,10 @@
 # include <sys/time.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <semaphore.h>
+# include <fcntl.h>
+
+
 
 typedef struct s_data	t_data;
 
@@ -30,20 +34,12 @@ typedef struct s_timer
 	long	d;
 }	t_timer;
 
-typedef struct s_fork
-{
-	pthread_mutex_t	fork;
-	long			fork_id;
-	bool			available;
-}	t_fork;
-
 typedef struct s_philos
 {
-	pthread_t		id;
 	long			n;
 	long			time_left;
-	t_fork			*previous_fork;
-	t_fork			*next_fork;
+	bool			*previous_fork;
+	bool			*next_fork;
 	long			meal_count;
 	t_data			*data;
 	long			last_meal;
@@ -55,17 +51,18 @@ struct s_data
 	bool			end;
 	bool			allthread_creat;
 	bool			all_full;
+	bool			*fork;	
+	sem_t			*fork_sem;
 	long			n_o_p;
 	long			start;
-	t_philos		*philo;
-	t_timer			timer;
-	t_fork			*fork;
-	pthread_mutex_t	dead_lock;
-	pthread_mutex_t	data_lock;
 	long			max_meal;
 	long			first_iteration;
-	pthread_mutex_t	no_eat_when_die;
-	pthread_mutex_t	msg_lock;
+	sem_t			*dead_lock;
+	sem_t			*data_lock;
+	sem_t			*no_eat_when_die;
+	sem_t			*msg_lock;
+	t_philos		*philo;
+	t_timer			timer;
 };
 
 typedef enum e_eatopcode
@@ -100,14 +97,16 @@ int		table_init(int ac, char **av, t_data *d);
 // my own malloc, mutex, printf and thread manager function
 int		mthread_manager(pthread_t *id, t_philos *philos, t_opcode opcode);
 void	mmutex_manager(pthread_mutex_t *mtx, t_opcode opcode);
+void	msem_manager(sem_t *sem, t_opcode opcode);
+
 // void	*mmalloc(size_t bytes);
 void	msg_action(t_philos *philo, int id, long timestamp, t_eatopcode opcode);
 
 // getters and setters
-void	set_bool(pthread_mutex_t *lock, bool value, bool *location);
-bool	get_bool(pthread_mutex_t *lock, bool *location);
-void	set_long(pthread_mutex_t *lock, long value, long *location);
-long	get_long(pthread_mutex_t *lock, long *location);
+void	set_bool(sem_t *sem, bool value, bool *location);
+bool	get_bool(sem_t *sem, bool *location);
+void	set_long(sem_t *sem, long value, long *location);
+long	get_long(sem_t *sem, long *location);
 
 // time management
 long	time_getter(void);

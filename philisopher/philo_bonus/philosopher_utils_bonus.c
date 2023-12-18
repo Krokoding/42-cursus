@@ -6,11 +6,11 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:09:08 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/17 17:21:16 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/16 15:42:26 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosopher_bonus.h"
+#include "philosopher.h"
 
 long	ft_atoi(const char *nptr)
 {
