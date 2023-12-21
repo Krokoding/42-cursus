@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_utils_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:09:08 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/20 18:29:16 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/21 13:16:15 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,19 +88,24 @@ int	dead_checker(t_philos *philo)
 	return (1);
 }
 
-int	full_checker(t_philos *philo, int i)
+int	full_checker(t_philos *philo)
 {
-	if (!get_bool(philo->data->data_lock, &philo->data->philo[i].full))
-	{
-		set_bool(philo->data->data_lock, false, &philo->data->all_full);
-	}
-	printf("philo %ld is %d || ", philo[i].n, philo[i].full);
-	if (i == (philo->data->n_o_p - 1) && philo->data->all_full == true)
-	{
-		write(1, "1", 1);
-		set_bool(philo->data->data_lock, true, &philo->data->end);
-		return (0);
-	}
-	return (1);
-}
+	int	i;
 
+	while (1)
+	{
+		i = -1;
+		philo->data->all_full = true;
+		while (++i < philo->data->n_o_p)
+		{
+			if (philo[i].full == false)
+				philo->data->all_full = false;
+		}
+		if (philo->data->all_full == true)
+		{
+			set_bool(philo->data->data_lock, true, &philo->data->end);
+			sem_post(philo->data->end_sim);
+			break ;
+		}
+	}
+}

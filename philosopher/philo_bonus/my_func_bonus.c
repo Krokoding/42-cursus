@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_func_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 17:02:10 by loris             #+#    #+#             */
-/*   Updated: 2023/12/20 13:31:30 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/21 13:02:36 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	msem_manager(sem_t *sem, t_opcode opcode)
 *	when the remaining time is less than 1000 usec, a busy while loop is used
 *	to wait
 */
-
 void	wait_func(long time_to_wait)
 {
 	long	start;

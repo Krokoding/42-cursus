@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:50:34 by loris             #+#    #+#             */
-/*   Updated: 2023/12/20 18:29:40 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/21 14:25:52 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 *	Call the functions eat sleep and think
 *	while end is true or all philo have eaten max meal
 */
-
 void	*diner_management(t_philos *philo)
 {
 	pthread_t thread_check;
@@ -43,6 +42,7 @@ void	*diner_management(t_philos *philo)
 			thinking(philo);
 		}
 	}
+	exit(1);
 	return (NULL);
 }
 
@@ -52,7 +52,6 @@ void	*diner_management(t_philos *philo)
 *	on the first iteration a time is set to synchronize them
 *	and have no deadlock
 */
-
 void	mutex_odd_philo(t_philos *philo)
 {
 	if (get_long(philo->data->data_lock, &philo->data->first_iteration))

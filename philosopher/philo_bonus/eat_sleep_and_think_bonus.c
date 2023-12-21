@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eat_sleep_and_think_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:17:54 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/20 18:04:36 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/21 13:09:27 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 *	Increment the meal count
 *	Unlock the forks
 */
-
 void	eating(t_philos *philo)
 {
 	if (philo->n % 2 == 0)
@@ -39,7 +38,6 @@ void	eating(t_philos *philo)
 /*
 *	Print message and wait
 */
-
 void	sleeping(t_philos *philo)
 {
 	msg_action(philo, philo->n, (time_getter()
@@ -52,7 +50,6 @@ void	sleeping(t_philos *philo)
 *	think time = tts - tte
 *	if odd, odd_thinking function
 */
-
 void	thinking(t_philos *philo)
 {
 	if (philo->data->n_o_p % 2 != 0)
@@ -78,7 +75,6 @@ void	thinking(t_philos *philo)
 *	automaticly sleep to prevent desynchronisation
 *	then wait untill the both fork are available
 */
-
 void	odd_thinking(t_philos *philo)
 {
 	wait_func(((get_long(philo->data->data_lock, &philo->data->timer.e) * 2)
@@ -99,7 +95,6 @@ void	odd_thinking(t_philos *philo)
 				set end to true
 *	End the simulation if end is true
 */
-
 void	*end_of_simulation(void *arg)
 {
 	int			i;
@@ -108,16 +103,10 @@ void	*end_of_simulation(void *arg)
 	philo = (void *)arg;
 	while (!get_bool(philo->data->data_lock, &philo->data->end))
 	{
-		set_bool(philo->data->data_lock, true, &philo->data->all_full);
 		i = -1;
 		while (++i < get_long(philo->data->data_lock, (long *)&philo->data->n_o_p))
 		{
 			if (!dead_checker(philo))
-			{
-				sem_post(philo->data->end_sim);
-				break ;
-			}
-			if (!full_checker(philo, i))
 			{
 				sem_post(philo->data->end_sim);
 				break ;

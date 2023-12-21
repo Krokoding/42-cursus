@@ -3,7 +3,7 @@ NAME_BONUS			=	philo_bonus
 NAME_FCLEAN_BONUS 	= 	philo_bonus
 
 CC				=	gcc -g
-CFLAGS			=	-lpthread -Wall -Werror -Wextra -fsanitize=thread -g3
+CFLAGS			=	-lpthread -Wall -Werror -Wextra #-fsanitize=thread -g3
 RM				=	rm -f
 
 SRC_BONUS		=	philosopher_bonus philosopher_utils_bonus initialisation_bonus my_func_bonus eat_sleep_and_think_bonus getters_setters_bonus process_management dinner_bonus

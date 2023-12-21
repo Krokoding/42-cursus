@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_management.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:07:32 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/20 14:58:38 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/21 14:27:41 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 *	the !end_of_simulation loop is a infinite loop that check if nobody died
 *	of if they are all full
 */
-
 void	table(t_data *d)
 {
 	int			i;
+	pthread_t	number_of_meals_checks;
 
 	i = -1;
 	while (++i < d->n_o_p)
@@ -32,6 +32,8 @@ void	table(t_data *d)
 		sem_post(d->start_all_together);
 	set_long(d->data_lock, time_getter(), &d->start);
 }
+
+
 
 void	pipe_for_checking(t_data *d)
 {

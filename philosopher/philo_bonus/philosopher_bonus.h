@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_bonus.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:37:05 by loris             #+#    #+#             */
-/*   Updated: 2023/12/20 17:47:31 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/21 14:28:14 by lkary-po         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef enum e_opcode
 	UNLOCK,
 }	t_opcode;
 
-void signal_handler(int sig, t_data *d);
+void 	signal_handler(int sig, t_data *d);
 
 // error handling
 int		msg_exit(char *str);
@@ -131,7 +131,7 @@ int		pipe_creator(t_philos *philo);
 // end of the dinner
 int		dead_checker(t_philos *philo);
 void	*end_of_simulation(void *arg);
-int		full_checker(t_philos *philo, int i);
+int		full_checker(t_philos *philo);
 int		clean(t_data *d);
 void	pipe_for_checking(t_data *d);
 void	kill_all(t_data *data);
