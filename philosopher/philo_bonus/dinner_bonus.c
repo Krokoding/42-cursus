@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dinner_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:50:34 by loris             #+#    #+#             */
-/*   Updated: 2023/12/21 14:25:52 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/22 14:21:36 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	*diner_management(t_philos *philo)
 {
 	pthread_t thread_check;
 
-	sem_wait(philo->data->start_all_together);
 	pthread_create(&thread_check, NULL, end_of_simulation, philo);
 	pthread_detach(thread_check);
 	set_long(philo->data->data_lock, time_getter(), &philo->data->start);
@@ -32,18 +31,16 @@ void	*diner_management(t_philos *philo)
 		while (!get_bool(philo->data->data_lock, &philo->data->end))
 		{
 			eating(philo);
-			if (philo->data->max_meal != 0 && philo->meal_count
-				== philo->data->max_meal)
-			{
-				set_bool(philo->data->data_lock, true, &philo->full);
+			if ((philo->data->max_meal != 0 && philo->meal_count
+				== philo->data->max_meal)) 
 				break ;
-			}
 			sleeping(philo);
 			thinking(philo);
 		}
 	}
-	exit(1);
-	return (NULL);
+	// if (get_bool(philo->data->data_lock, &philo->data->end))
+	// 	exit (1);
+	exit (0);
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 14:50:20 by loris             #+#    #+#             */
-/*   Updated: 2023/12/20 18:26:04 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/22 10:50:38 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,19 @@ int table_init(int ac, char **av, t_data *d)
 
 void	create_sem(t_data *d)
 {
-	pthread_mutex_init(&d->msg_lock, NULL);
 	sem_unlink("/data_lock_sem");
 	sem_unlink("/dead_lock_sem");
 	sem_unlink("/no_eat_when_die_sem");
-	sem_unlink("/end_sem");
 	sem_unlink("/wait_all");
 	sem_unlink("/fork_sem");
 	sem_unlink("/start_all_together_sem");
+	sem_unlink("/msg_lock_sem");
+	d->msg_lock = sem_open("/msg_lock_sem", O_CREAT, 0600, 1);
 	d->data_lock = sem_open("/data_lock_sem", O_CREAT, 0600, 1);
 	d->start_all_together = sem_open("/start_all_together_sem", O_CREAT, 0600, 0);
 	d->wait_all = sem_open("/wait_all", O_CREAT, 0600, 0);
 	d->dead_lock = sem_open("/dead_lock_sem", O_CREAT, 0600, 1);
 	d->no_eat_when_die = sem_open("/no_eat_when_die_sem", O_CREAT, 0600, 1);
-	d->end_sim = sem_open("/end_sem", O_CREAT, 0600, 1);
 	d->fork_sem = sem_open("/fork_sem", O_CREAT, 0600, d->n_o_p);
 }
 
@@ -85,7 +84,6 @@ void	create_sem(t_data *d)
  *	initialize all philos and set them the adress of the next and
  *	previous fork
  */
-
 int philo_init(t_data *d)
 {
 	t_philos *philosopher;

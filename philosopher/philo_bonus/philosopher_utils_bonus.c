@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_utils_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:09:08 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/21 13:16:15 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/22 14:20:06 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ long	ft_atoi(const char *nptr)
 
 void	msg_action(t_philos *philo, int id, long timestamp, t_eatopcode opcode)
 {
-	pthread_mutex_lock(&philo->data->msg_lock);
+	msem_manager(philo->data->msg_lock, LOCK);
 	if (opcode == EAT && !get_bool(philo->data->data_lock, &philo->data->end))
 		printf("%ld %d is eating\n", timestamp / 1000, id);
 	else if (opcode == DIE)
@@ -56,7 +56,7 @@ void	msg_action(t_philos *philo, int id, long timestamp, t_eatopcode opcode)
 	else if (opcode == THINK && !get_bool(philo->data->data_lock,
 			&philo->data->end))
 		printf("%ld %d is thinking\n", timestamp / 1000, id);
-	pthread_mutex_unlock(&philo->data->msg_lock);
+	msem_manager(philo->data->msg_lock, UNLOCK);
 }
 
 long	time_getter(void)
@@ -82,30 +82,29 @@ int	dead_checker(t_philos *philo)
 		{
 			msg_action(philo, philo->n, time_getter() - philo->data->start, DIE);
 			set_bool(philo->data->data_lock, true, &philo->data->end);
+			sem_wait(philo->data->msg_lock);
+			exit (1);
 		}
 		return (0);
 	}
 	return (1);
 }
 
-int	full_checker(t_philos *philo)
-{
-	int	i;
+// int	full_checker(t_philos *philo)
+// {
+// 	int	i;
 
-	while (1)
-	{
-		i = -1;
-		philo->data->all_full = true;
-		while (++i < philo->data->n_o_p)
-		{
-			if (philo[i].full == false)
-				philo->data->all_full = false;
-		}
-		if (philo->data->all_full == true)
-		{
-			set_bool(philo->data->data_lock, true, &philo->data->end);
-			sem_post(philo->data->end_sim);
-			break ;
-		}
-	}
-}
+// 	while (1)
+// 	{
+// 		i = -1;
+// 		philo->data->all_full = true;
+// 		while (++i < philo->data->n_o_p)
+// 		{
+// 			if (philo[i].full == false)
+// 				philo->data->all_full = false;
+// 		}
+// 		if (philo->data->all_full == true)
+// 			set_bool(philo->data->data_lock, true, &philo->data->end);
+// 	}
+// 	return (1);
+// }

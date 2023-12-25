@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_management.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:07:32 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/21 14:27:41 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/22 10:24:40 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 void	table(t_data *d)
 {
 	int			i;
-	pthread_t	number_of_meals_checks;
 
 	i = -1;
 	while (++i < d->n_o_p)
@@ -28,8 +27,6 @@ void	table(t_data *d)
 		d->id[i] = pipe_creator(&d->philo[i]);
 	}
 	i = -1;
-	while (++i < d->n_o_p)
-		sem_post(d->start_all_together);
 	set_long(d->data_lock, time_getter(), &d->start);
 }
 
@@ -43,9 +40,7 @@ void	pipe_for_checking(t_data *d)
 	if (pid == -1)
 		exit(0);
 	if (!pid)
-	{
 		end_of_simulation(d);
-	}
 }
 
 int	pipe_creator(t_philos *philo)

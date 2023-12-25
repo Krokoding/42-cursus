@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosopher_bonus.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 12:37:05 by loris             #+#    #+#             */
-/*   Updated: 2023/12/21 14:28:14 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/22 11:11:33 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdbool.h>
 # include <semaphore.h>
 # include <fcntl.h>
-# include<sys/wait.h>
+# include <sys/wait.h>
 #include <signal.h>
 
 typedef struct s_data	t_data;
@@ -61,8 +61,7 @@ struct s_data
 	sem_t			*dead_lock;
 	sem_t			*data_lock;
 	sem_t			*no_eat_when_die;
-	pthread_mutex_t	msg_lock;
-	sem_t			*end_sim;
+	sem_t			*msg_lock;
 	sem_t			*wait_all;
 	t_philos		*philo;
 	t_timer			timer;

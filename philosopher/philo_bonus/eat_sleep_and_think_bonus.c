@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eat_sleep_and_think_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkary-po <lkary-po@student.42.fr>          +#+  +:+       +#+        */
+/*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 09:17:54 by lkary-po          #+#    #+#             */
-/*   Updated: 2023/12/21 13:09:27 by lkary-po         ###   ########.fr       */
+/*   Updated: 2023/12/22 11:55:34 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,7 @@ void	*end_of_simulation(void *arg)
 		while (++i < get_long(philo->data->data_lock, (long *)&philo->data->n_o_p))
 		{
 			if (!dead_checker(philo))
-			{
-				sem_post(philo->data->end_sim);
 				break ;
-			}
 		}
 	}
 	return (NULL);

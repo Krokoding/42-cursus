@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 10:53:47 by loris             #+#    #+#             */
-/*   Updated: 2023/12/20 18:05:42 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/22 15:38:07 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ int	main(int ac, char **av)
 	{
 		if (!initialisation(ac, av, d))
 			return (0);
-		sem_wait(d->end_sim);
 		table(d);
-		sem_wait(d->end_sim);
 		clean(d);
 	}
 	else
@@ -37,13 +35,25 @@ int	main(int ac, char **av)
 
 int	clean(t_data *d)
 {
+	int i;
+	int	status;
+
+	i = -1;
+	while (i < d->n_o_p)
+	{
+		wait(&status);
+		if (status != 0)
+		{
+			break ;
+		}
+		i++;
+	}
 	kill_all(d);
 	sem_close(d->data_lock);
+	sem_close(d->msg_lock);
 	sem_close(d->dead_lock);
 	sem_close(d->no_eat_when_die);
 	sem_close(d->fork_sem);
-	sem_close(d->end_sim);
-	pthread_mutex_destroy(&d->msg_lock);
 	free(d->philo);
 	free(d->fork);
 	free(d->id);
