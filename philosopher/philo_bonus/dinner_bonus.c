@@ -6,7 +6,7 @@
 /*   By: loris <loris@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 18:50:34 by loris             #+#    #+#             */
-/*   Updated: 2023/12/22 14:21:36 by loris            ###   ########.fr       */
+/*   Updated: 2023/12/25 12:07:19 by loris            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	*diner_management(t_philos *philo)
 			thinking(philo);
 		}
 	}
-	// if (get_bool(philo->data->data_lock, &philo->data->end))
-	// 	exit (1);
 	exit (0);
 }
 
